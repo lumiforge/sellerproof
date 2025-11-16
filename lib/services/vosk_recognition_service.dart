@@ -11,6 +11,9 @@ import 'package:vosk_flutter/vosk_flutter.dart';
 enum VoskState { uninitialized, loading, ready, listening, error }
 
 class VoskRecognitionService {
+  // Singleton instance
+  static VoskRecognitionService? _instance;
+
   VoskFlutterPlugin? _vosk;
   Model? _model;
   Recognizer? _recognizer;
@@ -26,7 +29,7 @@ class VoskRecognitionService {
 
   // Debouncing для команды "стоп"
   DateTime? _lastStopCommandTime;
-  static const _stopCommandDebounce = Duration(milliseconds: 1000); // 1 секунда
+  static const _stopCommandDebounce = Duration(milliseconds: 1000);
   bool _stopCommandProcessed = false;
 
   final List<String> stopCommands = [
@@ -40,9 +43,34 @@ class VoskRecognitionService {
     'остановка',
   ];
 
-  final Function() onStopCommand;
+  Function()? _onStopCommand;
 
-  VoskRecognitionService({required this.onStopCommand});
+  // Private constructor
+  VoskRecognitionService._internal();
+
+  // Factory constructor для singleton
+  factory VoskRecognitionService({required Function() onStopCommand}) {
+    if (_instance == null) {
+      debugPrint('🆕 Creating new VoskRecognitionService instance');
+      _instance = VoskRecognitionService._internal();
+    } else {
+      debugPrint('♻️ Reusing existing VoskRecognitionService instance');
+    }
+
+    // Обновляем callback
+    _instance!._onStopCommand = onStopCommand;
+
+    return _instance!;
+  }
+
+  // Метод для сброса singleton (использовать осторожно)
+  static Future<void> reset() async {
+    if (_instance != null) {
+      debugPrint('🔄 Resetting VoskRecognitionService singleton');
+      await _instance!.dispose();
+      _instance = null;
+    }
+  }
 
   Future<void> initialize() async {
     if (_initCompleter == null) {
@@ -55,32 +83,42 @@ class VoskRecognitionService {
   Future<void> _initialize() async {
     try {
       state.value = VoskState.loading;
-      _vosk = VoskFlutterPlugin.instance();
+
+      if (_vosk == null) {
+        _vosk = VoskFlutterPlugin.instance();
+      }
 
       // Путь к модели в assets (архив zip)
       final modelPath = await _loadModelFromAssets(
         'assets/models/vosk-model-small-ru-0.22.zip',
       );
 
-      _model = await _vosk!.createModel(modelPath);
-      _recognizer = await _vosk!.createRecognizer(
-        model: _model!,
-        sampleRate: 16000,
-      );
+      if (_model == null) {
+        _model = await _vosk!.createModel(modelPath);
+      }
 
-      _speechService = await _vosk!.initSpeechService(_recognizer!);
+      if (_recognizer == null) {
+        _recognizer = await _vosk!.createRecognizer(
+          model: _model!,
+          sampleRate: 16000,
+        );
+      }
 
-      // Слушаем результаты распознавания
-      _resultSubscription = _speechService!.onResult().listen((result) {
-        debugPrint('🎤 Vosk result: $result');
-        _checkForStopCommand(result);
-      });
+      if (_speechService == null) {
+        _speechService = await _vosk!.initSpeechService(_recognizer!);
 
-      // Слушаем частичные результаты для быстрого отклика
-      _partialSubscription = _speechService!.onPartial().listen((partial) {
-        debugPrint('🎤 Vosk partial: $partial');
-        _checkForStopCommand(partial);
-      });
+        // Слушаем результаты распознавания
+        _resultSubscription = _speechService!.onResult().listen((result) {
+          debugPrint('🎤 Vosk result: $result');
+          _checkForStopCommand(result);
+        });
+
+        // Слушаем частичные результаты для быстрого отклика
+        _partialSubscription = _speechService!.onPartial().listen((partial) {
+          debugPrint('🎤 Vosk partial: $partial');
+          _checkForStopCommand(partial);
+        });
+      }
 
       state.value = VoskState.ready;
       _initCompleter!.complete();
@@ -88,7 +126,7 @@ class VoskRecognitionService {
     } catch (e) {
       if (e is PlatformException &&
           e.message!.contains('SpeechService instance already exist')) {
-        debugPrint('VoskService: Instance already exists (hot restart)');
+        debugPrint('♻️ VoskService: Instance already exists, reusing');
         state.value = VoskState.ready;
         _initCompleter!.complete();
       } else {
@@ -100,8 +138,20 @@ class VoskRecognitionService {
   }
 
   Future<void> startListening() async {
-    if (state.value != VoskState.ready || _speechService == null) {
-      debugPrint('Cannot start listening. State: ${state.value}');
+    debugPrint('🎤 startListening called, current state: ${state.value}');
+
+    if (_speechService == null) {
+      debugPrint('❌ Cannot start listening: _speechService is null');
+      return;
+    }
+
+    if (state.value == VoskState.listening) {
+      debugPrint('⚠️ Already listening, skipping');
+      return;
+    }
+
+    if (state.value != VoskState.ready) {
+      debugPrint('⚠️ Cannot start listening. State: ${state.value}');
       return;
     }
 
@@ -120,7 +170,15 @@ class VoskRecognitionService {
   }
 
   Future<void> stopListening() async {
-    if (state.value != VoskState.listening || _speechService == null) {
+    debugPrint('🛑 stopListening called, current state: ${state.value}');
+
+    if (_speechService == null) {
+      debugPrint('⚠️ _speechService is null, nothing to stop');
+      return;
+    }
+
+    if (state.value != VoskState.listening) {
+      debugPrint('⚠️ Not listening, skipping stop. State: ${state.value}');
       return;
     }
 
@@ -129,8 +187,9 @@ class VoskRecognitionService {
       state.value = VoskState.ready;
       debugPrint('✅ Vosk: Stopped listening');
     } catch (e) {
-      state.value = VoskState.error;
       debugPrint('❌ Error stopping Vosk: $e');
+      // Все равно переводим в ready, чтобы можно было снова запустить
+      state.value = VoskState.ready;
     }
   }
 
@@ -170,15 +229,14 @@ class VoskRecognitionService {
 
           debugPrint('🛑 Stop command detected: $command (from text: "$text")');
 
-          // Вызываем callback
-          onStopCommand();
+          // Вызываем callback если он установлен
+          _onStopCommand?.call();
 
           break;
         }
       }
     } catch (e) {
       debugPrint('⚠️ Error parsing Vosk result: $e');
-      // Ignore parsing errors
     }
   }
 
@@ -214,12 +272,25 @@ class VoskRecognitionService {
   }
 
   Future<void> dispose() async {
+    debugPrint('🗑️ VoskRecognitionService: dispose called');
+    await stopListening();
+    // НЕ отменяем подписки и не чистим ресурсы для singleton
+    // Они будут переиспользованы
+    debugPrint(
+      '✅ VoskRecognitionService: dispose complete (singleton preserved)',
+    );
+  }
+
+  // Полная очистка (только для сброса singleton)
+  Future<void> _fullDispose() async {
+    debugPrint('🗑️ VoskRecognitionService: full dispose');
     await stopListening();
     await _resultSubscription?.cancel();
     await _partialSubscription?.cancel();
     _speechService = null;
     _recognizer?.dispose();
     _model?.dispose();
-    state.dispose();
+    _vosk = null;
+    _initCompleter = null;
   }
 }

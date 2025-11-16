@@ -19,7 +19,7 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   late VoskRecognitionService _voskService;
   bool _isRecording = false;
   bool _isInitializing = true;
-  bool _isStopping = false; // Флаг для предотвращения повторных вызовов
+  bool _isStopping = false;
   String? _scannedCode;
 
   @override
@@ -30,6 +30,7 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   }
 
   Future<void> _initializeVosk() async {
+    // Используем singleton - если уже инициализирован, переиспользуем
     _voskService = VoskRecognitionService(
       onStopCommand: () {
         debugPrint('🛑 Stop command received from Vosk');
@@ -48,11 +49,15 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
         });
       }
 
-      // Запускаем нативную камеру (запись начнется автоматически в нативном коде)
+      // Запускаем нативную камеру
       await _startRecording();
+
+      // Даем небольшую задержку перед запуском голосового управления
+      await Future.delayed(const Duration(milliseconds: 500));
 
       // Запускаем голосовое управление
       await _voskService.startListening();
+      debugPrint('✅ Voice recognition started for recording');
     } catch (e) {
       debugPrint('Failed to initialize Vosk: $e');
       if (mounted) {
@@ -69,7 +74,6 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
     if (!mounted) return;
 
     try {
-      // Запускаем нативную камеру с отсканированным кодом
       await platform.invokeMethod('startCamera', {'scannedCode': _scannedCode});
 
       if (mounted) {
@@ -88,7 +92,6 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   }
 
   Future<void> _stopRecording() async {
-    // Предотвращаем повторные вызовы
     if (_isStopping) {
       debugPrint('⚠️ Already stopping, ignoring duplicate call');
       return;
@@ -98,7 +101,7 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
     debugPrint('🛑 Starting stop recording process');
 
     try {
-      // Останавливаем голосовое управление первым делом
+      // Останавливаем голосовое управление
       await _voskService.stopListening();
       debugPrint('🎤 Voice recognition stopped');
 
@@ -133,7 +136,11 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   @override
   void dispose() {
     debugPrint('🗑️ Disposing PackingCameraPage');
-    _voskService.dispose();
+    // НЕ вызываем dispose для Vosk - он singleton и переиспользуется
+    // Только останавливаем прослушивание если еще активно
+    if (_voskService.state.value == VoskState.listening) {
+      _voskService.stopListening();
+    }
     super.dispose();
   }
 
@@ -160,10 +167,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
 
     return WillPopScope(
       onWillPop: () async {
-        // Если пытаемся выйти во время записи, останавливаем запись
         if (_isRecording && !_isStopping) {
           await _stopRecording();
-          return false; // Не выходим сразу, дождемся завершения остановки
+          return false;
         }
         return true;
       },
@@ -172,16 +178,16 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            // Показываем нативную камеру через platform view
             Container(color: Colors.black),
-            // Наложение с информацией
+
+            // Информация о коде
             Positioned(
               top: 0,
               left: 0,
               right: 0,
               child: Container(
                 padding: const EdgeInsets.only(
-                  top: 50, // Учитываем статус бар
+                  top: 50,
                   left: 16,
                   right: 16,
                   bottom: 16,
@@ -232,7 +238,8 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                 ),
               ),
             ),
-            // Индикатор записи и подсказка
+
+            // Индикатор записи
             if (_isRecording && !_isStopping)
               Positioned(
                 bottom: 50,
@@ -278,6 +285,7 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                   ),
                 ),
               ),
+
             // Индикатор остановки
             if (_isStopping)
               Positioned(

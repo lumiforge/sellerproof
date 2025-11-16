@@ -1,7 +1,8 @@
-- Scanner works bad
-- Scanner rotates screen ????
-- Hints for user to quit from video recording screen (Скажите "Стоп" для остановки записи)
-- Voice sound for status messages (Start video, scanned code 1223123, Video saved,etc)
-- Save video to gallery
-- Save video on Cloud
-- 
+1. Сканнер работает плохо!
+2. Экран сканнера вращается хз почему?
+3. Подсказка для пользователя остановки записи (Скажите "Стоп" для остановки записи)
+4. Звук сообщения о статусе (Начата запись, сканирован код 1223123, Запись сохранена, etc)
+5. Сохранение видео в галерее
+6. Сохранение видео на облаке
+
+2й 
