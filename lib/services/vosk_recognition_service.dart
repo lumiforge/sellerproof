@@ -1,20 +1,28 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/services.dart';
+
+import 'package:archive/archive.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vosk_flutter/vosk_flutter.dart';
+
+enum VoskState { uninitialized, loading, ready, listening, error }
 
 class VoskRecognitionService {
   VoskFlutterPlugin? _vosk;
   Model? _model;
   Recognizer? _recognizer;
+  SpeechService? _speechService;
 
-  bool _isInitialized = false;
-  bool _isListening = false;
+  final ValueNotifier<VoskState> state = ValueNotifier<VoskState>(
+    VoskState.uninitialized,
+  );
 
-  Timer? _audioTimer;
+  StreamSubscription<String>? _resultSubscription;
+  StreamSubscription<String>? _partialSubscription;
+  Completer<void>? _initCompleter;
 
   final List<String> stopCommands = [
     'стоп',
@@ -32,153 +40,101 @@ class VoskRecognitionService {
   VoskRecognitionService({required this.onStopCommand});
 
   Future<void> initialize() async {
-    if (_isInitialized) return;
+    if (_initCompleter == null) {
+      _initCompleter = Completer<void>();
+      _initialize();
+    }
+    return _initCompleter!.future;
+  }
 
+  Future<void> _initialize() async {
     try {
+      state.value = VoskState.loading;
       _vosk = VoskFlutterPlugin.instance();
 
-      // Копируем модель из assets в документы
-      final modelPath = await _extractModelFromAssets();
+      // Путь к модели в assets (архив zip)
+      final modelPath = await _loadModelFromAssets(
+        'assets/models/vosk-model-small-ru-0.22.zip',
+      );
 
-      // Создаем модель
       _model = await _vosk!.createModel(modelPath);
-
-      // Создаем распознаватель (16000 Hz - стандарт для vosk)
       _recognizer = await _vosk!.createRecognizer(
         model: _model!,
         sampleRate: 16000,
       );
 
-      // Устанавливаем слушатель результатов
-      if (_recognizer != null) {
-        _recognizer!.setResultListener((result) {
-          debugPrint('🎤 Vosk result: $result');
-          _checkForStopCommand(result);
-        });
+      _speechService = await _vosk!.initSpeechService(_recognizer!);
 
-        _recognizer!.setPartialResultListener((partial) {
-          debugPrint('🎤 Vosk partial: $partial');
-          _checkForStopCommand(partial);
-        });
-      }
+      // Слушаем результаты распознавания
+      _resultSubscription = _speechService!.onResult().listen((result) {
+        debugPrint('🎤 Vosk result: $result');
+        _checkForStopCommand(result);
+      });
 
-      _isInitialized = true;
+      // Слушаем частичные результаты для быстрого отклика
+      _partialSubscription = _speechService!.onPartial().listen((partial) {
+        debugPrint('🎤 Vosk partial: $partial');
+        _checkForStopCommand(partial);
+      });
+
+      state.value = VoskState.ready;
+      _initCompleter!.complete();
       debugPrint('✅ Vosk initialized successfully');
     } catch (e) {
-      debugPrint('❌ Error initializing Vosk: $e');
-      rethrow;
+      if (e is PlatformException &&
+          e.message!.contains('SpeechService instance already exist')) {
+        debugPrint('VoskService: Instance already exists (hot restart)');
+        state.value = VoskState.ready;
+        _initCompleter!.complete();
+      } else {
+        state.value = VoskState.error;
+        _initCompleter!.completeError(e, StackTrace.current);
+        debugPrint('❌ Error initializing Vosk: $e');
+      }
     }
-  }
-
-  Future<String> _extractModelFromAssets() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final modelPath = '${directory.path}/vosk-model-small-ru';
-
-    // Проверяем, скопирована ли модель
-    final modelDir = Directory(modelPath);
-    if (await modelDir.exists()) {
-      debugPrint('Model already exists at $modelPath');
-      return modelPath;
-    }
-
-    // Копируем модель из assets
-    debugPrint('Extracting model to $modelPath...');
-    await modelDir.create(recursive: true);
-
-    // Получаем список файлов из assets
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-
-    // Копируем все файлы модели
-    final modelFiles = manifestMap.keys
-        .where(
-          (String key) => key.startsWith('assets/models/vosk-model-small-ru/'),
-        )
-        .toList();
-
-    for (final assetPath in modelFiles) {
-      final relativePath = assetPath.replaceFirst(
-        'assets/models/vosk-model-small-ru/',
-        '',
-      );
-      if (relativePath.isEmpty) continue;
-
-      final targetPath = '$modelPath/$relativePath';
-      final targetFile = File(targetPath);
-
-      // Создаем директории если нужно
-      await targetFile.parent.create(recursive: true);
-
-      // Копируем файл
-      final data = await rootBundle.load(assetPath);
-      await targetFile.writeAsBytes(data.buffer.asUint8List());
-
-      debugPrint('Copied: $relativePath');
-    }
-
-    debugPrint('✅ Model extracted successfully');
-    return modelPath;
   }
 
   Future<void> startListening() async {
-    if (!_isInitialized) {
-      await initialize();
+    if (state.value != VoskState.ready || _speechService == null) {
+      debugPrint('Cannot start listening. State: ${state.value}');
+      return;
     }
 
-    if (_isListening) return;
-
     try {
-      // Используем микрофон через recognizer
-      _recognizer?.start();
-      _isListening = true;
-
-      // Периодически обновляем аудио (в версии 0.3.48 нужно вручную читать)
-      _startAudioProcessing();
-
+      await _speechService!.start();
+      state.value = VoskState.listening;
       debugPrint('✅ Vosk: Started continuous listening');
     } catch (e) {
+      state.value = VoskState.error;
       debugPrint('❌ Error starting Vosk listening: $e');
-      rethrow;
     }
   }
 
-  void _startAudioProcessing() {
-    // В версии 0.3.48 используем таймер для постоянного прослушивания
-    _audioTimer = Timer.periodic(const Duration(milliseconds: 100), (
-      timer,
-    ) async {
-      if (!_isListening) {
-        timer.cancel();
-        return;
-      }
+  Future<void> stopListening() async {
+    if (state.value != VoskState.listening || _speechService == null) {
+      return;
+    }
 
-      try {
-        // Обрабатываем аудио
-        await _recognizer?.acceptWaveform();
-      } catch (e) {
-        debugPrint('Error processing audio: $e');
-      }
-    });
+    try {
+      await _speechService!.stop();
+      state.value = VoskState.ready;
+      debugPrint('✅ Vosk: Stopped listening');
+    } catch (e) {
+      state.value = VoskState.error;
+      debugPrint('❌ Error stopping Vosk: $e');
+    }
   }
 
-  void _checkForStopCommand(String text) {
-    // Парсим JSON результат
+  void _checkForStopCommand(String result) {
     try {
-      final result = json.decode(text);
-      final recognizedText = (result['text'] ?? result['partial'] ?? '')
-          .toString()
-          .toLowerCase();
+      final jsonResult = jsonDecode(result);
+      final text =
+          (jsonResult['text'] ?? jsonResult['partial'] ?? '') as String;
 
-      for (final command in stopCommands) {
-        if (recognizedText.contains(command)) {
-          debugPrint('🛑 Stop command detected: $command');
-          onStopCommand();
-          break;
-        }
-      }
-    } catch (e) {
-      // Если не JSON, проверяем напрямую
+      if (text.isEmpty) return;
+
       final lowerText = text.toLowerCase();
+
       for (final command in stopCommands) {
         if (lowerText.contains(command)) {
           debugPrint('🛑 Stop command detected: $command');
@@ -186,34 +142,49 @@ class VoskRecognitionService {
           break;
         }
       }
+    } catch (e) {
+      // Ignore parsing errors
     }
   }
 
-  Future<void> stopListening() async {
-    if (!_isListening) return;
+  Future<String> _loadModelFromAssets(String assetPath) async {
+    final tempDir = await getTemporaryDirectory();
+    final modelName = assetPath.split('/').last.replaceAll('.zip', '');
+    final modelDir = Directory('${tempDir.path}/$modelName');
 
-    try {
-      _audioTimer?.cancel();
-      _audioTimer = null;
+    if (!await modelDir.exists()) {
+      debugPrint('Extracting model to ${modelDir.path}...');
+      await modelDir.create(recursive: true);
 
-      _recognizer?.stop();
+      final assetData = await rootBundle.load(assetPath);
+      final bytes = assetData.buffer.asUint8List();
+      final archive = ZipDecoder().decodeBytes(bytes);
 
-      _isListening = false;
-
-      debugPrint('✅ Vosk: Stopped listening');
-    } catch (e) {
-      debugPrint('❌ Error stopping Vosk: $e');
+      for (final file in archive) {
+        final filename = '${modelDir.path}/${file.name}';
+        if (file.isFile) {
+          final outFile = File(filename);
+          await outFile.create(recursive: true);
+          await outFile.writeAsBytes(file.content as List<int>);
+        } else {
+          await Directory(filename).create(recursive: true);
+        }
+      }
+      debugPrint('✅ Model extracted successfully');
+    } else {
+      debugPrint('Model already exists at ${modelDir.path}');
     }
+
+    return '${modelDir.path}/$modelName';
   }
 
   Future<void> dispose() async {
     await stopListening();
-
+    await _resultSubscription?.cancel();
+    await _partialSubscription?.cancel();
+    _speechService = null;
     _recognizer?.dispose();
     _model?.dispose();
-
-    _recognizer = null;
-    _model = null;
-    _isInitialized = false;
+    state.dispose();
   }
 }
