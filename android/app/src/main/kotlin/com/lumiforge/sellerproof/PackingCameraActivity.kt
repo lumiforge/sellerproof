@@ -179,6 +179,8 @@ class PackingCameraActivity : ComponentActivity() {
                             
                             backgroundHandler?.post {
                                 configureCameraSettings()
+                                // Автоматически запускаем запись после настройки камеры
+                                startRecording()
                             }
                         } catch (e: CameraAccessException) {
                             Log.e(TAG, "Failed to start preview", e)

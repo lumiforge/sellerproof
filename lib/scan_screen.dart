@@ -11,24 +11,49 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
-  late ScanController controller;
+  ScanController? controller;
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() async {
+    // Инициализация будет в didChangeDependencies, когда контекст будет доступен
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Инициализация при первом вызове
+    if (controller == null) {
       controller = Provider.of<ScanController>(context, listen: false);
-      await controller.initialize();
-      controller.startScanning(); // Start scanning after initialization
-      setState(() {});
-    });
+      Future.microtask(() async {
+        await controller!.initialize();
+        controller!.resumeScanning(); // Resume scanning after initialization
+        setState(() {});
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    controller = Provider.of<ScanController>(context);
+    final controller = Provider.of<ScanController>(context);
+
     if (!controller.scannerReady) {
       return Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    // Если код отсканирован, автоматически переходим к записи
+    if (controller.lastScannedCode != null && !controller.isScanning) {
+      // Используем Future.microtask, чтобы избежать ошибки при навигации во время build
+      final scannedCode = controller.lastScannedCode;
+      if (scannedCode != null) {
+        Future.microtask(() {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => PackingCameraPage(initialCode: scannedCode),
+            ),
+          );
+        });
+      }
     }
 
     return Scaffold(
@@ -45,14 +70,14 @@ class _ScanScreenState extends State<ScanScreen> {
               },
             ),
           // Scanner overlay
-          if (controller.isScanning) ScannerOverlay(),
+          if (controller.isScanning) const ScannerOverlay(),
           // Show code found message
-          if (controller.lastScannedCode != null)
+          if (controller.lastScannedCode != null && !controller.isScanning)
             Align(
               alignment: Alignment.center,
               child: Container(
-                padding: EdgeInsets.all(16),
-                margin: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   color: Colors.black87,
                   borderRadius: BorderRadius.circular(12),
@@ -60,35 +85,36 @@ class _ScanScreenState extends State<ScanScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       'Код найден:',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
-                      controller.lastScannedCode!,
-                      style: TextStyle(color: Colors.green, fontSize: 16),
+                      controller.lastScannedCode ?? '',
+                      style: const TextStyle(color: Colors.green, fontSize: 16),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Navigate to recording screen with the scanned code
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => PackingCameraPage(
-                              initialCode: controller.lastScannedCode!,
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.green,
                             ),
                           ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ),
-                      child: Text(
-                        'Начать запись',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                        ),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Запуск видеозаписи...',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -97,6 +123,12 @@ class _ScanScreenState extends State<ScanScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Не dispose контроллер здесь, так как он управляется Provider
+    super.dispose();
   }
 }
 
@@ -124,8 +156,8 @@ class ScannerOverlay extends StatelessWidget {
           child: Center(
             child: Card(
               color: Colors.black.withAlpha(179), // 0.7*255=178.5
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Text(
                   'Наведите камеру на QR или штрих-код',
                   style: TextStyle(color: Colors.white, fontSize: 18),

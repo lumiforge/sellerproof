@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 /// Controller for scanning logic only.
@@ -11,6 +12,9 @@ class ScanController extends ChangeNotifier {
 
   /// Call this when initializing the scanner screen.
   Future<void> initialize() async {
+    // Check if already initialized
+    if (scannerReady) return;
+
     // Initialize scanner controller with autoStart disabled
     scannerController = MobileScannerController(autoStart: false);
 
@@ -47,6 +51,21 @@ class ScanController extends ChangeNotifier {
     lastScannedCode = null;
     isScanning = false;
     notifyListeners();
+  }
+
+  /// Resume scanning after recording
+  void resumeScanning() {
+    lastScannedCode = null;
+    isScanning = true;
+
+    // Используем addPostFrameCallback с задержкой для безопасного запуска сканера
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Дополнительная задержка, чтобы убедиться, что контроллер готов
+      Future.delayed(const Duration(milliseconds: 500), () {
+        scannerController?.start();
+        notifyListeners();
+      });
+    });
   }
 
   @override
