@@ -168,12 +168,27 @@ class PackingCameraActivity : ComponentActivity() {
             
             val surface = Surface(texture)
             
-            // Try TEMPLATE_PREVIEW first, fallback to TEMPLATE_RECORD if not supported
-            try {
-                previewRequestBuilder = cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+            // Try different templates in order of preference
+            previewRequestBuilder = try {
+                cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
             } catch (e: Exception) {
-                Log.w(TAG, "TEMPLATE_PREVIEW not supported, falling back to TEMPLATE_RECORD", e)
-                previewRequestBuilder = cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
+                Log.w(TAG, "TEMPLATE_PREVIEW not supported, trying TEMPLATE_RECORD", e)
+                try {
+                    cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
+                } catch (e2: Exception) {
+                    Log.w(TAG, "TEMPLATE_RECORD not supported, trying TEMPLATE_STILL_CAPTURE", e2)
+                    try {
+                        cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
+                    } catch (e3: Exception) {
+                        Log.w(TAG, "TEMPLATE_STILL_CAPTURE not supported, trying TEMPLATE_VIDEO_SNAPSHOT", e3)
+                        try {
+                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_VIDEO_SNAPSHOT)
+                        } catch (e4: Exception) {
+                            Log.e(TAG, "All templates failed, using TEMPLATE_MANUAL as last resort", e4)
+                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_MANUAL)
+                        }
+                    }
+                }
             }
             previewRequestBuilder?.addTarget(surface)
             
@@ -205,84 +220,106 @@ class PackingCameraActivity : ComponentActivity() {
                 },
                 backgroundHandler
             )
+        } catch (e: CameraAccessException) {
+            Log.e(TAG, "Camera access exception in preview session", e)
+            // Try to recover by reopening camera
+            cameraDevice?.close()
+            cameraDevice = null
+            backgroundHandler?.postDelayed({
+                openCamera()
+            }, 1000) // Wait 1 second before retrying
         } catch (e: Exception) {
             Log.e(TAG, "Failed to create preview session", e)
         }
     }
 
-    private fun configureCameraSettings() {
+   private fun configureCameraSettings() {
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.VANILLA_ICE_CREAM) {
         try {
-            val captureRequestBuilder = this.previewRequestBuilder ?: return
-            val cameraId = this.cameraId ?: return
-            val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
-            
-            // Set exposure compensation if supported
-            val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
-            if (exposureRange != null && exposureRange.lower < exposureRange.upper) {
-                val compensation = exposureRange.lower.coerceAtLeast(2.coerceAtMost(exposureRange.upper))
-                captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
+            previewRequestBuilder?.set(CaptureRequest.CONTROL_AE_MODE, 5) // ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY
+        } catch (e: Exception) {
+            Log.w(TAG, "Low Light Boost not supported")
+        }
+    }
+    try {
+        val captureRequestBuilder = this.previewRequestBuilder ?: return
+        val cameraId = this.cameraId ?: return
+        val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
+        
+        // КРИТИЧНО: Устанавливаем режим полного контроля
+        captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
+        
+        // Устанавливаем ВЫСОКОЕ значение экспозиции
+        val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
+        if (exposureRange != null && exposureRange.upper > 0) {
+            // Используем МАКСИМУМ или близко к нему
+            val compensation = (exposureRange.upper * 0.7).toInt().coerceAtMost(exposureRange.upper)
+            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
+            Log.d(TAG, "Set exposure compensation: $compensation (range: ${exposureRange.lower}..${exposureRange.upper})")
+        }
+        
+        // Включаем AE mode с приоритетом на яркость
+        captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
+        
+        // Устанавливаем ВЫСОКИЙ ISO для слабых устройств
+        val isoRange = characteristics?.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE)
+        if (isoRange != null) {
+            // Используем 75% от максимального ISO вместо среднего
+            val iso = (isoRange.lower + (isoRange.upper - isoRange.lower) * 0.75).toInt()
+            captureRequestBuilder.set(CaptureRequest.SENSOR_SENSITIVITY, iso)
+            Log.d(TAG, "Set ISO: $iso (range: ${isoRange.lower}..${isoRange.upper})")
+        }
+        
+        // Увеличиваем время экспозиции для лучшей яркости
+        val exposureTimeRange = characteristics?.get(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE)
+        if (exposureTimeRange != null) {
+            // Используем более длинную выдержку для записи (но не максимум, чтобы избежать размытия)
+            val exposureTime = (exposureTimeRange.lower + (exposureTimeRange.upper - exposureTimeRange.lower) * 0.4).toLong()
+                .coerceAtMost(33_333_333L) // Максимум 1/30 секунды для видео 30fps
+            captureRequestBuilder.set(CaptureRequest.SENSOR_EXPOSURE_TIME, exposureTime)
+            Log.d(TAG, "Set exposure time: $exposureTime ns")
+        }
+        
+        // FPS range - стабильный 30fps
+        val fpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
+        if (fpsRanges != null) {
+            val targetRange = fpsRanges.find { it.lower == 30 && it.upper == 30 }
+                ?: fpsRanges.find { it.upper == 30 }
+                ?: fpsRanges.lastOrNull()
+            targetRange?.let {
+                captureRequestBuilder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, it)
+                Log.d(TAG, "Set FPS range: ${it.lower}-${it.upper}")
             }
-            
-            // Set AE mode
-            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
-            
-            // Set FPS range if supported
-            val fpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
-            if (fpsRanges != null) {
-                val targetRange = fpsRanges.find { it.lower == 30 && it.upper == 30 }
-                    ?: fpsRanges.find { it.lower >= 24 && it.upper <= 30 }
-                    ?: fpsRanges.firstOrNull()
-                targetRange?.let {
-                    captureRequestBuilder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, it)
-                }
+        }
+        
+        // Отключаем scene mode чтобы не мешал
+        captureRequestBuilder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
+        
+        // Включаем стабилизацию видео если доступна
+        val availableVideoStabilization = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
+        if (availableVideoStabilization != null && availableVideoStabilization.contains(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)) {
+            captureRequestBuilder.set(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)
+        }
+        
+        // Применяем настройки
+        captureSession?.let { session ->
+            try {
+                session.setRepeatingRequest(captureRequestBuilder.build(), null, backgroundHandler)
+                Log.d(TAG, "Camera settings applied successfully")
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to update camera settings", e)
             }
-            
-            // Set ISO if supported
-            val isoRange = characteristics?.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE)
-            if (isoRange != null) {
-                val iso = (isoRange.lower + isoRange.upper) / 2
-                captureRequestBuilder.set(CaptureRequest.SENSOR_SENSITIVITY, iso)
-            }
-            
-            // Try to set scene mode, but don't use HDR as it might not be supported
-            val availableSceneModes = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_SCENE_MODES)
-            if (availableSceneModes != null && availableSceneModes.contains(CaptureRequest.CONTROL_SCENE_MODE_DISABLED)) {
-                captureRequestBuilder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
-            }
-            
-            // Only update settings if session is still active
-            captureSession?.let { session ->
-                try {
-                    session.setRepeatingRequest(captureRequestBuilder.build(), null, backgroundHandler)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed to update camera settings", e)
-                }
-            }
-            
-            // Post to background handler to ensure thread safety
-            backgroundHandler?.postDelayed({
-                try {
-                    // Check if session and builder are still valid
-                    val session = captureSession
-                    val builder = previewRequestBuilder
-                    if (session != null && builder != null) {
-                        // Check if AE lock is supported before using it
-                        val aeLockAvailable = characteristics?.get(CameraCharacteristics.CONTROL_AE_LOCK_AVAILABLE) == true
-                        if (aeLockAvailable) {
-                            builder.set(CaptureRequest.CONTROL_AE_LOCK, true)
-                            session.setRepeatingRequest(builder.build(), null, backgroundHandler)
-                            Log.d(TAG, "Exposure locked after stabilization")
-                        }
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed to lock exposure", e)
-                }
-            }, 2000)
-            
+        }
+        
+        // НЕ БЛОКИРУЕМ AE для preview - пусть адаптируется
+        // Блокировка будет только при записи
+        
         } catch (e: Exception) {
             Log.e(TAG, "Failed to configure camera settings", e)
         }
     }
+
+
 
     private fun startRecording() {
         if (isRecording) {
@@ -312,7 +349,7 @@ class PackingCameraActivity : ComponentActivity() {
                 setVideoSource(MediaRecorder.VideoSource.SURFACE)
                 setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
                 setOutputFile(currentVideoFile!!.absolutePath)
-                setVideoEncodingBitRate(8000000) // Reduced bitrate for better compatibility
+                setVideoEncodingBitRate(12000000)
                 setVideoFrameRate(30)
                 videoSize?.let {
                     setVideoSize(it.width, it.height)
@@ -348,12 +385,27 @@ class PackingCameraActivity : ComponentActivity() {
                         captureSession = session
                         
                         try {
-                            // Try TEMPLATE_RECORD first, fallback to TEMPLATE_PREVIEW if not supported
+                            // Try different templates in order of preference for recording
                             val previewRequestBuilder = try {
                                 cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
                             } catch (e: Exception) {
-                                Log.w(TAG, "TEMPLATE_RECORD not supported, falling back to TEMPLATE_PREVIEW", e)
-                                cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+                                Log.w(TAG, "TEMPLATE_RECORD not supported, trying TEMPLATE_PREVIEW", e)
+                                try {
+                                    cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+                                } catch (e2: Exception) {
+                                    Log.w(TAG, "TEMPLATE_PREVIEW not supported, trying TEMPLATE_STILL_CAPTURE", e2)
+                                    try {
+                                        cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
+                                    } catch (e3: Exception) {
+                                        Log.w(TAG, "TEMPLATE_STILL_CAPTURE not supported, trying TEMPLATE_VIDEO_SNAPSHOT", e3)
+                                        try {
+                                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_VIDEO_SNAPSHOT)
+                                        } catch (e4: Exception) {
+                                            Log.e(TAG, "All templates failed, using TEMPLATE_MANUAL as last resort", e4)
+                                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_MANUAL)
+                                        }
+                                    }
+                                }
                             }
                             previewRequestBuilder?.addTarget(previewSurface)
                             previewRequestBuilder?.addTarget(recorderSurface)
@@ -367,6 +419,15 @@ class PackingCameraActivity : ComponentActivity() {
                             btnStartStop.text = "Остановить запись"
                             Toast.makeText(this@PackingCameraActivity, "Запись началась", Toast.LENGTH_SHORT).show()
                             
+                        } catch (e: CameraAccessException) {
+                            Log.e(TAG, "Camera access exception when starting recording", e)
+                            // Try to recover by reopening camera
+                            cameraDevice?.close()
+                            cameraDevice = null
+                            backgroundHandler?.postDelayed({
+                                openCamera()
+                            }, 1000) // Wait 1 second before retrying
+                            Toast.makeText(this@PackingCameraActivity, "Ошибка доступа к камере", Toast.LENGTH_SHORT).show()
                         } catch (e: Exception) {
                             Log.e(TAG, "Failed to start recording", e)
                             Toast.makeText(this@PackingCameraActivity, "Ошибка запуска записи", Toast.LENGTH_SHORT).show()
@@ -388,44 +449,73 @@ class PackingCameraActivity : ComponentActivity() {
     }
     
     private fun configureRecordingSettings(captureRequestBuilder: CaptureRequest.Builder?) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            try {
+                captureRequestBuilder?.set(CaptureRequest.CONTROL_AE_MODE, 5) // ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY
+            } catch (e: Exception) {
+                Log.w(TAG, "Low Light Boost not supported")
+            }
+        }
+
         try {
             val builder = captureRequestBuilder ?: return
             val cameraId = this.cameraId ?: return
             val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
             
-            // Set exposure compensation if supported
+            // КРИТИЧНО: Полный контроль
+            builder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
+            
+            // МАКСИМАЛЬНАЯ компенсация экспозиции для записи
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
-            if (exposureRange != null && exposureRange.lower < exposureRange.upper) {
-                val compensation = exposureRange.lower.coerceAtLeast(2.coerceAtMost(exposureRange.upper))
+            if (exposureRange != null && exposureRange.upper > 0) {
+                // Используем 70-80% от максимума
+                val compensation = (exposureRange.upper * 0.75).toInt().coerceAtMost(exposureRange.upper)
                 builder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
+                Log.d(TAG, "Recording: Set exposure compensation: $compensation")
             }
             
-            // Set AE mode
+            // AE mode
             builder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
             
-            // Set FPS range if supported
+            // ВЫСОКИЙ ISO для записи
+            val isoRange = characteristics?.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE)
+            if (isoRange != null) {
+                // 80% от максимума для записи
+                val iso = (isoRange.lower + (isoRange.upper - isoRange.lower) * 0.8).toInt()
+                builder.set(CaptureRequest.SENSOR_SENSITIVITY, iso)
+                Log.d(TAG, "Recording: Set ISO: $iso")
+            }
+            
+            // Время экспозиции
+            val exposureTimeRange = characteristics?.get(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE)
+            if (exposureTimeRange != null) {
+                val exposureTime = (exposureTimeRange.lower + (exposureTimeRange.upper - exposureTimeRange.lower) * 0.4).toLong()
+                    .coerceAtMost(33_333_333L)
+                builder.set(CaptureRequest.SENSOR_EXPOSURE_TIME, exposureTime)
+                Log.d(TAG, "Recording: Set exposure time: $exposureTime ns")
+            }
+            
+            // FPS 30
             val fpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
             if (fpsRanges != null) {
                 val targetRange = fpsRanges.find { it.lower == 30 && it.upper == 30 }
-                    ?: fpsRanges.find { it.lower >= 24 && it.upper <= 30 }
-                    ?: fpsRanges.firstOrNull()
+                    ?: fpsRanges.find { it.upper == 30 }
+                    ?: fpsRanges.lastOrNull()
                 targetRange?.let {
                     builder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, it)
                 }
             }
             
-            // Set ISO if supported
-            val isoRange = characteristics?.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE)
-            if (isoRange != null) {
-                val iso = (isoRange.lower + isoRange.upper) / 2
-                builder.set(CaptureRequest.SENSOR_SENSITIVITY, iso)
+            // Отключаем scene mode
+            builder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
+            
+            // Включаем видео стабилизацию
+            val availableVideoStabilization = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
+            if (availableVideoStabilization != null && availableVideoStabilization.contains(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)) {
+                builder.set(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)
             }
             
-            // Try to set scene mode, but don't use HDR as it might not be supported
-            val availableSceneModes = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_SCENE_MODES)
-            if (availableSceneModes != null && availableSceneModes.contains(CaptureRequest.CONTROL_SCENE_MODE_DISABLED)) {
-                builder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
-            }
+            Log.d(TAG, "Recording settings configured")
             
         } catch (e: Exception) {
             Log.e(TAG, "Failed to configure recording settings", e)
