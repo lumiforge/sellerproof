@@ -24,6 +24,11 @@ class VoskRecognitionService {
   StreamSubscription<String>? _partialSubscription;
   Completer<void>? _initCompleter;
 
+  // Debouncing для команды "стоп"
+  DateTime? _lastStopCommandTime;
+  static const _stopCommandDebounce = Duration(milliseconds: 1000); // 1 секунда
+  bool _stopCommandProcessed = false;
+
   final List<String> stopCommands = [
     'стоп',
     'stop',
@@ -101,6 +106,10 @@ class VoskRecognitionService {
     }
 
     try {
+      // Сбрасываем флаг при начале нового прослушивания
+      _stopCommandProcessed = false;
+      _lastStopCommandTime = null;
+
       await _speechService!.start();
       state.value = VoskState.listening;
       debugPrint('✅ Vosk: Started continuous listening');
@@ -137,12 +146,38 @@ class VoskRecognitionService {
 
       for (final command in stopCommands) {
         if (lowerText.contains(command)) {
-          debugPrint('🛑 Stop command detected: $command');
+          // Проверяем debouncing
+          final now = DateTime.now();
+
+          // Если команда уже была обработана, игнорируем
+          if (_stopCommandProcessed) {
+            debugPrint('⚠️ Stop command already processed, ignoring');
+            return;
+          }
+
+          // Проверяем, не была ли команда недавно
+          if (_lastStopCommandTime != null &&
+              now.difference(_lastStopCommandTime!) < _stopCommandDebounce) {
+            debugPrint(
+              '⚠️ Stop command ignored (debounce): too soon after last command',
+            );
+            return;
+          }
+
+          // Обновляем время последней команды и устанавливаем флаг
+          _lastStopCommandTime = now;
+          _stopCommandProcessed = true;
+
+          debugPrint('🛑 Stop command detected: $command (from text: "$text")');
+
+          // Вызываем callback
           onStopCommand();
+
           break;
         }
       }
     } catch (e) {
+      debugPrint('⚠️ Error parsing Vosk result: $e');
       // Ignore parsing errors
     }
   }

@@ -7,7 +7,7 @@ import '../scan_controller.dart';
 class PackingCameraPage extends StatefulWidget {
   final String? initialCode;
 
-  const PackingCameraPage({super.key, this.initialCode});
+  const PackingCameraPage({Key? key, this.initialCode}) : super(key: key);
 
   @override
   State<PackingCameraPage> createState() => _PackingCameraPageState();
@@ -19,6 +19,7 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   late VoskRecognitionService _voskService;
   bool _isRecording = false;
   bool _isInitializing = true;
+  bool _isStopping = false; // Флаг для предотвращения повторных вызовов
   String? _scannedCode;
 
   @override
@@ -32,7 +33,7 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
     _voskService = VoskRecognitionService(
       onStopCommand: () {
         debugPrint('🛑 Stop command received from Vosk');
-        if (_isRecording) {
+        if (_isRecording && !_isStopping) {
           _stopRecording();
         }
       },
@@ -40,9 +41,12 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
 
     try {
       await _voskService.initialize();
-      setState(() {
-        _isInitializing = false;
-      });
+
+      if (mounted) {
+        setState(() {
+          _isInitializing = false;
+        });
+      }
 
       // Запускаем нативную камеру (запись начнется автоматически в нативном коде)
       await _startRecording();
@@ -62,6 +66,8 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   }
 
   Future<void> _startRecording() async {
+    if (!mounted) return;
+
     try {
       // Запускаем нативную камеру с отсканированным кодом
       await platform.invokeMethod('startCamera', {'scannedCode': _scannedCode});
@@ -82,12 +88,27 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   }
 
   Future<void> _stopRecording() async {
+    // Предотвращаем повторные вызовы
+    if (_isStopping) {
+      debugPrint('⚠️ Already stopping, ignoring duplicate call');
+      return;
+    }
+
+    _isStopping = true;
+    debugPrint('🛑 Starting stop recording process');
+
     try {
-      // Останавливаем голосовое управление
+      // Останавливаем голосовое управление первым делом
       await _voskService.stopListening();
+      debugPrint('🎤 Voice recognition stopped');
 
       // Останавливаем запись
-      await platform.invokeMethod('stopCamera');
+      try {
+        await platform.invokeMethod('stopCamera');
+        debugPrint('📹 Camera stopped');
+      } on PlatformException catch (e) {
+        debugPrint("⚠️ Failed to stop camera: '${e.message}'.");
+      }
 
       if (mounted) {
         setState(() {
@@ -95,30 +116,40 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
         });
       }
 
-      // Возвращаемся на экран сканирования
+      // Возвращаемся на экран сканирования используя addPostFrameCallback
+      // чтобы избежать навигации во время build
       if (mounted) {
-        // Получаем ScanController и сбрасываем его состояние
-        final scanController = Provider.of<ScanController>(
-          context,
-          listen: false,
-        );
-        scanController.reset();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && Navigator.of(context).canPop()) {
+            debugPrint('🔙 Navigating back to scan screen');
 
-        // Возвращаемся на предыдущий экран (ScanScreen)
-        Navigator.of(context).pop();
+            // Получаем ScanController и сбрасываем его состояние
+            final scanController = Provider.of<ScanController>(
+              context,
+              listen: false,
+            );
+            scanController.reset();
 
-        // После возврата возобновляем сканирование
-        Future.delayed(const Duration(milliseconds: 300), () {
-          scanController.resumeScanning();
+            // Возвращаемся на предыдущий экран (ScanScreen)
+            Navigator.of(context).pop();
+
+            // После возврата возобновляем сканирование
+            Future.delayed(const Duration(milliseconds: 500), () {
+              if (mounted) {
+                scanController.resumeScanning();
+              }
+            });
+          }
         });
       }
-    } on PlatformException catch (e) {
-      debugPrint("Failed to stop camera: '${e.message}'.");
+    } catch (e) {
+      debugPrint("❌ Error in stopRecording: $e");
     }
   }
 
   @override
   void dispose() {
+    debugPrint('🗑️ Disposing PackingCameraPage');
     _voskService.dispose();
     super.dispose();
   }
@@ -144,118 +175,162 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
       );
     }
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Показываем нативную камеру через platform view
-          Container(color: Colors.black),
-          // Наложение с информацией
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.only(
-                top: 50, // Учитываем статус бар
-                left: 16,
-                right: 16,
-                bottom: 16,
-              ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.black.withOpacity(0.7), Colors.transparent],
+    return WillPopScope(
+      onWillPop: () async {
+        // Если пытаемся выйти во время записи, останавливаем запись
+        if (_isRecording && !_isStopping) {
+          await _stopRecording();
+          return false; // Не выходим сразу, дождемся завершения остановки
+        }
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            // Показываем нативную камеру через platform view
+            Container(color: Colors.black),
+            // Наложение с информацией
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 50, // Учитываем статус бар
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.black.withOpacity(0.7), Colors.transparent],
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (_scannedCode != null) ...[
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.green),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Код:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              _scannedCode!,
+                              style: const TextStyle(
+                                color: Colors.green,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (_scannedCode != null) ...[
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.green),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            // Индикатор записи и подсказка
+            if (_isRecording && !_isStopping)
+              Positioned(
+                bottom: 50,
+                left: 16,
+                right: 16,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Код:',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
+                          Container(
+                            width: 16,
+                            height: 16,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            _scannedCode!,
-                            style: const TextStyle(
-                              color: Colors.green,
+                          const SizedBox(width: 8),
+                          const Text(
+                            'ИДЕТ ЗАПИСЬ',
+                            style: TextStyle(
+                              color: Colors.red,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ),
-          // Индикатор записи и подсказка
-          if (_isRecording)
-            Positioned(
-              bottom: 50,
-              left: 16,
-              right: 16,
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 16,
-                          height: 16,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          'ИДЕТ ЗАПИСЬ',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Скажите "Стоп" для остановки записи',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Скажите "Стоп" для остановки записи',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-        ],
+            // Индикатор остановки
+            if (_isStopping)
+              Positioned(
+                bottom: 50,
+                left: 16,
+                right: 16,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12),
+                      Text(
+                        'Остановка записи...',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
