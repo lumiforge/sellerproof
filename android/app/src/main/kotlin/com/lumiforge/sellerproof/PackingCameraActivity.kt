@@ -369,52 +369,39 @@ class PackingCameraActivity : ComponentActivity() {
             val cameraId = this.cameraId ?: return
             val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
             
-            // КРИТИЧНО: Используем ТОЛЬКО Auto режим с компенсацией
+            // Для PREVIEW - используем ОБЫЧНУЮ автоматику БЕЗ компенсации
             captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
             captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
             
-            // Устанавливаем МАКСИМАЛЬНУЮ компенсацию экспозиции
+            // НЕ УСТАНАВЛИВАЕМ компенсацию экспозиции для preview!
+            // Или устанавливаем минимальную
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
-            if (exposureRange != null && exposureRange.upper > 0) {
-                // Используем МАКСИМУМ компенсации
-                val compensation = exposureRange.upper
-                captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
-                Log.d(TAG, "Set exposure compensation: $compensation (max: ${exposureRange.upper})")
+            if (exposureRange != null) {
+                // Используем 0 или минимальную компенсацию для preview
+                captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, 0)
+                Log.d(TAG, "Preview: exposure compensation = 0 (range: ${exposureRange.lower}..${exposureRange.upper})")
             }
             
-            // НЕ УСТАНАВЛИВАЕМ ISO и EXPOSURE_TIME - они конфликтуют с AE_MODE_ON!
-            // Автоматика сама их подберет на основе компенсации экспозиции
-            
-            // FPS range - гибкий диапазон для лучшей адаптации
+            // FPS для preview - можно оставить 30
             val fpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
             if (fpsRanges != null) {
-                // Выбираем диапазон с верхним пределом 30fps, но нижним 15-24
-                val targetRange = fpsRanges.find { it.lower >= 15 && it.upper == 30 }
+                val targetRange = fpsRanges.find { it.lower == 30 && it.upper == 30 }
                     ?: fpsRanges.find { it.upper == 30 }
                     ?: fpsRanges.lastOrNull()
                 targetRange?.let {
                     captureRequestBuilder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, it)
-                    Log.d(TAG, "Set FPS range: ${it.lower}-${it.upper}")
+                    Log.d(TAG, "Preview: FPS range: ${it.lower}-${it.upper}")
                 }
             }
             
-            // Отключаем scene mode
-            captureRequestBuilder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
-            
-            // Автофокус для видео
+            // Автофокус для preview
             captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
-            
-            // Включаем стабилизацию видео если доступна
-            val availableVideoStabilization = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
-            if (availableVideoStabilization != null && availableVideoStabilization.contains(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)) {
-                captureRequestBuilder.set(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)
-            }
             
             // Применяем настройки
             captureSession?.let { session ->
                 try {
                     session.setRepeatingRequest(captureRequestBuilder.build(), null, backgroundHandler)
-                    Log.d(TAG, "Preview settings applied successfully")
+                    Log.d(TAG, "Preview settings applied (no exposure boost)")
                 } catch (e: Exception) {
                     Log.e(TAG, "Failed to update preview settings", e)
                 }
@@ -425,43 +412,49 @@ class PackingCameraActivity : ComponentActivity() {
         }
     }
 
+
     private fun configureRecordingSettings(captureRequestBuilder: CaptureRequest.Builder?) {
         try {
             val builder = captureRequestBuilder ?: return
             val cameraId = this.cameraId ?: return
             val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
             
-            // КРИТИЧНО: Auto режим с максимальной компенсацией
+            // Для RECORDING - МАКСИМАЛЬНАЯ яркость
             builder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
             builder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
             
-            // МАКСИМАЛЬНАЯ компенсация экспозиции
+            // МАКСИМАЛЬНАЯ компенсация для записи
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
             if (exposureRange != null && exposureRange.upper > 0) {
-                val compensation = exposureRange.upper
+                val compensation = exposureRange.upper // МАКСИМУМ
                 builder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
-                Log.d(TAG, "Recording: Set exposure compensation: $compensation (max: ${exposureRange.upper})")
+                Log.d(TAG, "Recording: MAX exposure compensation = $compensation")
             }
+
             
-            // НЕ УСТАНАВЛИВАЕМ ISO и EXPOSURE_TIME!
-            
-            // FPS для записи - гибкий диапазон
+            // Для записи - используем гибкий FPS диапазон
             val fpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
+            Log.d(TAG, "Available FPS ranges:")
+            fpsRanges?.forEach { range ->
+                Log.d(TAG, "  - ${range.lower} to ${range.upper}")
+            }
+
             if (fpsRanges != null) {
-                val targetRange = fpsRanges.find { it.lower >= 15 && it.upper == 30 }
+                // Ищем диапазон с нижней границей 15-20 и верхней 30
+                val targetRange = fpsRanges.find { it.lower >= 15 && it.lower <= 20 && it.upper == 30 }
                     ?: fpsRanges.find { it.upper == 30 }
                     ?: fpsRanges.lastOrNull()
                 targetRange?.let {
                     builder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, it)
-                    Log.d(TAG, "Recording: Set FPS range: ${it.lower}-${it.upper}")
+                    Log.d(TAG, "Recording: FPS range: ${it.lower}-${it.upper}")
                 }
             }
             
-            // Отключаем scene mode
-            builder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
-            
             // Автофокус для видео
             builder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
+            
+            // Отключаем scene mode
+            builder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
             
             // Включаем видео стабилизацию
             val availableVideoStabilization = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
@@ -469,7 +462,7 @@ class PackingCameraActivity : ComponentActivity() {
                 builder.set(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)
             }
             
-            Log.d(TAG, "Recording settings configured successfully")
+            Log.d(TAG, "Recording settings configured with MAX brightness")
             
         } catch (e: Exception) {
             Log.e(TAG, "Failed to configure recording settings", e)
