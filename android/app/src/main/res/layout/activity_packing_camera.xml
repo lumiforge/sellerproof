@@ -7,7 +7,17 @@
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+    
+    <TextView
+        android:id="@+id/voiceIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="🎤 Скажите 'Стоп' для остановки"
+        android:textColor="@android:color/white"
+        android:background="#80000000"
+        android:padding="8dp"
+        android:visibility="gone"/>
     <Button
         android:id="@+id/btnStartStop"
         android:layout_width="match_parent"

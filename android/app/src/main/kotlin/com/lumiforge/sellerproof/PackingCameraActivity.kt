@@ -16,6 +16,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.util.Range
 import android.view.Surface
+import android.widget.TextView
 import android.view.TextureView
 import android.widget.Button
 import android.widget.Toast
@@ -30,6 +31,7 @@ class PackingCameraActivity : ComponentActivity() {
 
     private lateinit var textureView: TextureView
     private lateinit var btnStartStop: Button
+    private lateinit var voiceIndicator: TextView
 
     private var cameraDevice: CameraDevice? = null
     private var captureSession: CameraCaptureSession? = null
@@ -42,7 +44,8 @@ class PackingCameraActivity : ComponentActivity() {
     private var cameraId: String? = null
     private var backgroundHandler: Handler? = null
     private var backgroundThread: HandlerThread? = null
-    
+    private var voiceRecognition: VoiceRecognitionService? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +53,20 @@ class PackingCameraActivity : ComponentActivity() {
 
         textureView = findViewById(R.id.viewFinder)
         btnStartStop = findViewById(R.id.btnStartStop)
+        voiceIndicator = findViewById(R.id.voiceIndicator)
         
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        
+        // Инициализируем голосовое управление
+        voiceRecognition = VoiceRecognitionService(this) {
+            // Callback для остановки записи
+            runOnUiThread {
+                if (isRecording) {
+                    Toast.makeText(this, "Голосовая команда: Остановка!", Toast.LENGTH_SHORT).show()
+                    stopRecording()
+                }
+            }
+        }
 
         btnStartStop.setOnClickListener {
             if (!isRecording) {
@@ -71,7 +86,7 @@ class PackingCameraActivity : ComponentActivity() {
             )
         }
     }
-
+    
     private fun startCamera() {
         try {
             cameraId = cameraManager?.cameraIdList?.find { id ->
@@ -362,6 +377,9 @@ class PackingCameraActivity : ComponentActivity() {
             Log.e(TAG, "Failed to start recording", e)
             Toast.makeText(this, "Ошибка записи видео", Toast.LENGTH_SHORT).show()
         }
+        
+        voiceIndicator.visibility = android.view.View.VISIBLE
+        voiceRecognition?.startListening()
     }
     
     private fun configureCameraSettings() {
@@ -482,12 +500,16 @@ class PackingCameraActivity : ComponentActivity() {
     }
 
     private fun stopRecording() {
+        voiceIndicator.visibility = android.view.View.GONE
+        voiceRecognition?.stopListening()
+
         if (!isRecording) {
             Log.w(TAG, "stopRecording: not recording")
             return
         }
         
         try {
+            voiceRecognition?.stopListening()
             finishAfterStop = true
             mediaRecorder?.stop()
             mediaRecorder?.release()
@@ -554,10 +576,17 @@ class PackingCameraActivity : ComponentActivity() {
     }
     
     override fun onPause() {
+        voiceRecognition?.stopListening()
         closeCamera()
         stopBackgroundThread()
         super.onPause()
     }
+        
+    override fun onDestroy() {
+        voiceRecognition?.stopListening()
+        super.onDestroy()
+    }
+
     
     private fun closeCamera() {
         try {

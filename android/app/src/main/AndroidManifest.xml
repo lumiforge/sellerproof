@@ -5,6 +5,9 @@
         android:label="sellerproof"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+          <service
+            android:name=".VoiceRecognitionService"
+            android:exported="false"/>
         <activity
             android:name=".PackingCameraActivity"
             android:exported="false"    
