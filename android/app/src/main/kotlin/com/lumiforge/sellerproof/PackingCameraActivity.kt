@@ -42,6 +42,7 @@ class PackingCameraActivity : ComponentActivity() {
     private var cameraId: String? = null
     private var backgroundHandler: Handler? = null
     private var backgroundThread: HandlerThread? = null
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -426,10 +427,12 @@ class PackingCameraActivity : ComponentActivity() {
             // МАКСИМАЛЬНАЯ компенсация для записи
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
             if (exposureRange != null && exposureRange.upper > 0) {
-                val compensation = exposureRange.upper // МАКСИМУМ
+                // Используем 50-60% от максимума вместо 100%
+                val compensation = (exposureRange.upper * 0.6).toInt().coerceAtLeast(1)
                 builder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
-                Log.d(TAG, "Recording: MAX exposure compensation = $compensation")
+                Log.d(TAG, "Recording: Adaptive exposure compensation = $compensation (max: ${exposureRange.upper})")
             }
+
 
             
             // Для записи - используем гибкий FPS диапазон
