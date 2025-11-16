@@ -25,18 +25,8 @@ class ScanAndRecordController extends ChangeNotifier {
     );
     await cameraController!.initialize();
     scannerController = MobileScannerController(
-      detectionSpeed: DetectionSpeed.noDuplicates,
-      formats: [
-        BarcodeFormat.qrCode,
-        BarcodeFormat.code128,
-        BarcodeFormat.code39,
-        BarcodeFormat.code93,
-        BarcodeFormat.ean13,
-        BarcodeFormat.ean8,
-        BarcodeFormat.upcA,
-        BarcodeFormat.upcE,
-        BarcodeFormat.dataMatrix,
-      ],
+      detectionSpeed: DetectionSpeed.unrestricted,
+      facing: CameraFacing.back
     );
     cameraReady = true;
     notifyListeners();
@@ -50,18 +40,16 @@ class ScanAndRecordController extends ChangeNotifier {
   }
 
   /// Handle detection
-  Future<void> onDetected(BarcodeCapture capture) async {
+  void onDetected(Barcode barcode, MobileScannerArguments? args) async {
     if (!isScanning) return;
-    final barcode = capture.barcodes.firstOrNull;
-    if (barcode != null &&
-        barcode.rawValue != null &&
-        barcode.rawValue!.isNotEmpty) {
+    final String? codeValue = barcode.rawValue;
+    if (codeValue != null && codeValue.isNotEmpty) {
       isScanning = false;
-      lastScannedCode = barcode.rawValue!;
+      lastScannedCode = codeValue;
       notifyListeners();
       await startRecording();
     }
-    // Else: will keep scanning.
+    // If not recognized, scanner continues.
   }
 
   /// Start video recording, and save code with video
