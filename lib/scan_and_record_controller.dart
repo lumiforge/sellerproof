@@ -24,10 +24,9 @@ class ScanAndRecordController extends ChangeNotifier {
       ResolutionPreset.medium,
     );
     await cameraController!.initialize();
-    scannerController = MobileScannerController(
-      detectionSpeed: DetectionSpeed.unrestricted,
-      facing: CameraFacing.back
-    );
+    // NOTE: We rely on the MobileScanner widget directly for camera;
+    // do NOT double-initialize the camera in controller and widget.
+    scannerController = null;
     cameraReady = true;
     notifyListeners();
   }
@@ -36,33 +35,42 @@ class ScanAndRecordController extends ChangeNotifier {
   void startScanning() {
     isScanning = true;
     notifyListeners();
-    scannerController?.start();
+    // Do not call start on scannerController, let widget handle lifecycle
   }
 
-  /// Handle detection
-  void onDetected(Barcode barcode, MobileScannerArguments? args) async {
+  /// Handle detection (MobileScanner 4.x BarcodeCapture)
+  Future<void> onDetected(BarcodeCapture capture) async {
     if (!isScanning) return;
-    final String? codeValue = barcode.rawValue;
-    if (codeValue != null && codeValue.isNotEmpty) {
-      isScanning = false;
-      lastScannedCode = codeValue;
-      notifyListeners();
-      await startRecording();
+    final barcodes = capture.barcodes;
+    for (final barcode in barcodes) {
+      final codeValue = barcode.rawValue;
+      if (codeValue != null && codeValue.isNotEmpty) {
+        isScanning = false;
+        lastScannedCode = codeValue;
+        notifyListeners();
+        await startRecording();
+        return;
+      }
     }
-    // If not recognized, scanner continues.
+    // Если ни один код не распознан -- ничего не делаем, продолжаем сканирование.
   }
 
   /// Start video recording, and save code with video
   Future<void> startRecording() async {
-    if (cameraController == null || cameraController!.value.isRecordingVideo)
-      return;
+    if (cameraController == null || cameraController!.value.isRecordingVideo) return;
+
     final dir = await getApplicationDocumentsDirectory();
     final timestamp = DateTime.now().millisecondsSinceEpoch;
     final videoPath = '${dir.path}/scan_video_$timestamp.mp4';
-    await cameraController!.startVideoRecording();
-    isRecording = true;
-    savedVideoPath = videoPath;
-    notifyListeners();
+
+    try {
+      await cameraController!.startVideoRecording();
+      isRecording = true;
+      savedVideoPath = videoPath;
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Ошибка запуска записи видео: $e');
+    }
   }
 
   /// Stop video recording.

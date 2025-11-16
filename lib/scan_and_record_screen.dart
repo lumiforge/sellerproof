@@ -27,9 +27,7 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
   Widget build(BuildContext context) {
     controller = Provider.of<ScanAndRecordController>(context);
     if (!controller.cameraReady) {
-      return Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -38,29 +36,17 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
         children: [
           if (controller.cameraController != null)
             CameraPreview(controller.cameraController!),
-          if (!controller.isRecording && (controller.isScanning || controller.lastScannedCode == null))
+          if (!controller.isRecording &&
+              (controller.isScanning || controller.lastScannedCode == null))
             MobileScanner(
-              controller: controller.scannerController,
               fit: BoxFit.cover,
-              // replace deprecated onDetect (BarcodeCapture) with new callback
-              onDetect: (barcode, args) {
-                controller.onDetected(barcode, args);
+              allowDuplicates: false,
+              onDetect: (BarcodeCapture capture) {
+                controller.onDetected(capture);
               },
-              // Support ALL formats (mobile_scanner list)
-              formats: [
-                BarcodeFormat.qrCode,
-                BarcodeFormat.code128,
-                BarcodeFormat.code39,
-                BarcodeFormat.code93,
-                BarcodeFormat.ean13,
-                BarcodeFormat.ean8,
-                BarcodeFormat.upcA,
-                BarcodeFormat.upcE,
-                BarcodeFormat.dataMatrix,
-                BarcodeFormat.pdf417,
-                BarcodeFormat.aztec
-              ],
               overlay: ScannerOverlay(),
+              detectionSpeed: DetectionSpeed.normal,
+              facing: CameraFacing.back,
             ),
           // Video recording overlay status
           if (controller.isRecording)
@@ -71,9 +57,16 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.fiber_manual_record, color: Colors.red, size: 32),
+                    Icon(
+                      Icons.fiber_manual_record,
+                      color: Colors.red,
+                      size: 32,
+                    ),
                     SizedBox(width: 10),
-                    Text('Recording...', style: TextStyle(color: Colors.white, fontSize: 24)),
+                    Text(
+                      'Recording...',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
                   ],
                 ),
               ),
