@@ -328,18 +328,13 @@ class PackingCameraActivity : ComponentActivity() {
             
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
             if (exposureRange != null && exposureRange.upper > 0) {
+                // Увеличиваем яркость на 60% от максимума
                 val compensation = (exposureRange.upper * 0.6).toInt().coerceAtLeast(1)
                 builder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
                 Log.d(TAG, "Recording: Adaptive exposure compensation = $compensation (max: ${exposureRange.upper})")
             }
             
             builder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
-            builder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
-            
-            val availableVideoStabilization = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
-            if (availableVideoStabilization != null && availableVideoStabilization.contains(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)) {
-                builder.set(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)
-            }
             
             Log.d(TAG, "Recording settings configured with brightness boost")
             
@@ -347,6 +342,7 @@ class PackingCameraActivity : ComponentActivity() {
             Log.e(TAG, "Failed to configure recording settings", e)
         }
     }
+
     
     private fun getOutputMediaFile(): File {
         val mediaStorageDir = File(getExternalFilesDir(null), "Movies/SellerProof")
