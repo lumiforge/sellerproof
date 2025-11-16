@@ -276,7 +276,7 @@ class PackingCameraActivity : ComponentActivity() {
             
             currentVideoFile = getOutputMediaFile()
             mediaRecorder?.apply {
-                setAudioSource(MediaRecorder.AudioSource.MIC)
+                // setAudioSource(MediaRecorder.AudioSource.MIC)
                 setVideoSource(MediaRecorder.VideoSource.SURFACE)
                 setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
                 setOutputFile(currentVideoFile!!.absolutePath)
@@ -288,9 +288,9 @@ class PackingCameraActivity : ComponentActivity() {
                     setVideoSize(1280, 720) // Fallback to 720p
                 }
                 setVideoEncoder(MediaRecorder.VideoEncoder.H264)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-                setAudioEncodingBitRate(128000)
-                setAudioSamplingRate(44100)
+                // setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+                // setAudioEncodingBitRate(128000)
+                // setAudioSamplingRate(44100)
                 prepare()
             }
             
