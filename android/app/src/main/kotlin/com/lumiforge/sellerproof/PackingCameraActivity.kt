@@ -202,6 +202,7 @@ class PackingCameraActivity : ComponentActivity() {
             captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
             captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
             
+            // Для превью используем нейтральную яркость
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
             if (exposureRange != null) {
                 captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, 0)
@@ -210,10 +211,24 @@ class PackingCameraActivity : ComponentActivity() {
             
             captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
             
+            // Получаем доступные FPS диапазоны для превью
+            val availableFpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
+            if (availableFpsRanges != null) {
+                // Для превью используем стабильный 30 FPS
+                val previewFpsRange = availableFpsRanges.firstOrNull { 
+                    it.lower == 30 && it.upper == 30 
+                } ?: availableFpsRanges.maxByOrNull { it.upper }
+                
+                if (previewFpsRange != null) {
+                    captureRequestBuilder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, previewFpsRange)
+                    Log.d(TAG, "Preview: FPS range: ${previewFpsRange.lower}-${previewFpsRange.upper}")
+                }
+            }
+            
             captureSession?.let { session ->
                 try {
                     session.setRepeatingRequest(captureRequestBuilder.build(), null, backgroundHandler)
-                    Log.d(TAG, "Preview settings applied")
+                    Log.d(TAG, "Preview settings applied (no exposure boost)")
                 } catch (e: Exception) {
                     Log.e(TAG, "Failed to update preview settings", e)
                 }
@@ -223,6 +238,7 @@ class PackingCameraActivity : ComponentActivity() {
             Log.e(TAG, "Failed to configure camera settings", e)
         }
     }
+
 
     private fun startRecording() {
         if (isRecording) {
@@ -326,22 +342,63 @@ class PackingCameraActivity : ComponentActivity() {
             builder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
             builder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
             
+            // ВАЖНО: Адаптивное осветление
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
-            if (exposureRange != null && exposureRange.upper > 0) {
-                // Увеличиваем яркость на 60% от максимума
-                val compensation = (exposureRange.upper * 0.6).toInt().coerceAtLeast(1)
-                builder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
-                Log.d(TAG, "Recording: Adaptive exposure compensation = $compensation (max: ${exposureRange.upper})")
+            if (exposureRange != null) {
+                val maxExposure = exposureRange.upper
+                
+                // Начинаем с 60% от максимума
+                var targetCompensation = (maxExposure * 0.6).toInt().coerceAtLeast(1)
+                
+                // Получаем текущую яркость сцены (если доступно)
+                val currentExposureCompensation = builder.get(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION) ?: 0
+                
+                // Если сцена очень темная, увеличиваем до 80%
+                if (currentExposureCompensation < -2) {
+                    targetCompensation = (maxExposure * 0.8).toInt().coerceAtLeast(1)
+                    Log.d(TAG, "Recording: Scene is dark, boosting to 80%")
+                }
+                
+                builder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, targetCompensation)
+                Log.d(TAG, "Recording: Adaptive exposure compensation = $targetCompensation (range: ${exposureRange.lower}..${exposureRange.upper})")
             }
             
+            // Фокусировка для видео
             builder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
             
-            Log.d(TAG, "Recording settings configured with brightness boost")
+            // Отключаем сцены - даем полный контроль яркости
+            builder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
+            
+            // Стабилизация видео если доступна
+            val availableVideoStabilization = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
+            if (availableVideoStabilization != null && availableVideoStabilization.contains(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)) {
+                builder.set(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)
+                Log.d(TAG, "Recording: Video stabilization enabled")
+            }
+            
+            // Получаем доступные FPS диапазоны
+            val availableFpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
+            if (availableFpsRanges != null) {
+                Log.d(TAG, "Available FPS ranges:")
+                availableFpsRanges.forEach { range ->
+                    Log.d(TAG, "  - ${range.lower} to ${range.upper}")
+                }
+                
+                // Выбираем диапазон с наименьшим минимумом для лучшей яркости
+                val bestFpsRange = availableFpsRanges.minByOrNull { it.lower }
+                if (bestFpsRange != null) {
+                    builder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, bestFpsRange)
+                    Log.d(TAG, "Recording: FPS range: ${bestFpsRange.lower}-${bestFpsRange.upper}")
+                }
+            }
+            
+            Log.d(TAG, "Recording settings configured with MAX brightness")
             
         } catch (e: Exception) {
             Log.e(TAG, "Failed to configure recording settings", e)
         }
     }
+
 
     
     private fun getOutputMediaFile(): File {
