@@ -37,10 +37,14 @@ class PackingCameraActivity : ComponentActivity() {
     private var cameraId: String? = null
     private var backgroundHandler: Handler? = null
     private var backgroundThread: HandlerThread? = null
+    private var scannedCode: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_packing_camera)
+        
+        // Get scanned code from intent
+        scannedCode = intent.getStringExtra("scannedCode")
 
         textureView = findViewById(R.id.viewFinder)
         btnStartStop = findViewById(R.id.btnStartStop)
@@ -406,7 +410,16 @@ class PackingCameraActivity : ComponentActivity() {
         if (!mediaStorageDir.exists()) {
             mediaStorageDir.mkdirs()
         }
-        return File(mediaStorageDir, "packing_${System.currentTimeMillis()}.mp4")
+        val videoFile = File(mediaStorageDir, "packing_${System.currentTimeMillis()}.mp4")
+        
+        // Save scanned code with video
+        scannedCode?.let { code ->
+            val codeFile = File(mediaStorageDir, "packing_${System.currentTimeMillis()}.txt")
+            codeFile.writeText(code)
+            Log.d(TAG, "Saved scanned code: $code with video: ${videoFile.absolutePath}")
+        }
+        
+        return videoFile
     }
 
     fun stopRecording() {
@@ -429,6 +442,8 @@ class PackingCameraActivity : ComponentActivity() {
             currentVideoFile?.let { videoFile ->
                 val resultIntent = Intent().apply {
                     putExtra("videoPath", videoFile.absolutePath)
+                    // Also include the scanned code
+                    putExtra("scannedCode", scannedCode)
                 }
                 setResult(Activity.RESULT_OK, resultIntent)
             } ?: run {

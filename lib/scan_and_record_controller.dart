@@ -18,15 +18,17 @@ class ScanAndRecordController extends ChangeNotifier {
 
   /// Call this when initializing the screen.
   Future<void> initialize() async {
+    // Initialize scanner controller with autoStart disabled
+    scannerController = MobileScannerController(autoStart: false);
+
+    // Initialize camera controller for video recording
     final cameras = await availableCameras();
     cameraController = CameraController(
       cameras.firstWhere((c) => c.lensDirection == CameraLensDirection.back),
       ResolutionPreset.medium,
     );
     await cameraController!.initialize();
-    // NOTE: We rely on the MobileScanner widget directly for camera;
-    // do NOT double-initialize the camera in controller and widget.
-    scannerController = null;
+
     cameraReady = true;
     notifyListeners();
   }
@@ -34,8 +36,8 @@ class ScanAndRecordController extends ChangeNotifier {
   /// Start scanning, called when the camera is shown and no recording.
   void startScanning() {
     isScanning = true;
+    scannerController?.start();
     notifyListeners();
-    // Do not call start on scannerController, let widget handle lifecycle
   }
 
   /// Handle detection (MobileScanner 4.x BarcodeCapture)
@@ -45,6 +47,8 @@ class ScanAndRecordController extends ChangeNotifier {
     for (final barcode in barcodes) {
       final codeValue = barcode.rawValue;
       if (codeValue != null && codeValue.isNotEmpty) {
+        // Stop scanner before starting recording
+        await scannerController?.stop();
         isScanning = false;
         lastScannedCode = codeValue;
         notifyListeners();
@@ -57,13 +61,16 @@ class ScanAndRecordController extends ChangeNotifier {
 
   /// Start video recording, and save code with video
   Future<void> startRecording() async {
-    if (cameraController == null || cameraController!.value.isRecordingVideo) return;
+    if (cameraController == null || cameraController!.value.isRecordingVideo)
+      return;
 
     final dir = await getApplicationDocumentsDirectory();
     final timestamp = DateTime.now().millisecondsSinceEpoch;
     final videoPath = '${dir.path}/scan_video_$timestamp.mp4';
 
     try {
+      // Wait a bit for scanner to fully stop before starting recording
+      await Future.delayed(Duration(milliseconds: 500));
       await cameraController!.startVideoRecording();
       isRecording = true;
       savedVideoPath = videoPath;
@@ -85,13 +92,21 @@ class ScanAndRecordController extends ChangeNotifier {
     // Optionally, persist code+video association in a simple file/db.
     final logFile = File('${savedVideoPath!}.txt');
     await logFile.writeAsString(lastScannedCode ?? '');
+
+    // Restart scanner after recording stops
+    await Future.delayed(Duration(milliseconds: 500));
+    await scannerController?.start();
   }
 
   /// Reset scanning after stop.
-  void reset() {
+  Future<void> reset() async {
     lastScannedCode = null;
     isScanning = false;
     isRecording = false;
+    // Wait a bit before restarting scanner
+    await Future.delayed(Duration(milliseconds: 300));
+    await scannerController?.start();
+    isScanning = true;
     notifyListeners();
   }
 

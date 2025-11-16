@@ -15,6 +15,10 @@ class MainActivity: FlutterActivity() {
             when (call.method) {
                 "startCamera" -> {
                     val intent = Intent(this, PackingCameraActivity::class.java)
+                    // Pass scanned code if provided
+                    call.argument<String?>("scannedCode")?.let { code ->
+                        intent.putExtra("scannedCode", code)
+                    }
                     startActivityForResult(intent, CAMERA_REQUEST_CODE)
                     result.success(null)
                 }

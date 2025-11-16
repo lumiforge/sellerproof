@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'services/vosk_recognition_service.dart';
 import 'package:provider/provider.dart';
-import 'scan_and_record_controller.dart';
-import 'scan_and_record_screen.dart';
+import 'scan_controller.dart';
+import 'scan_screen.dart';
 
 void main() {
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ScanAndRecordController()),
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => ScanController())],
       child: const MyApp(),
     ),
   );
@@ -24,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'sellerproof',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: ScanAndRecordScreen(),
+      home: ScanScreen(),
     );
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import '../services/vosk_recognition_service.dart';
 
 class PackingCameraPage extends StatefulWidget {
-  const PackingCameraPage({Key? key}) : super(key: key);
+  final String? initialCode;
+
+  const PackingCameraPage({Key? key, this.initialCode}) : super(key: key);
 
   @override
   State<PackingCameraPage> createState() => _PackingCameraPageState();
@@ -15,10 +17,12 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   late VoskRecognitionService _voskService;
   bool _isRecording = false;
   bool _isInitializing = true;
+  String? _scannedCode;
 
   @override
   void initState() {
     super.initState();
+    _scannedCode = widget.initialCode;
     _initializeVosk();
   }
 
@@ -49,8 +53,8 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
 
   Future<void> _startRecording() async {
     try {
-      // Запускаем нативную камеру
-      await platform.invokeMethod('startCamera');
+      // Запускаем нативную камеру с отсканированным кодом
+      await platform.invokeMethod('startCamera', {'scannedCode': _scannedCode});
 
       setState(() {
         _isRecording = true;
@@ -78,9 +82,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
         _isRecording = false;
       });
 
-      // Возвращаемся назад
+      // Возвращаемся на экран сканирования
       if (mounted) {
-        Navigator.pop(context);
+        Navigator.of(context).popUntil((route) => route.isFirst);
       }
     } on PlatformException catch (e) {
       debugPrint("Failed to stop camera: '${e.message}'.");
@@ -127,7 +131,14 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
+              if (_scannedCode != null) ...[
+                Text(
+                  'Код: $_scannedCode',
+                  style: TextStyle(color: Colors.green, fontSize: 16),
+                ),
+                const SizedBox(height: 8),
+              ],
               const Text(
                 'Скажите "Стоп" для остановки',
                 style: TextStyle(color: Colors.white70, fontSize: 16),

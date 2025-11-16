@@ -19,6 +19,7 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
     Future.microtask(() async {
       controller = Provider.of<ScanAndRecordController>(context, listen: false);
       await controller.initialize();
+      controller.startScanning(); // Start scanning after initialization
       setState(() {});
     });
   }
@@ -34,16 +35,21 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          if (controller.cameraController != null)
-            CameraPreview(controller.cameraController!),
+          // Show scanner when not recording
           if (!controller.isRecording &&
               (controller.isScanning || controller.lastScannedCode == null))
             MobileScanner(
+              controller: controller.scannerController,
               fit: BoxFit.cover,
               onDetect: (BarcodeCapture capture) {
                 controller.onDetected(capture);
               },
             ),
+          // Show camera preview when recording
+          if (controller.isRecording && controller.cameraController != null)
+            CameraPreview(controller.cameraController!),
+          // Scanner overlay
+          if (!controller.isRecording) ScannerOverlay(),
           // Video recording overlay status
           if (controller.isRecording)
             Align(
@@ -76,7 +82,7 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
               backgroundColor: Colors.red,
               onPressed: () async {
                 await controller.stopRecording();
-                controller.reset();
+                await controller.reset();
               },
             )
           : null,
