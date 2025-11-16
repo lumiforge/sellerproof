@@ -40,13 +40,9 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
               (controller.isScanning || controller.lastScannedCode == null))
             MobileScanner(
               fit: BoxFit.cover,
-              allowDuplicates: false,
               onDetect: (BarcodeCapture capture) {
                 controller.onDetected(capture);
               },
-              overlay: ScannerOverlay(),
-              detectionSpeed: DetectionSpeed.normal,
-              facing: CameraFacing.back,
             ),
           // Video recording overlay status
           if (controller.isRecording)
@@ -89,6 +85,8 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
 }
 
 class ScannerOverlay extends StatelessWidget {
+  const ScannerOverlay({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -101,7 +99,6 @@ class ScannerOverlay extends StatelessWidget {
               border: Border.all(color: Colors.green, width: 4),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: null,
           ),
         ),
         Positioned(
@@ -110,7 +107,7 @@ class ScannerOverlay extends StatelessWidget {
           right: 0,
           child: Center(
             child: Card(
-              color: Colors.black.withOpacity(0.7),
+              color: Colors.black.withAlpha(179), // 0.7*255=178.5
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
