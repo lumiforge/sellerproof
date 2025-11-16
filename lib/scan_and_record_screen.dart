@@ -6,6 +6,8 @@ import 'scan_and_record_controller.dart';
 
 /// Screen that handles scanning barcodes + video recording.
 class ScanAndRecordScreen extends StatefulWidget {
+  const ScanAndRecordScreen({super.key});
+
   @override
   State<ScanAndRecordScreen> createState() => _ScanAndRecordScreenState();
 }

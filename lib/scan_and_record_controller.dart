@@ -61,8 +61,9 @@ class ScanAndRecordController extends ChangeNotifier {
 
   /// Start video recording, and save code with video
   Future<void> startRecording() async {
-    if (cameraController == null || cameraController!.value.isRecordingVideo)
+    if (cameraController == null || cameraController!.value.isRecordingVideo) {
       return;
+    }
 
     final dir = await getApplicationDocumentsDirectory();
     final timestamp = DateTime.now().millisecondsSinceEpoch;
@@ -82,11 +83,12 @@ class ScanAndRecordController extends ChangeNotifier {
 
   /// Stop video recording.
   Future<void> stopRecording() async {
-    if (cameraController == null || !cameraController!.value.isRecordingVideo)
+    if (cameraController == null || !cameraController!.value.isRecordingVideo) {
       return;
+    }
     final file = await cameraController!.stopVideoRecording();
     final File recordedFile = File(file.path);
-    final File toSaved = await recordedFile.copy(savedVideoPath!);
+    await recordedFile.copy(savedVideoPath!);
     isRecording = false;
     notifyListeners();
     // Optionally, persist code+video association in a simple file/db.

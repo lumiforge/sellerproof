@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../services/vosk_recognition_service.dart';
-import '../scan_screen.dart';
+import '../scan_controller.dart';
 
 class PackingCameraPage extends StatefulWidget {
   final String? initialCode;
 
-  const PackingCameraPage({Key? key, this.initialCode}) : super(key: key);
+  const PackingCameraPage({super.key, this.initialCode});
 
   @override
   State<PackingCameraPage> createState() => _PackingCameraPageState();
@@ -44,17 +45,19 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
       });
 
       // Запускаем нативную камеру (запись начнется автоматически в нативном коде)
-      _startRecording();
+      await _startRecording();
 
       // Запускаем голосовое управление
       await _voskService.startListening();
     } catch (e) {
       debugPrint('Failed to initialize Vosk: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Ошибка инициализации голосового управления: $e'),
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Ошибка инициализации голосового управления: $e'),
+          ),
+        );
+      }
     }
   }
 
@@ -63,14 +66,18 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
       // Запускаем нативную камеру с отсканированным кодом
       await platform.invokeMethod('startCamera', {'scannedCode': _scannedCode});
 
-      setState(() {
-        _isRecording = true;
-      });
+      if (mounted) {
+        setState(() {
+          _isRecording = true;
+        });
+      }
     } on PlatformException catch (e) {
       debugPrint("Failed to start camera: '${e.message}'.");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Ошибка запуска камеры: ${e.message}')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Ошибка запуска камеры: ${e.message}')),
+        );
+      }
     }
   }
 
@@ -82,20 +89,29 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
       // Останавливаем запись
       await platform.invokeMethod('stopCamera');
 
-      setState(() {
-        _isRecording = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isRecording = false;
+        });
+      }
 
       // Возвращаемся на экран сканирования
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          // Используем pushAndRemoveUntil для полной замены стека навигации
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => ScanScreen()),
-            (Route<dynamic> route) => false,
-          );
-        }
-      });
+      if (mounted) {
+        // Получаем ScanController и сбрасываем его состояние
+        final scanController = Provider.of<ScanController>(
+          context,
+          listen: false,
+        );
+        scanController.reset();
+
+        // Возвращаемся на предыдущий экран (ScanScreen)
+        Navigator.of(context).pop();
+
+        // После возврата возобновляем сканирование
+        Future.delayed(const Duration(milliseconds: 300), () {
+          scanController.resumeScanning();
+        });
+      }
     } on PlatformException catch (e) {
       debugPrint("Failed to stop camera: '${e.message}'.");
     }

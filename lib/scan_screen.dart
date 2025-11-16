@@ -6,17 +6,19 @@ import 'pages/packing_camera_page.dart';
 
 /// Screen that handles QR code scanning.
 class ScanScreen extends StatefulWidget {
+  const ScanScreen({super.key});
+
   @override
   State<ScanScreen> createState() => _ScanScreenState();
 }
 
 class _ScanScreenState extends State<ScanScreen> {
   ScanController? controller;
+  bool _isNavigating = false; // Флаг для предотвращения множественной навигации
 
   @override
   void initState() {
     super.initState();
-    // Инициализация будет в didChangeDependencies, когда контекст будет доступен
   }
 
   @override
@@ -28,9 +30,27 @@ class _ScanScreenState extends State<ScanScreen> {
       Future.microtask(() async {
         await controller!.initialize();
         controller!.resumeScanning(); // Resume scanning after initialization
-        setState(() {});
+        if (mounted) {
+          setState(() {});
+        }
       });
     }
+  }
+
+  void _navigateToRecording(String code) {
+    if (_isNavigating) return; // Предотвращаем повторную навигацию
+
+    _isNavigating = true;
+    Navigator.of(context)
+        .push(
+          MaterialPageRoute(
+            builder: (context) => PackingCameraPage(initialCode: code),
+          ),
+        )
+        .then((_) {
+          // После возврата сбрасываем флаг навигации
+          _isNavigating = false;
+        });
   }
 
   @override
@@ -42,16 +62,13 @@ class _ScanScreenState extends State<ScanScreen> {
     }
 
     // Если код отсканирован, автоматически переходим к записи
-    if (controller.lastScannedCode != null && !controller.isScanning) {
-      // Используем Future.microtask, чтобы избежать ошибки при навигации во время build
+    if (controller.lastScannedCode != null &&
+        !controller.isScanning &&
+        !_isNavigating) {
       final scannedCode = controller.lastScannedCode;
       if (scannedCode != null) {
         Future.microtask(() {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => PackingCameraPage(initialCode: scannedCode),
-            ),
-          );
+          _navigateToRecording(scannedCode);
         });
       }
     }
@@ -155,7 +172,7 @@ class ScannerOverlay extends StatelessWidget {
           right: 0,
           child: Center(
             child: Card(
-              color: Colors.black.withAlpha(179), // 0.7*255=178.5
+              color: Colors.black.withAlpha(179),
               child: const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
