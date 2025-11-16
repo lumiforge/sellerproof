@@ -2,7 +2,6 @@ package com.lumiforge.sellerproof
 
 import android.Manifest
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,12 +10,9 @@ import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
-import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
-import android.util.Range
 import android.view.Surface
-import android.widget.TextView
 import android.view.TextureView
 import android.widget.Button
 import android.widget.Toast
@@ -24,14 +20,11 @@ import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 class PackingCameraActivity : ComponentActivity() {
 
     private lateinit var textureView: TextureView
     private lateinit var btnStartStop: Button
-    private lateinit var voiceIndicator: TextView
 
     private var cameraDevice: CameraDevice? = null
     private var captureSession: CameraCaptureSession? = null
@@ -44,8 +37,6 @@ class PackingCameraActivity : ComponentActivity() {
     private var cameraId: String? = null
     private var backgroundHandler: Handler? = null
     private var backgroundThread: HandlerThread? = null
-    private var voiceRecognition: VoiceRecognitionService? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,20 +44,8 @@ class PackingCameraActivity : ComponentActivity() {
 
         textureView = findViewById(R.id.viewFinder)
         btnStartStop = findViewById(R.id.btnStartStop)
-        voiceIndicator = findViewById(R.id.voiceIndicator)
         
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        
-        // Инициализируем голосовое управление
-        voiceRecognition = VoiceRecognitionService(this) {
-            // Callback для остановки записи
-            runOnUiThread {
-                if (isRecording) {
-                    Toast.makeText(this, "Голосовая команда: Остановка!", Toast.LENGTH_SHORT).show()
-                    stopRecording()
-                }
-            }
-        }
 
         btnStartStop.setOnClickListener {
             if (!isRecording) {
@@ -86,7 +65,7 @@ class PackingCameraActivity : ComponentActivity() {
             )
         }
     }
-    
+
     private fun startCamera() {
         try {
             cameraId = cameraManager?.cameraIdList?.find { id ->
@@ -119,11 +98,7 @@ class PackingCameraActivity : ComponentActivity() {
         }
 
         override fun onSurfaceTextureSizeChanged(surface: android.graphics.SurfaceTexture, width: Int, height: Int) {}
-
-        override fun onSurfaceTextureDestroyed(surface: android.graphics.SurfaceTexture): Boolean {
-            return true
-        }
-
+        override fun onSurfaceTextureDestroyed(surface: android.graphics.SurfaceTexture): Boolean = true
         override fun onSurfaceTextureUpdated(surface: android.graphics.SurfaceTexture) {}
     }
     
@@ -162,53 +137,31 @@ class PackingCameraActivity : ComponentActivity() {
     private fun createCameraPreviewSession() {
         try {
             val texture = textureView.surfaceTexture ?: return
-            
-            // Get camera characteristics to determine supported sizes
             val characteristics = cameraManager?.getCameraCharacteristics(cameraId!!)
             val map = characteristics?.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
             val sizes = map?.getOutputSizes(android.graphics.SurfaceTexture::class.java)
             
-            // Choose a suitable preview size (prefer smaller sizes for preview)
-            val previewSize = sizes?.let { sizeArray ->
-                sizeArray.firstOrNull { size ->
-                    size.width <= 1920 && size.height <= 1080
-                } ?: sizeArray.first()
+            val previewSize = sizes?.firstOrNull { size ->
+                size.width <= 1920 && size.height <= 1080
             } ?: sizes?.first()
             
-            // Set buffer size with supported dimensions
             previewSize?.let {
                 texture.setDefaultBufferSize(it.width, it.height)
             } ?: run {
-                texture.setDefaultBufferSize(1280, 720) // Fallback to 720p
+                texture.setDefaultBufferSize(1280, 720)
             }
             
             val surface = Surface(texture)
             
-            // Try different templates in order of preference
             previewRequestBuilder = try {
-                cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+                cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
             } catch (e: Exception) {
-                Log.w(TAG, "TEMPLATE_PREVIEW not supported, trying TEMPLATE_RECORD", e)
-                try {
-                    cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
-                } catch (e2: Exception) {
-                    Log.w(TAG, "TEMPLATE_RECORD not supported, trying TEMPLATE_STILL_CAPTURE", e2)
-                    try {
-                        cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
-                    } catch (e3: Exception) {
-                        Log.w(TAG, "TEMPLATE_STILL_CAPTURE not supported, trying TEMPLATE_VIDEO_SNAPSHOT", e3)
-                        try {
-                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_VIDEO_SNAPSHOT)
-                        } catch (e4: Exception) {
-                            Log.e(TAG, "All templates failed, using TEMPLATE_MANUAL as last resort", e4)
-                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_MANUAL)
-                        }
-                    }
-                }
+                Log.w(TAG, "TEMPLATE_RECORD not supported, using TEMPLATE_PREVIEW", e)
+                cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
             }
+            
             previewRequestBuilder?.addTarget(surface)
             
-            // Create capture session with proper surface configuration
             cameraDevice?.createCaptureSession(
                 listOf(surface),
                 object : CameraCaptureSession.StateCallback() {
@@ -220,7 +173,6 @@ class PackingCameraActivity : ComponentActivity() {
                                 session.setRepeatingRequest(builder.build(), null, backgroundHandler)
                             }
                             
-                            // Configure additional settings after preview is started
                             backgroundHandler?.post {
                                 configureCameraSettings()
                             }
@@ -236,21 +188,41 @@ class PackingCameraActivity : ComponentActivity() {
                 },
                 backgroundHandler
             )
-        } catch (e: CameraAccessException) {
-            Log.e(TAG, "Camera access exception in preview session", e)
-            // Try to recover by reopening camera
-            cameraDevice?.close()
-            cameraDevice = null
-            backgroundHandler?.postDelayed({
-                openCamera()
-            }, 1000) // Wait 1 second before retrying
         } catch (e: Exception) {
             Log.e(TAG, "Failed to create preview session", e)
         }
     }
 
- 
-
+    private fun configureCameraSettings() {
+        try {
+            val captureRequestBuilder = this.previewRequestBuilder ?: return
+            val cameraId = this.cameraId ?: return
+            val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
+            
+            captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
+            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
+            
+            val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
+            if (exposureRange != null) {
+                captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, 0)
+                Log.d(TAG, "Preview: exposure compensation = 0 (range: ${exposureRange.lower}..${exposureRange.upper})")
+            }
+            
+            captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
+            
+            captureSession?.let { session ->
+                try {
+                    session.setRepeatingRequest(captureRequestBuilder.build(), null, backgroundHandler)
+                    Log.d(TAG, "Preview settings applied")
+                } catch (e: Exception) {
+                    Log.e(TAG, "Failed to update preview settings", e)
+                }
+            }
+            
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to configure camera settings", e)
+        }
+    }
 
     private fun startRecording() {
         if (isRecording) {
@@ -265,18 +237,14 @@ class PackingCameraActivity : ComponentActivity() {
             val map = characteristics?.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
             val videoSizes = map?.getOutputSizes(MediaRecorder::class.java)
             
-            // Choose a suitable video size
-            val videoSize = videoSizes?.let { sizeArray ->
-                sizeArray.firstOrNull { size ->
-                    size.width <= 1920 && size.height <= 1080
-                } ?: sizeArray.firstOrNull { size ->
-                    size.width <= 1280 && size.height <= 720
-                } ?: sizeArray.first()
+            val videoSize = videoSizes?.firstOrNull { size ->
+                size.width <= 1920 && size.height <= 1080
             } ?: videoSizes?.first()
             
             currentVideoFile = getOutputMediaFile()
+            
+            // ВАЖНО: НЕ добавляем аудио источник для работы голосового управления!
             mediaRecorder?.apply {
-                // setAudioSource(MediaRecorder.AudioSource.MIC)
                 setVideoSource(MediaRecorder.VideoSource.SURFACE)
                 setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
                 setOutputFile(currentVideoFile!!.absolutePath)
@@ -285,12 +253,9 @@ class PackingCameraActivity : ComponentActivity() {
                 videoSize?.let {
                     setVideoSize(it.width, it.height)
                 } ?: run {
-                    setVideoSize(1280, 720) // Fallback to 720p
+                    setVideoSize(1280, 720)
                 }
                 setVideoEncoder(MediaRecorder.VideoEncoder.H264)
-                // setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-                // setAudioEncodingBitRate(128000)
-                // setAudioSamplingRate(44100)
                 prepare()
             }
             
@@ -298,7 +263,7 @@ class PackingCameraActivity : ComponentActivity() {
             videoSize?.let {
                 texture.setDefaultBufferSize(it.width, it.height)
             } ?: run {
-                texture.setDefaultBufferSize(1280, 720) // Fallback to 720p
+                texture.setDefaultBufferSize(1280, 720)
             }
             val previewSurface = Surface(texture)
             val recorderSurface = mediaRecorder?.surface
@@ -316,28 +281,7 @@ class PackingCameraActivity : ComponentActivity() {
                         captureSession = session
                         
                         try {
-                            // Try different templates in order of preference for recording
-                            val previewRequestBuilder = try {
-                                cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
-                            } catch (e: Exception) {
-                                Log.w(TAG, "TEMPLATE_RECORD not supported, trying TEMPLATE_PREVIEW", e)
-                                try {
-                                    cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-                                } catch (e2: Exception) {
-                                    Log.w(TAG, "TEMPLATE_PREVIEW not supported, trying TEMPLATE_STILL_CAPTURE", e2)
-                                    try {
-                                        cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
-                                    } catch (e3: Exception) {
-                                        Log.w(TAG, "TEMPLATE_STILL_CAPTURE not supported, trying TEMPLATE_VIDEO_SNAPSHOT", e3)
-                                        try {
-                                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_VIDEO_SNAPSHOT)
-                                        } catch (e4: Exception) {
-                                            Log.e(TAG, "All templates failed, using TEMPLATE_MANUAL as last resort", e4)
-                                            cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_MANUAL)
-                                        }
-                                    }
-                                }
-                            }
+                            val previewRequestBuilder = cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
                             previewRequestBuilder?.addTarget(previewSurface)
                             previewRequestBuilder?.addTarget(recorderSurface)
                             
@@ -350,15 +294,9 @@ class PackingCameraActivity : ComponentActivity() {
                             btnStartStop.text = "Остановить запись"
                             Toast.makeText(this@PackingCameraActivity, "Запись началась", Toast.LENGTH_SHORT).show()
                             
-                        } catch (e: CameraAccessException) {
-                            Log.e(TAG, "Camera access exception when starting recording", e)
-                            // Try to recover by reopening camera
-                            cameraDevice?.close()
-                            cameraDevice = null
-                            backgroundHandler?.postDelayed({
-                                openCamera()
-                            }, 1000) // Wait 1 second before retrying
-                            Toast.makeText(this@PackingCameraActivity, "Ошибка доступа к камере", Toast.LENGTH_SHORT).show()
+                            // Отправляем сигнал Flutter что запись началась
+                            sendRecordingStateToFlutter(true)
+                            
                         } catch (e: Exception) {
                             Log.e(TAG, "Failed to start recording", e)
                             Toast.makeText(this@PackingCameraActivity, "Ошибка запуска записи", Toast.LENGTH_SHORT).show()
@@ -377,119 +315,38 @@ class PackingCameraActivity : ComponentActivity() {
             Log.e(TAG, "Failed to start recording", e)
             Toast.makeText(this, "Ошибка записи видео", Toast.LENGTH_SHORT).show()
         }
-        
-        voiceIndicator.visibility = android.view.View.VISIBLE
-        voiceRecognition?.startListening()
     }
     
-    private fun configureCameraSettings() {
-        try {
-            val captureRequestBuilder = this.previewRequestBuilder ?: return
-            val cameraId = this.cameraId ?: return
-            val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
-            
-            // Для PREVIEW - используем ОБЫЧНУЮ автоматику БЕЗ компенсации
-            captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
-            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
-            
-            // НЕ УСТАНАВЛИВАЕМ компенсацию экспозиции для preview!
-            // Или устанавливаем минимальную
-            val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
-            if (exposureRange != null) {
-                // Используем 0 или минимальную компенсацию для preview
-                captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, 0)
-                Log.d(TAG, "Preview: exposure compensation = 0 (range: ${exposureRange.lower}..${exposureRange.upper})")
-            }
-            
-            // FPS для preview - можно оставить 30
-            val fpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
-            if (fpsRanges != null) {
-                val targetRange = fpsRanges.find { it.lower == 30 && it.upper == 30 }
-                    ?: fpsRanges.find { it.upper == 30 }
-                    ?: fpsRanges.lastOrNull()
-                targetRange?.let {
-                    captureRequestBuilder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, it)
-                    Log.d(TAG, "Preview: FPS range: ${it.lower}-${it.upper}")
-                }
-            }
-            
-            // Автофокус для preview
-            captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
-            
-            // Применяем настройки
-            captureSession?.let { session ->
-                try {
-                    session.setRepeatingRequest(captureRequestBuilder.build(), null, backgroundHandler)
-                    Log.d(TAG, "Preview settings applied (no exposure boost)")
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed to update preview settings", e)
-                }
-            }
-            
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to configure camera settings", e)
-        }
-    }
-
-
     private fun configureRecordingSettings(captureRequestBuilder: CaptureRequest.Builder?) {
         try {
             val builder = captureRequestBuilder ?: return
             val cameraId = this.cameraId ?: return
             val characteristics = cameraManager?.getCameraCharacteristics(cameraId)
             
-            // Для RECORDING - МАКСИМАЛЬНАЯ яркость
             builder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
             builder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON)
             
-            // МАКСИМАЛЬНАЯ компенсация для записи
             val exposureRange = characteristics?.get(CameraCharacteristics.CONTROL_AE_COMPENSATION_RANGE)
             if (exposureRange != null && exposureRange.upper > 0) {
-                // Используем 50-60% от максимума вместо 100%
                 val compensation = (exposureRange.upper * 0.6).toInt().coerceAtLeast(1)
                 builder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, compensation)
                 Log.d(TAG, "Recording: Adaptive exposure compensation = $compensation (max: ${exposureRange.upper})")
             }
-
-
             
-            // Для записи - используем гибкий FPS диапазон
-            val fpsRanges = characteristics?.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
-            Log.d(TAG, "Available FPS ranges:")
-            fpsRanges?.forEach { range ->
-                Log.d(TAG, "  - ${range.lower} to ${range.upper}")
-            }
-
-            if (fpsRanges != null) {
-                // Ищем диапазон с нижней границей 15-20 и верхней 30
-                val targetRange = fpsRanges.find { it.lower >= 15 && it.lower <= 20 && it.upper == 30 }
-                    ?: fpsRanges.find { it.upper == 30 }
-                    ?: fpsRanges.lastOrNull()
-                targetRange?.let {
-                    builder.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, it)
-                    Log.d(TAG, "Recording: FPS range: ${it.lower}-${it.upper}")
-                }
-            }
-            
-            // Автофокус для видео
             builder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO)
-            
-            // Отключаем scene mode
             builder.set(CaptureRequest.CONTROL_SCENE_MODE, CaptureRequest.CONTROL_SCENE_MODE_DISABLED)
             
-            // Включаем видео стабилизацию
             val availableVideoStabilization = characteristics?.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
             if (availableVideoStabilization != null && availableVideoStabilization.contains(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)) {
                 builder.set(CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON)
             }
             
-            Log.d(TAG, "Recording settings configured with MAX brightness")
+            Log.d(TAG, "Recording settings configured with brightness boost")
             
         } catch (e: Exception) {
             Log.e(TAG, "Failed to configure recording settings", e)
         }
     }
-
     
     private fun getOutputMediaFile(): File {
         val mediaStorageDir = File(getExternalFilesDir(null), "Movies/SellerProof")
@@ -499,17 +356,13 @@ class PackingCameraActivity : ComponentActivity() {
         return File(mediaStorageDir, "packing_${System.currentTimeMillis()}.mp4")
     }
 
-    private fun stopRecording() {
-        voiceIndicator.visibility = android.view.View.GONE
-        voiceRecognition?.stopListening()
-
+    fun stopRecording() {
         if (!isRecording) {
             Log.w(TAG, "stopRecording: not recording")
             return
         }
         
         try {
-            voiceRecognition?.stopListening()
             finishAfterStop = true
             mediaRecorder?.stop()
             mediaRecorder?.release()
@@ -517,7 +370,9 @@ class PackingCameraActivity : ComponentActivity() {
             isRecording = false
             btnStartStop.text = "Начать запись"
             
-            // Use the stored video file path
+            // Отправляем сигнал Flutter что запись остановлена
+            sendRecordingStateToFlutter(false)
+            
             currentVideoFile?.let { videoFile ->
                 val resultIntent = Intent().apply {
                     putExtra("videoPath", videoFile.absolutePath)
@@ -537,6 +392,13 @@ class PackingCameraActivity : ComponentActivity() {
             Log.e(TAG, "Failed to stop recording", e)
             Toast.makeText(this, "Ошибка остановки записи", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun sendRecordingStateToFlutter(isRecording: Boolean) {
+        // Метод для связи с Flutter через MethodChannel (настроим позже в MainActivity)
+        val intent = Intent("RECORDING_STATE_CHANGED")
+        intent.putExtra("isRecording", isRecording)
+        sendBroadcast(intent)
     }
 
     override fun onBackPressed() {
@@ -576,17 +438,10 @@ class PackingCameraActivity : ComponentActivity() {
     }
     
     override fun onPause() {
-        voiceRecognition?.stopListening()
         closeCamera()
         stopBackgroundThread()
         super.onPause()
     }
-        
-    override fun onDestroy() {
-        voiceRecognition?.stopListening()
-        super.onDestroy()
-    }
-
     
     private fun closeCamera() {
         try {
@@ -603,10 +458,7 @@ class PackingCameraActivity : ComponentActivity() {
 
     private fun allPermissionsGranted(): Boolean =
         REQUIRED_PERMISSIONS.all { perm ->
-            ContextCompat.checkSelfPermission(
-                this,
-                perm
-            ) == PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
         }
 
     override fun onRequestPermissionsResult(
@@ -619,11 +471,7 @@ class PackingCameraActivity : ComponentActivity() {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(
-                    this,
-                    "Нет разрешений на камеру/микрофон",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "Нет разрешений на камеру/микрофон", Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
@@ -632,10 +480,29 @@ class PackingCameraActivity : ComponentActivity() {
     companion object {
         private const val TAG = "PackingCameraActivity"
         private const val REQUEST_CODE_PERMISSIONS = 10
-
         private val REQUIRED_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO
+            Manifest.permission.RECORD_AUDIO  // Нужно для Vosk
         )
+        
+        // Статический метод для вызова из Flutter
+        private var currentActivity: PackingCameraActivity? = null
+        
+        fun setCurrentActivity(activity: PackingCameraActivity?) {
+            currentActivity = activity
+        }
+        
+        fun requestStopRecording() {
+            currentActivity?.stopRecording()
+        }
+    }
+    
+    init {
+        setCurrentActivity(this)
+    }
+    
+    override fun onDestroy() {
+        setCurrentActivity(null)
+        super.onDestroy()
     }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sellerproof/services/native_packing_camera.dart';
+import 'pages/packing_camera_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,43 +11,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'SellerProof',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: const Text('SellerProof')),
       body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                final path = await NativePackingCamera.startPackingCamera();
-                print("VIDEO PATH: $path");
-              },
-              child: const Text('Записать видео'),
-            ),
-          ],
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PackingCameraPage(),
+              ),
+            );
+          },
+          child: const Text('Начать запись упаковки'),
         ),
       ),
     );
