@@ -116,29 +116,12 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
         });
       }
 
-      // Возвращаемся на экран сканирования используя addPostFrameCallback
-      // чтобы избежать навигации во время build
+      // Возвращаемся на экран сканирования
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted && Navigator.of(context).canPop()) {
-            debugPrint('🔙 Navigating back to scan screen');
-
-            // Получаем ScanController и сбрасываем его состояние
-            final scanController = Provider.of<ScanController>(
-              context,
-              listen: false,
-            );
-            scanController.reset();
-
-            // Возвращаемся на предыдущий экран (ScanScreen)
+            debugPrint('🔙 Popping to scan screen');
             Navigator.of(context).pop();
-
-            // После возврата возобновляем сканирование
-            Future.delayed(const Duration(milliseconds: 500), () {
-              if (mounted) {
-                scanController.resumeScanning();
-              }
-            });
           }
         });
       }

@@ -6,41 +6,82 @@ import 'pages/packing_camera_page.dart';
 
 /// Screen that handles QR code scanning.
 class ScanScreen extends StatefulWidget {
-  const ScanScreen({super.key});
+  const ScanScreen({Key? key}) : super(key: key);
 
   @override
   State<ScanScreen> createState() => _ScanScreenState();
 }
 
-class _ScanScreenState extends State<ScanScreen> {
+class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
   ScanController? controller;
-  bool _isNavigating = false; // Флаг для предотвращения множественной навигации
+  bool _isNavigating = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    debugPrint('📱 ScanScreen: initState');
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Инициализация при первом вызове
     if (controller == null) {
       controller = Provider.of<ScanController>(context, listen: false);
-      Future.microtask(() async {
-        await controller!.initialize();
-        controller!.resumeScanning(); // Resume scanning after initialization
-        if (mounted) {
-          setState(() {});
+      _initializeScanner();
+    }
+  }
+
+  Future<void> _initializeScanner() async {
+    debugPrint('📷 ScanScreen: Initializing scanner');
+    await controller!.initialize();
+
+    // Небольшая задержка перед запуском сканера
+    await Future.delayed(const Duration(milliseconds: 300));
+
+    if (mounted) {
+      controller!.resumeScanning();
+      setState(() {});
+      debugPrint('✅ ScanScreen: Scanner started');
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (controller == null) return;
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        debugPrint('📱 ScanScreen: App resumed');
+        // Возобновляем сканирование при возврате в приложение
+        if (mounted && !_isNavigating) {
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (mounted && !_isNavigating) {
+              controller?.resumeScanning();
+              debugPrint('✅ ScanScreen: Scanner resumed after app resume');
+            }
+          });
         }
-      });
+        break;
+      case AppLifecycleState.paused:
+        debugPrint('📱 ScanScreen: App paused');
+        break;
+      default:
+        break;
     }
   }
 
   void _navigateToRecording(String code) {
-    if (_isNavigating) return; // Предотвращаем повторную навигацию
+    if (_isNavigating) {
+      debugPrint('⚠️ Already navigating, ignoring');
+      return;
+    }
 
+    debugPrint('🚀 Navigating to recording with code: $code');
     _isNavigating = true;
+
     Navigator.of(context)
         .push(
           MaterialPageRoute(
@@ -48,8 +89,23 @@ class _ScanScreenState extends State<ScanScreen> {
           ),
         )
         .then((_) {
-          // После возврата сбрасываем флаг навигации
+          debugPrint('🔙 Returned from recording screen');
           _isNavigating = false;
+
+          // Возобновляем сканирование после возврата
+          if (mounted && controller != null) {
+            debugPrint('🔄 Resetting and resuming scanner');
+            controller!.reset();
+
+            // Даем время камере освободиться
+            Future.delayed(const Duration(milliseconds: 800), () {
+              if (mounted && !_isNavigating) {
+                controller!.resumeScanning();
+                setState(() {});
+                debugPrint('✅ Scanner resumed after return');
+              }
+            });
+          }
         });
   }
 
@@ -58,7 +114,19 @@ class _ScanScreenState extends State<ScanScreen> {
     final controller = Provider.of<ScanController>(context);
 
     if (!controller.scannerReady) {
-      return Scaffold(body: Center(child: CircularProgressIndicator()));
+      debugPrint('⏳ Scanner not ready');
+      return const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('Инициализация сканера...'),
+            ],
+          ),
+        ),
+      );
     }
 
     // Если код отсканирован, автоматически переходим к записи
@@ -67,18 +135,24 @@ class _ScanScreenState extends State<ScanScreen> {
         !_isNavigating) {
       final scannedCode = controller.lastScannedCode;
       if (scannedCode != null) {
+        debugPrint('📦 Code scanned: $scannedCode, navigating...');
         Future.microtask(() {
           _navigateToRecording(scannedCode);
         });
       }
     }
 
+    debugPrint(
+      '🎨 Building ScanScreen - isScanning: ${controller.isScanning}, lastCode: ${controller.lastScannedCode}',
+    );
+
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Show scanner when not recording
-          if (controller.isScanning || controller.lastScannedCode == null)
+          // Show scanner when scanning
+          if (controller.isScanning)
             MobileScanner(
               controller: controller.scannerController,
               fit: BoxFit.cover,
@@ -86,8 +160,29 @@ class _ScanScreenState extends State<ScanScreen> {
                 controller.onDetected(capture);
               },
             ),
+
+          // Показываем черный экран если не сканируем
+          if (!controller.isScanning && controller.lastScannedCode == null)
+            Container(
+              color: Colors.black,
+              child: const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(color: Colors.white),
+                    SizedBox(height: 16),
+                    Text(
+                      'Подготовка камеры...',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
           // Scanner overlay
           if (controller.isScanning) const ScannerOverlay(),
+
           // Show code found message
           if (controller.lastScannedCode != null && !controller.isScanning)
             Align(
@@ -113,10 +208,10 @@ class _ScanScreenState extends State<ScanScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
-                    Row(
+                    const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(
@@ -126,8 +221,8 @@ class _ScanScreenState extends State<ScanScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        const Text(
+                        SizedBox(width: 8),
+                        Text(
                           'Запуск видеозаписи...',
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
@@ -144,7 +239,8 @@ class _ScanScreenState extends State<ScanScreen> {
 
   @override
   void dispose() {
-    // Не dispose контроллер здесь, так как он управляется Provider
+    debugPrint('🗑️ ScanScreen: dispose');
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 }

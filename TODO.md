@@ -1,5 +1,7 @@
 - Scanner works bad
 - Scanner rotates screen ????
-- Hints for user to quit from video recording
+- Hints for user to quit from video recording screen (Скажите "Стоп" для остановки записи)
 - Voice sound for status messages (Start video, scanned code 1223123, Video saved,etc)
-- Voice sound for errors (Failed to start camera, etc)
+- Save video to gallery
+- Save video on Cloud
+- 
