@@ -113,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
               
               // Настройки голоса (только для voice)
-              if (settings.communicationMethod == CommunicationMethod.voice) ..[
+              if (settings.communicationMethod == CommunicationMethod.voice) ...[
                 // 2. Настройка голосовых команд
                 _buildSectionHeader('Голосовые команды'),
                 Card(
