@@ -37,10 +37,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 final map = v as Map;
                 return Map<String, dynamic>.from(map);
               })
+              .where((voice) {
+                final locale = voice['locale']?.toString().toLowerCase() ?? '';
+                final language = voice['language']?.toString().toLowerCase() ?? '';
+                final name = voice['name']?.toString().toLowerCase() ?? '';
+                return locale.contains('ru')
+                  || language.contains('ru')
+                  || name.contains('russian')
+                  || name.contains('русск')
+                  || name.contains('ru-ru');
+              })
               .toList();
           _isLoadingVoices = false;
         });
-        debugPrint('🎤 Total voices loaded: [32m${_filteredVoices.length}[0m');
+        debugPrint('🎤 Total RU voices loaded: ${_filteredVoices.length}');
       } else {
         setState(() {
           _filteredVoices = [{'name': 'ru-RU', 'locale': 'ru-RU'}];
@@ -178,8 +188,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         else if (_filteredVoices.isEmpty)
                           const Text('Голоса не найдены')
                         else
-                          SizedBox(
+                          Container(
                             width: double.infinity,
+                            constraints: BoxConstraints(minWidth: 300),
                             child: DropdownButtonFormField<String>(
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
