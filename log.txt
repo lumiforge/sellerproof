@@ -1,0 +1,479 @@
+I/Choreographer(17420): Skipped 222 frames!  The application may be doing too much work on its main thread.
+I/rge.sellerproof(17420): Compiler allocated 4973KB to compile void android.view.ViewRootImpl.performTraversals()
+I/TextToSpeech(17420): Setting up the connection to TTS engine...
+D/BufferQueueConsumer(17420): [](id:440c00000000,api:0,p:-1,c:17420) connect: controlledByApp=false
+E/FBI     (17420): Can't load library: dlopen failed: library "libmagtsync.so" not found
+D/libMEOW (17420): meow new tls: 0xb400007a9b43b1d0
+D/libMEOW (17420): applied 1 plugins for [com.lumiforge.sellerproof]:
+D/libMEOW (17420):   plugin 1: [libMEOW_gift.so]: 0xb400007a5b290030
+D/libMEOW (17420): rebuild call chain: 0xb400007a9b48b220
+D/skia    (17420): GrGLMakeAssembledInterface verStr OpenGL ES 3.2 build 1.13@5776728
+D/skia    (17420): GrGLMakeAssembledGLESInterface verStr OpenGL ES 3.2 build 1.13@5776728
+D/skia    (17420): extensions init verString=OpenGL ES 3.2 build 1.13@5776728
+D/BufferQueueConsumer(17420): [](id:440c00000001,api:0,p:-1,c:17420) connect: controlledByApp=false
+E/ion     (17420): ioctl c0044901 failed with code -1: Invalid argument
+D/BLASTBufferQueue(17420): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1051560412862981(auto) mPendingTransactions.size=0 graphicBufferId=74818330296321 transform=0
+I/Choreographer(17420): Skipped 102 frames!  The application may be doing too much work on its main thread.
+D/BLASTBufferQueue(17420): [VRI[MainActivity]#0](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1051560512446904(auto) mPendingTransactions.size=0 graphicBufferId=74818330296323 transform=0
+W/Parcel  (17420): Expecting binder but got null!
+I/OpenGLRenderer(17420): Davey! duration=1720ms; Flags=1, FrameTimelineVsyncId=163188440, IntendedVsync=1051558792372741, Vsync=1051560476893051, InputEventId=0, HandleInputStart=1051560483467289, AnimationStart=1051560483476212, PerformTraversalsStart=1051560483478289, DrawStart=1051560493302904, FrameDeadline=1051558812372741, FrameInterval=1051560483256289, FrameStartTime=16514905, SyncQueued=1051560495370597, SyncStart=1051560498630366, IssueDrawCommandsStart=1051560499391212, SwapBuffers=1051560511297674, FrameCompleted=1051560515785597, DequeueBufferDuration=0, QueueBufferDuration=518461, GpuCompleted=1051560515785597, SwapBuffersCompleted=1051560513170058, DisplayPresentTime=0, CommandSubmissionCompleted=1051560511297674, 
+I/flutter (17420): ✅ ScanController: Initialized successfully
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: false, lastCode: null
+I/flutter (17420): 🔄 ScanController: resumeScanning called
+I/flutter (17420): ✅ ScanScreen: Scanner started
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+I/flutter (17420): ✅ ScanController: Scanner resumed and started
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/ProfileInstaller(17420): Installing profile for com.lumiforge.sellerproof
+D/CompatibilityChangeReporter(17420): Compat change id reported: 78294732; UID 10636; state: ENABLED
+I/DynamiteModule(17420): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
+I/DynamiteModule(17420): Selected local version of com.google.mlkit.dynamite.barcode
+D/QuirkSettingsLoader(17420): QuirkSettings$MetadataHolderService is not found.
+D/CameraX (17420): QuirkSettings from app metadata: null
+D/CameraX (17420): QuirkSettings by default: QuirkSettings{enabledWhenDeviceHasQuirk=true, forceEnabledQuirks=[], forceDisabledQuirks=[]}
+I/flutter (17420): 📱 ScanScreen: App resumed
+I/CameraManagerGlobal(17420): Connecting to camera service
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+I/Camera2CameraInfo(17420): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+D/TransportRuntime.JobInfoScheduler(17420): Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=979314552 in 30000ms(Backend next call timestamp 0). Attempt 1
+D/CompatibilityChangeReporter(17420): Compat change id reported: 194532703; UID 10636; state: ENABLED
+I/Camera2CameraInfo(17420): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+I/Camera2CameraInfo(17420): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+I/CameraPresencePrvdr(17420): Starting CameraPresenceProvider monitoring.
+I/CameraPresenceSrc(17420): First observer added. Starting monitoring.
+I/Camera2PresenceSrc(17420): Starting system availability monitoring.
+D/Camera2PresenceSrc(17420): System onCameraAvailable: 0
+D/Camera2PresenceSrc(17420): System onCameraAvailable: 1
+D/Camera2PresenceSrc(17420): System onCameraAvailable: 2
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/TransportRuntime.JobInfoScheduler(17420): Scheduling upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=984295289 in 86400000ms(Backend next call timestamp 0). Attempt 1
+D/BufferQueueConsumer(17420): [](id:440c00000002,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/BufferQueueConsumer(17420): [](id:440c00000003,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/BufferQueueConsumer(17420): [](id:440c00000004,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/Camera2PresenceSrc(17420): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/rge.sellerproof(17420): Background concurrent copying GC freed 13MB AllocSpace bytes, 6(220KB) LOS objects, 49% free, 4422KB/8845KB, paused 293us,155us total 143.291ms
+I/flutter (17420): 🔄 ScanController: resumeScanning called
+I/flutter (17420): ✅ ScanScreen: Scanner resumed after app resume
+D/nativeloader(17420): Load /data/app/~~GoGzVprEfLjrgh92TSd3iQ==/com.lumiforge.sellerproof-hVCeiE9lGdSHQbSVl5tunw==/base.apk!/lib/arm64-v8a/libbarhopper_v3.so using class loader ns clns-4 (caller=/data/app/~~GoGzVprEfLjrgh92TSd3iQ==/com.lumiforge.sellerproof-hVCeiE9lGdSHQbSVl5tunw==/base.apk!classes18.dex): ok
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+I/tflite  (17420): Initialized TensorFlow Lite runtime.
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+W/libc    (17420): Access denied finding property "ro.hardware.chipname"
+I/tflite  (17420): Created TensorFlow Lite XNNPACK delegate for CPU.
+I/tflite  (17420): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+I/tflite  (17420): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
+I/native  (17420): I0000 00:00:1763406480.759633   17582 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+I/flutter (17420): ✅ ScanController: Scanner resumed and started
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BufferQueueConsumer(17420): [ImageReader-1600x1200f22m7-17420-2](id:440c00000004,api:4,p:851,c:17420) disconnect
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-2](id:440c00000004,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+W/OnBackInvokedCallback(17420): OnBackInvokedCallback is not enabled for the application.
+W/OnBackInvokedCallback(17420): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-2](id:440c00000004,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-2](id:440c00000004,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-2](id:440c00000004,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+D/Camera2PresenceSrc(17420): System onCameraAvailable: 0
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/BpBinder(17420): onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+I/flutter (17420): 🎤 Voices response: [{features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: es-us-x-sfb-local, locale: es-US, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	legacySetLanguageVoice	networkRetriesCount, latency: low, name: ur-PK-language, locale: ur-PK, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: ja-jp-x-htm-network, locale: ja-JP, network_required: 1, quality: high}, {features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: th-th-x-thd-network, locale: th-TH, network_required: 1, quality: high}, {features: networkTimeoutMsnotInstalled	networkRetriesCount, latency: low, name: it-it-x-itd-local, locale: it-IT, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	legacySetLanguageVoice	networkRetriesCount, latency: low, name: en-AU-language, locale: en-AU, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstall
+D/BufferQueueConsumer(17420): [ImageReader-1920x1440f23m4-17420-0](id:440c00000002,api:0,p:-1,c:17420) disconnect
+D/BufferQueueConsumer(17420): [ImageReader-1920x1440f23m4-17420-1](id:440c00000003,api:0,p:-1,c:17420) disconnect
+I/ScrollIdentify(17420): on fling
+I/flutter (17420): 🎤 Total RU voices loaded: 11
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(17420): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1](f:0,a:1) destructor()
+D/BufferQueueConsumer(17420): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1(BLAST Consumer)1](id:440c00000001,api:0,p:-1,c:17420) disconnect
+D/BLASTBufferQueue(17420): [VRI[MainActivity]#0](f:0,a:1) destructor()
+D/BufferQueueConsumer(17420): [VRI[MainActivity]#0(BLAST Consumer)0](id:440c00000000,api:0,p:-1,c:17420) disconnect
+I/libPerfCtl(17420): fbcNotifySbeRescue ret=-1
+I/flutter (17420): 📱 ScanScreen: App paused
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/FilePickerDelegate(17420): [SingleFilePick] File URI:content://com.android.externalstorage.documents/tree/primary%3ADownload%2FAaassss/document/primary%3ADownload%2FAaassss
+I/rge.sellerproof(17420): hiddenapi: Accessing hidden method Landroid/os/storage/StorageManager;->getVolumeList()[Landroid/os/storage/StorageVolume; (runtime_flags=0, domain=platform, api=unsupported) from Lcom/mr/flutter/plugin/filepicker/FileUtils; (domain=app) using reflection: allowed
+D/BufferQueueConsumer(17420): [](id:440c00000005,api:0,p:-1,c:17420) connect: controlledByApp=false
+D/BufferQueueConsumer(17420): [](id:440c00000006,api:0,p:-1,c:17420) connect: controlledByApp=false
+D/BLASTBufferQueue(17420): [VRI[MainActivity]#2](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1051580684083213(auto) mPendingTransactions.size=0 graphicBufferId=74818330296354 transform=0
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(17420): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1051580713618059(auto) mPendingTransactions.size=0 graphicBufferId=74818330296353 transform=0
+I/flutter (17420): 📱 ScanScreen: App resumed
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (17420): 🔙 Returned from settings screen
+I/flutter (17420): 🔄 ScanController: resumeScanning called
+I/flutter (17420): ✅ Scanner resumed after settings
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+I/flutter (17420): ✅ ScanController: Scanner resumed and started
+I/DynamiteModule(17420): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
+I/DynamiteModule(17420): Selected local version of com.google.mlkit.dynamite.barcode
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/BufferQueueConsumer(17420): [](id:440c00000007,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/BufferQueueConsumer(17420): [](id:440c00000008,api:0,p:-1,c:17420) connect: controlledByApp=true
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/BufferQueueConsumer(17420): [](id:440c00000009,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/Camera2PresenceSrc(17420): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/tflite  (17420): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+I/tflite  (17420): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
+I/native  (17420): I0000 00:00:1763406505.531729   17593 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+I/flutter (17420): 📦 ScanController: Code detected: OZN1306390352
+D/BufferQueueConsumer(17420): [ImageReader-1600x1200f22m7-17420-5](id:440c00000009,api:4,p:851,c:17420) disconnect
+I/flutter (17420): 🔊 TtsService: Запись 0 3 5 2 началась
+I/flutter (17420): 📦 Code scanned: OZN1306390352, navigating...
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: false, lastCode: OZN1306390352
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-5](id:440c00000009,api:4,p:851,c:17420) queueBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-5](id:440c00000009,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+I/flutter (17420): 🚀 Navigating to recording with code: OZN1306390352
+I/flutter (17420): ⏸️ ScanController: Scanner stopped after detection
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-5](id:440c00000009,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-5](id:440c00000009,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(17420): [ImageReader-1600x1200f22m7-17420-5](id:440c00000009,api:4,p:851,c:17420) cancelBuffer: BufferQueue has been abandoned
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+I/flutter (17420): 🆕 Creating new VoskRecognitionService instance
+D/Camera2PresenceSrc(17420): System onCameraAvailable: 0
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BufferQueueConsumer(17420): [ImageReader-1920x1440f23m4-17420-4](id:440c00000008,api:0,p:-1,c:17420) disconnect
+I/flutter (17420): Extracting model to /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22...
+W/OnBackInvokedCallback(17420): OnBackInvokedCallback is not enabled for the application.
+W/OnBackInvokedCallback(17420): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/TransportRuntime.CctTransportBackend(17420): Making request to: https://firebaselogging.googleapis.com/v0cc/log/batch?format=json_proto3
+I/TransportRuntime.CctTransportBackend(17420): Status Code: 200
+I/TransportRuntime.CctTransportBackend(17420): Content-Type: application/json; charset=UTF-8
+I/TransportRuntime.CctTransportBackend(17420): Content-Encoding: gzip
+D/TTS     (17420): Utterance ID has started: 7452355e-ce9b-43ef-9e0e-f335611e0020
+I/flutter (17420): ✅ Model extracted successfully
+D/nativeloader(17420): Load /data/app/~~GoGzVprEfLjrgh92TSd3iQ==/com.lumiforge.sellerproof-hVCeiE9lGdSHQbSVl5tunw==/base.apk!/lib/arm64-v8a/libjnidispatch.so using class loader ns clns-4 (caller=/data/app/~~GoGzVprEfLjrgh92TSd3iQ==/com.lumiforge.sellerproof-hVCeiE9lGdSHQbSVl5tunw==/base.apk!classes18.dex): ok
+I/VoskAPI (17420): ReadDataFiles():model.cc:213) Decoding params beam=10 max-active=3000 lattice-beam=2
+I/VoskAPI (17420): ReadDataFiles():model.cc:216) Silence phones 1:2:3:4:5:6:7:8:9:10
+I/VoskAPI (17420): RemoveOrphanNodes():nnet-nnet.cc:948) Removed 0 orphan nodes.
+I/VoskAPI (17420): RemoveOrphanComponents():nnet-nnet.cc:847) Removing 0 orphan components.
+I/VoskAPI (17420): ReadDataFiles():model.cc:249) Loading i-vector extractor from /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/ivector/final.ie
+I/VoskAPI (17420): ComputeDerivedVars():ivector-extractor.cc:183) Computing derived variables for iVector extractor
+I/VoskAPI (17420): ComputeDerivedVars():ivector-extractor.cc:204) Done.
+I/VoskAPI (17420): ReadDataFiles():model.cc:285) Loading HCL and G from /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/HCLr.fst /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/Gr.fst
+D/TTS     (17420): Utterance ID has completed: 7452355e-ce9b-43ef-9e0e-f335611e0020
+I/VoskAPI (17420): ReadDataFiles():model.cc:311) Loading winfo /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/phones/word_boundary.int
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/AudioRecord(17420): set(): 0xb4000079ab3533f0, inputSource 6, sampleRate 16000, format 0x1, channelMask 0x10, frameCount 3200, notificationFrames 0, sessionId 0, transferType 0, flags 0, attributionSource AttributionSourceState{pid: -1, uid: 10636, packageName: com.lumiforge.sellerproof, attributionTag: (null), token: , renouncedPermissions: [], next: []} uid -1, pid -1
+D/AudioRecord(17420): openRecord_l: 0xb4000079ab3533f0, mCblk = 0x7b5099e000
+I/flutter (17420): ✅ Vosk initialized successfully
+I/flutter (17420): 🔊 TtsService: Запись 0 3 5 2 началась
+I/flutter (17420): 📱 ScanScreen: App resumed
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/TTS     (17420): Utterance ID has started: 46930742-11e9-469e-bb77-31b6c3951929
+D/libMEOW (17420): meow new tls: 0xb400007a9ed9eb30
+D/libMEOW (17420): applied 1 plugins for [com.lumiforge.sellerproof]:
+D/libMEOW (17420):   plugin 1: [libMEOW_gift.so]: 0xb400007a5b290030
+D/libMEOW (17420): rebuild call chain: 0xb400007a9ed3ead0
+D/libMEOW (17420): meow delete tls: 0xb400007a9ed9eb30
+D/CompatibilityChangeReporter(17420): Compat change id reported: 210923482; UID 10636; state: ENABLED
+D/VRI[PackingCameraActivity](17420): hardware acceleration = true, forceHwAccelerated = false
+D/InputTransport(17420): Create ARC handle: 0xb4000078bb2c9f00
+D/BufferQueueConsumer(17420): [](id:440c0000000a,api:0,p:-1,c:17420) connect: controlledByApp=false
+D/TextureView(17420): getHardwareLayer, createNewSurface:true
+D/BufferQueueConsumer(17420): [](id:440c0000000b,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/Camera2PresenceSrc(17420): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/BpBinder(17420): onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+D/BufferQueueConsumer(17420): [ImageReader-1920x1440f23m4-17420-3](id:440c00000007,api:0,p:-1,c:17420) disconnect
+D/BLASTBufferQueue(17420): [VRI[PackingCameraActivity]#4](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1051605969463138(auto) mPendingTransactions.size=0 graphicBufferId=74818330296380 transform=0
+W/Parcel  (17420): Expecting binder but got null!
+D/PackingCameraActivity(17420): Preview: exposure compensation = 0 (range: -4..4)
+D/PackingCameraActivity(17420): Preview: FPS range: 30-30
+D/PackingCameraActivity(17420): Preview settings applied (no exposure boost)
+D/MediaRecorder(17420): constructor+ 0xb40000792b2bf850
+D/MediaRecorder(17420): constructor- 0xb40000792b2bf850
+D/PackingCameraActivity(17420): Saved scanned code: OZN1306390352 with video: /storage/emulated/0/Android/data/com.lumiforge.sellerproof/files/Movies/SellerProof/packing_1763406521541.mp4
+D/MediaRecorder(17420): init+ 0xb40000792b2bf850
+D/MediaRecorder(17420): init- 0xb40000792b2bf850
+D/MediaRecorder(17420): prepare+ 0xb40000792b2bf850
+I/flutter (17420): 🎤 startListening called, current state: VoskState.ready
+I/flutter (17420): ✅ Vosk: Started continuous listening
+I/flutter (17420): ✅ Voice recognition started for recording
+D/AudioRecord(17420): start(10008): 0xb4000079ab3533f0, sync event 0 trigger session 0
+D/AudioRecord(17420): start(10008): return status 0
+D/BLASTBufferQueue(17420): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3](f:0,a:1) destructor()
+D/BufferQueueConsumer(17420): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3(BLAST Consumer)3](id:440c00000006,api:0,p:-1,c:17420) disconnect
+D/BLASTBufferQueue(17420): [VRI[MainActivity]#2](f:0,a:1) destructor()
+E/BLASTBufferQueue(17420): [VRI[MainActivity]#2](f:0,a:1) Applying pending transactions on dtor 2
+D/BufferQueueConsumer(17420): [VRI[MainActivity]#2(BLAST Consumer)2](id:440c00000005,api:0,p:-1,c:17420) disconnect
+I/flutter (17420): 📱 ScanScreen: App paused
+D/MediaRecorder(17420): prepare- 0xb40000792b2bf850
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+D/PackingCameraActivity(17420): Recording: Adaptive exposure compensation = 2 (range: -4..4)
+D/PackingCameraActivity(17420): Recording: Video stabilization enabled
+D/PackingCameraActivity(17420): Available FPS ranges:
+D/PackingCameraActivity(17420):   - 10 to 10
+D/PackingCameraActivity(17420):   - 15 to 15
+D/PackingCameraActivity(17420):   - 15 to 20
+D/PackingCameraActivity(17420):   - 20 to 20
+D/PackingCameraActivity(17420):   - 5 to 30
+D/PackingCameraActivity(17420):   - 30 to 30
+D/PackingCameraActivity(17420): Recording: FPS range: 5-30
+D/PackingCameraActivity(17420): Recording settings configured with MAX brightness
+D/MediaRecorder(17420): start+ 0xb40000792b2bf850
+D/MediaRecorder(17420): start- 0xb40000792b2bf850
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "впрочем"
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "впрочем"
+I/flutter (17420): }
+D/TTS     (17420): Utterance ID has completed: 46930742-11e9-469e-bb77-31b6c3951929
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "король"
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "король"
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "ноль три"
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "король"
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk result: {
+I/flutter (17420):   "text" : "король целилась"
+I/flutter (17420): }
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : ""
+I/flutter (17420): }
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "стоп"
+I/flutter (17420): }
+I/flutter (17420): 🛑 Stop command detected: стоп (from text: "стоп")
+I/flutter (17420): 🛑 Stop command received from Vosk
+I/flutter (17420): 🛑 Starting stop recording process
+I/flutter (17420): 🛑 stopListening called, current state: VoskState.listening
+D/AudioRecord(17420): stop(10008): 0xb4000079ab3533f0, mActive: 1
+D/AudioTrackShared(17420): this(0xb40000793b30bb30), mCblk(0x7b5099e000), front(60800), mIsOut 0, interrupt() FUTEX_WAKE
+D/AudioRecord(17420): stop(10008) done
+D/TTS     (17420): Utterance ID has started: b53d4ca5-0888-4fb0-bd81-9aa6ad146062
+I/flutter (17420): ✅ Vosk: Stopped listening
+I/flutter (17420): 🎤 Voice recognition stopped
+I/flutter (17420): 🎤 Vosk partial: {
+I/flutter (17420):   "partial" : "стоп"
+I/flutter (17420): }
+I/flutter (17420): ⚠️ Stop command already processed, ignoring
+I/flutter (17420): 🎤 Vosk result: {
+I/flutter (17420):   "text" : "стоп"
+I/flutter (17420): }
+I/flutter (17420): ⚠️ Stop command already processed, ignoring
+D/MediaRecorder(17420): stop+ 0xb40000792b2bf850
+D/MediaRecorder(17420): stop- 0xb40000792b2bf850
+D/MediaRecorder(17420): release+ 0xb40000792b2bf850
+D/MediaRecorder(17420): release- 0xb40000792b2bf850
+D/MediaRecorder(17420): destructor+ 0xb40000792b2bf850
+D/MediaRecorder(17420): destructor- 0xb40000792b2bf850
+I/flutter (17420): 📹 Camera stopped
+D/Camera2PresenceSrc(17420): System onCameraAvailable: 0
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BufferQueueConsumer(17420): [](id:440c0000000c,api:0,p:-1,c:17420) connect: controlledByApp=false
+D/BufferQueueConsumer(17420): [](id:440c0000000d,api:0,p:-1,c:17420) connect: controlledByApp=false
+D/BLASTBufferQueue(17420): [VRI[MainActivity]#5](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1051612610112215(auto) mPendingTransactions.size=0 graphicBufferId=74818330296396 transform=0
+I/flutter (17420): 🔙 Popping to scan screen
+I/flutter (17420): 🔙 Returned from recording screen
+I/flutter (17420): 🔄 Resetting and resuming scanner
+I/flutter (17420): 🔄 ScanController: reset called
+I/flutter (17420): ✅ ScanController: Reset complete
+W/OnBackInvokedCallback(17420): OnBackInvokedCallback is not enabled for the application.
+W/OnBackInvokedCallback(17420): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+D/BLASTBufferQueue(17420): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#6](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1051612645781138(auto) mPendingTransactions.size=0 graphicBufferId=74818330296395 transform=0
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: false, lastCode: null
+I/flutter (17420): 📱 ScanScreen: App resumed
+D/BLASTBufferQueue(17420): [VRI[PackingCameraActivity]#4](f:0,a:1) destructor()
+D/BufferQueueConsumer(17420): [VRI[PackingCameraActivity]#4(BLAST Consumer)4](id:440c0000000a,api:0,p:-1,c:17420) disconnect
+D/BufferQueueConsumer(17420): [SurfaceTexture-0-17420-0](id:440c0000000b,api:0,p:-1,c:17420) disconnect
+D/View    (17420): [Warning] assignParent to null: this = DecorView@5dd09f1[PackingCameraActivity]
+D/InputTransport(17420): Destroy ARC handle: 0xb4000078bb2c9f00
+D/TTS     (17420): Utterance ID has completed: b53d4ca5-0888-4fb0-bd81-9aa6ad146062
+I/flutter (17420): 🗑️ Disposing PackingCameraPage
+I/flutter (17420): 🔄 ScanController: resumeScanning called
+I/flutter (17420): ✅ ScanScreen: Scanner resumed after app resume
+I/flutter (17420): 🔄 ScanController: resumeScanning called
+I/flutter (17420): ✅ Scanner resumed after return
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+I/flutter (17420): ✅ ScanController: Scanner resumed and started
+I/DynamiteModule(17420): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
+I/DynamiteModule(17420): Selected local version of com.google.mlkit.dynamite.barcode
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=979314552 in 886313ms(Backend next call timestamp 1763407415244). Attempt 1
+D/TransportRuntime.SQLiteEventStore(17420): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(17420): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/BufferQueueConsumer(17420): [](id:440c0000000e,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/BufferQueueConsumer(17420): [](id:440c0000000f,api:0,p:-1,c:17420) connect: controlledByApp=true
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/BufferQueueConsumer(17420): [](id:440c00000010,api:0,p:-1,c:17420) connect: controlledByApp=true
+D/Camera2PresenceSrc(17420): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (17420): ✅ ScanController: Scanner resumed and started
+I/flutter (17420): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/Camera2PresenceSrc(17420): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(17420): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/tflite  (17420): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+I/tflite  (17420): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
+I/native  (17420): I0000 00:00:1763406529.805343   17595 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
+
