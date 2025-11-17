@@ -7,7 +7,7 @@ import '../scan_controller.dart';
 class PackingCameraPage extends StatefulWidget {
   final String? initialCode;
 
-  const PackingCameraPage({Key? key, this.initialCode}) : super(key: key);
+  const PackingCameraPage({super.key, this.initialCode});
 
   @override
   State<PackingCameraPage> createState() => _PackingCameraPageState();

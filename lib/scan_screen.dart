@@ -6,7 +6,7 @@ import 'pages/packing_camera_page.dart';
 
 /// Screen that handles QR code scanning.
 class ScanScreen extends StatefulWidget {
-  const ScanScreen({Key? key}) : super(key: key);
+  const ScanScreen({super.key});
 
   @override
   State<ScanScreen> createState() => _ScanScreenState();

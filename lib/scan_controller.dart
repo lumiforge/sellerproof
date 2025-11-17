@@ -20,8 +20,29 @@ class ScanController extends ChangeNotifier {
     }
 
     try {
-      // Initialize scanner controller with autoStart disabled
-      scannerController = MobileScannerController(autoStart: false);
+      // Initialize scanner controller with optimal settings
+      scannerController = MobileScannerController(
+        autoStart: false,
+        facing: CameraFacing.back,
+        torchEnabled: false,
+        // Включаем все основные форматы
+        formats: const [
+          BarcodeFormat.qrCode,
+          BarcodeFormat.ean13,
+          BarcodeFormat.ean8,
+          BarcodeFormat.code128,
+          BarcodeFormat.code39,
+          BarcodeFormat.code93,
+          BarcodeFormat.dataMatrix,
+          BarcodeFormat.itf,
+          BarcodeFormat.upcA,
+          BarcodeFormat.upcE,
+        ],
+        // Высокая скорость детекции
+        detectionSpeed: DetectionSpeed.noDuplicates,
+        // Высокое разрешение для лучшего распознавания
+        returnImage: false,
+      );
 
       scannerReady = true;
       notifyListeners();
@@ -88,8 +109,8 @@ class ScanController extends ChangeNotifier {
 
     // Используем addPostFrameCallback для безопасного запуска сканера
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Дополнительная задержка, чтобы убедиться, что контроллер готов
-      Future.delayed(const Duration(milliseconds: 500), () {
+      // Сокращаем задержку до 300ms для более быстрого отклика
+      Future.delayed(const Duration(milliseconds: 300), () {
         try {
           scannerController?.start();
           notifyListeners();

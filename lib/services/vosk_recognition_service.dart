@@ -84,25 +84,19 @@ class VoskRecognitionService {
     try {
       state.value = VoskState.loading;
 
-      if (_vosk == null) {
-        _vosk = VoskFlutterPlugin.instance();
-      }
+      _vosk ??= VoskFlutterPlugin.instance();
 
       // Путь к модели в assets (архив zip)
       final modelPath = await _loadModelFromAssets(
         'assets/models/vosk-model-small-ru-0.22.zip',
       );
 
-      if (_model == null) {
-        _model = await _vosk!.createModel(modelPath);
-      }
+      _model ??= await _vosk!.createModel(modelPath);
 
-      if (_recognizer == null) {
-        _recognizer = await _vosk!.createRecognizer(
-          model: _model!,
-          sampleRate: 16000,
-        );
-      }
+      _recognizer ??= await _vosk!.createRecognizer(
+        model: _model!,
+        sampleRate: 16000,
+      );
 
       if (_speechService == null) {
         _speechService = await _vosk!.initSpeechService(_recognizer!);

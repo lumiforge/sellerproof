@@ -80,12 +80,12 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
       // For demo, provide a stop record button if recording.
       floatingActionButton: controller.isRecording
           ? FloatingActionButton(
-              child: Icon(Icons.stop),
               backgroundColor: Colors.red,
               onPressed: () async {
                 await controller.stopRecording();
                 await controller.reset();
               },
+              child: Icon(Icons.stop),
             )
           : null,
     );
