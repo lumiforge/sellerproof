@@ -66,8 +66,8 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
     try {
       // Get custom storage path from settings provider
       final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
-      final storagePath = settingsProvider.storagePath;
-      
+      final storagePath = settingsProvider.settings.videoStoragePath;
+ 
       debugPrint('🎬 Starting recording with code: $_scannedCode, storagePath: $storagePath');
       
       await platform.invokeMethod('startCamera', {
