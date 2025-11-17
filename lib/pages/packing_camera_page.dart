@@ -32,7 +32,6 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   }
 
   Future<void> _initializeVosk() async {
-    // Используем singleton - если уже инициализирован, переиспользуем
     _voskService = VoskRecognitionService(
       onStopCommand: () {
         debugPrint('🛑 Stop command received from Vosk');
@@ -44,29 +43,18 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
 
     try {
       await _voskService.initialize();
-
       if (mounted) {
-        setState(() {
-          _isInitializing = false;
-        });
+        setState(() { _isInitializing = false; });
       }
-
-      // Запускаем нативную камеру
       await _startRecording();
-
-      // Даем небольшую задержку перед запуском голосового управления
       await Future.delayed(const Duration(milliseconds: 500));
-
-      // Запускаем голосовое управление
       await _voskService.startListening();
       debugPrint('✅ Voice recognition started for recording');
     } catch (e) {
       debugPrint('Failed to initialize Vosk: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Ошибка инициализации голосового управления: $e'),
-          ),
+          SnackBar(content: Text('Ошибка инициализации голосового управления: $e')),
         );
       }
     }
@@ -74,18 +62,15 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
 
   Future<void> _startRecording() async {
     if (!mounted) return;
-
     try {
       await platform.invokeMethod('startCamera', {'scannedCode': _scannedCode});
-
       if (mounted) {
-        setState(() {
-          _isRecording = true;
-        });
+        setState(() { _isRecording = true; });
       }
-
-      // 🔊 Озвучиваем начало записи
-      await _ttsService.announceRecordingStarted();
+      // Новая озвучка — "Запись {код} началась"
+      if (_scannedCode != null && _scannedCode!.isNotEmpty) {
+        await _ttsService.speakRecordWithCode(_scannedCode!);
+      }
     } on PlatformException catch (e) {
       debugPrint("Failed to start camera: '${e.message}'.");
       if (mounted) {
@@ -101,33 +86,21 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
       debugPrint('⚠️ Already stopping, ignoring duplicate call');
       return;
     }
-
     _isStopping = true;
     debugPrint('🛑 Starting stop recording process');
-
     try {
-      // 🔊 Озвучиваем остановку записи
       await _ttsService.announceRecordingStopped();
-
-      // Останавливаем голосовое управление
       await _voskService.stopListening();
       debugPrint('🎤 Voice recognition stopped');
-
-      // Останавливаем запись
       try {
         await platform.invokeMethod('stopCamera');
         debugPrint('📹 Camera stopped');
       } on PlatformException catch (e) {
         debugPrint("⚠️ Failed to stop camera: '${e.message}'.");
       }
-
       if (mounted) {
-        setState(() {
-          _isRecording = false;
-        });
+        setState(() { _isRecording = false; });
       }
-
-      // Возвращаемся на экран сканирования
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted && Navigator.of(context).canPop()) {
@@ -144,8 +117,6 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   @override
   void dispose() {
     debugPrint('🗑️ Disposing PackingCameraPage');
-    // НЕ вызываем dispose для Vosk - он singleton и переиспользуется
-    // Только останавливаем прослушивание если еще активно
     if (_voskService.state.value == VoskState.listening) {
       _voskService.stopListening();
     }
@@ -163,16 +134,12 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
             children: [
               CircularProgressIndicator(color: Colors.white),
               SizedBox(height: 16),
-              Text(
-                'Инициализация камеры...',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
+              Text('Инициализация камеры...', style: TextStyle(color: Colors.white, fontSize: 16)),
             ],
           ),
         ),
       );
     }
-
     return WillPopScope(
       onWillPop: () async {
         if (_isRecording && !_isStopping) {
@@ -187,19 +154,12 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
           fit: StackFit.expand,
           children: [
             Container(color: Colors.black),
-
-            // Информация о коде
             Positioned(
               top: 0,
               left: 0,
               right: 0,
               child: Container(
-                padding: const EdgeInsets.only(
-                  top: 50,
-                  left: 16,
-                  right: 16,
-                  bottom: 16,
-                ),
+                padding: const EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -221,23 +181,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Код:',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            const Text('Код:', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
                             const SizedBox(height: 4),
-                            Text(
-                              _scannedCode!,
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            Text(_scannedCode!, style: const TextStyle(color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold)),
                           ],
                         ),
                       ),
@@ -246,8 +192,6 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                 ),
               ),
             ),
-
-            // Индикатор записи
             if (_isRecording && !_isStopping)
               Positioned(
                 bottom: 50,
@@ -264,37 +208,17 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 16,
-                            height: 16,
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
+                          Container(width: 16, height: 16, decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle)),
                           const SizedBox(width: 8),
-                          const Text(
-                            'ИДЕТ ЗАПИСЬ',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          const Text('ИДЕТ ЗАПИСЬ', style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold)),
                         ],
                       ),
                       const SizedBox(height: 12),
-                      const Text(
-                        'Скажите "Стоп" для остановки записи',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
+                      const Text('Скажите "Стоп" для остановки записи', style: TextStyle(color: Colors.white, fontSize: 16), textAlign: TextAlign.center),
                     ],
                   ),
                 ),
               ),
-
-            // Индикатор остановки
             if (_isStopping)
               Positioned(
                 bottom: 50,
@@ -302,28 +226,13 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                 right: 16,
                 child: Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.8), borderRadius: BorderRadius.circular(12)),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
-                        ),
-                      ),
+                      SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white))),
                       SizedBox(width: 12),
-                      Text(
-                        'Остановка записи...',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
+                      Text('Остановка записи...', style: TextStyle(color: Colors.white, fontSize: 16)),
                     ],
                   ),
                 ),
