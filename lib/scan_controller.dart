@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'services/tts_service.dart';
 
 /// Controller for scanning logic only.
 class ScanController extends ChangeNotifier {
@@ -7,6 +8,8 @@ class ScanController extends ChangeNotifier {
   bool scannerReady = false;
   bool isScanning = false;
   String? lastScannedCode;
+  
+  final TtsService _ttsService = TtsService();
 
   /// Call this when initializing the scanner screen.
   Future<void> initialize() async {
@@ -19,6 +22,9 @@ class ScanController extends ChangeNotifier {
     }
 
     try {
+      // Initialize TTS service
+      await _ttsService.initialize();
+      
       // Initialize scanner controller with optimal settings
       scannerController = MobileScannerController(
         autoStart: false,
@@ -78,6 +84,9 @@ class ScanController extends ChangeNotifier {
         isScanning = false;
         lastScannedCode = codeValue;
         notifyListeners();
+
+        // 🔊 Озвучиваем последние 4 цифры кода
+        await _ttsService.speakLastFourDigits(codeValue);
 
         debugPrint('⏸️ ScanController: Scanner stopped after detection');
         return;
