@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:camera/camera.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'scan_and_record_controller.dart';
+import 'providers/settings_provider.dart';
 
 /// Screen that handles scanning barcodes + video recording.
 class ScanAndRecordScreen extends StatefulWidget {
@@ -20,7 +21,10 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
     super.initState();
     Future.microtask(() async {
       controller = Provider.of<ScanAndRecordController>(context, listen: false);
-      await controller.initialize();
+      final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
+      final storagePath = settingsProvider.settings.videoStoragePath;
+      
+      await controller.initialize(storagePath: storagePath);
       controller.startScanning(); // Start scanning after initialization
       setState(() {});
     });
@@ -29,6 +33,14 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
   @override
   Widget build(BuildContext context) {
     controller = Provider.of<ScanAndRecordController>(context);
+    final settingsProvider = Provider.of<SettingsProvider>(context);
+    final storagePath = settingsProvider.settings.videoStoragePath;
+    
+    // Обновляем путь в контроллере, если он изменился
+    if (controller.cameraReady && controller.customStoragePath != storagePath) {
+      controller.updateStoragePath(storagePath);
+    }
+    
     if (!controller.cameraReady) {
       return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
