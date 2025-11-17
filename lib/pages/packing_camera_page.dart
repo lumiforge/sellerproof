@@ -215,6 +215,31 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                       ),
                       const SizedBox(height: 12),
                       const Text('Скажите "Стоп" для остановки записи', style: TextStyle(color: Colors.white, fontSize: 16), textAlign: TextAlign.center),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          debugPrint('🛑 Stop button pressed');
+                          if (_isRecording && !_isStopping) {
+                            _stopRecording();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.stop, size: 24),
+                            SizedBox(width: 8),
+                            Text('Остановить запись', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
