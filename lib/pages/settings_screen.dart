@@ -14,39 +14,49 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final FlutterTts _flutterTts = FlutterTts();
-  List<String> _availableVoices = [];
+  List<Map<String, dynamic>> _filteredVoices = [];
   bool _isLoadingVoices = true;
 
   @override
   void initState() {
     super.initState();
-    // Ждем инициализации context через addPostFrameCallback
     WidgetsBinding.instance.addPostFrameCallback((_) => _loadAvailableVoices());
   }
 
   Future<void> _loadAvailableVoices() async {
     try {
       final voices = await _flutterTts.getVoices;
-      if (voices is List) {
-        final currentLocale = Localizations.localeOf(context).toString();
-        setState(() {
-          _availableVoices = voices
-              .where((voice) =>
-                  voice is Map &&
-                  voice['locale'] != null &&
-                  (voice['locale'] == currentLocale ||
-                   voice['locale'].toString().startsWith(currentLocale.split('_')[0])
-                  ))
-              .map((voice) => '${voice['name']} (${voice['locale']})')
-              .toList();
-          _isLoadingVoices = false;
-        });
-      }
+      final locale = Localizations.localeOf(context).toString();
+      setState(() {
+        _filteredVoices = (voices as List)
+            .where((voice) =>
+                voice is Map &&
+                voice['locale'] != null &&
+                (voice['locale'] == locale ||
+                 voice['locale'].toString().startsWith(locale.split('_')[0])
+                ))
+            .map((voice) => voice as Map<String, dynamic>)
+            .toList();
+        _isLoadingVoices = false;
+      });
     } catch (e) {
-      debugPrint('Error loading voices: $e');
       setState(() {
         _isLoadingVoices = false;
       });
+    }
+  }
+
+  void _onVoiceSelect(String? voiceId) async {
+    if (voiceId != null) {
+      // Находим выбранный voice object
+      final selectedVoice = _filteredVoices.firstWhere(
+        (v) => v['name'] == voiceId,
+        orElse: () => {},
+      );
+      if (selectedVoice.isNotEmpty) {
+        await _flutterTts.setVoice(selectedVoice);
+        context.read<SettingsProvider>().setSelectedVoice(voiceId);
+      }
     }
   }
 
@@ -80,11 +90,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Consumer<SettingsProvider>(
         builder: (context, settingsProvider, child) {
           final settings = settingsProvider.settings;
-          
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // 1. Способ коммуникации
               _buildSectionHeader('Способ коммуникации'),
               Card(
                 child: Column(
@@ -116,9 +124,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              // Настройки голоса (только для voice)
               if (settings.communicationMethod == CommunicationMethod.voice) ...[
-                // 2. Настройка голосовых команд
                 _buildSectionHeader('Голосовые команды'),
                 Card(
                   child: Padding(
@@ -146,7 +152,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                // 3. Настройки TTS
                 _buildSectionHeader('Настройки голосового синтеза (TTS)'),
                 Card(
                   child: Padding(
@@ -154,7 +159,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Выбор голоса
                         const Text(
                           'Выбор голоса',
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -162,7 +166,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const SizedBox(height: 8),
                         if (_isLoadingVoices)
                           const Center(child: CircularProgressIndicator())
-                        else if (_availableVoices.isEmpty)
+                        else if (_filteredVoices.isEmpty)
                           const Text('Голоса не найдены')
                         else
                           SizedBox(
@@ -173,24 +177,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                               value: settings.selectedVoice,
                               hint: const Text('Выберите голос'),
-                              items: _availableVoices.map((voice) {
+                              items: _filteredVoices.map((voice) {
                                 return DropdownMenuItem(
-                                  value: voice,
+                                  value: voice['name'],
                                   child: Text(
-                                    voice,
+                                    '${voice['name']} (${voice['locale']})',
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 );
                               }).toList(),
-                              onChanged: (value) {
-                                if (value != null) {
-                                  settingsProvider.setSelectedVoice(value);
-                                }
+                              onChanged: (voiceId) {
+                                _onVoiceSelect(voiceId);
                               },
                             ),
                           ),
                         const SizedBox(height: 24),
-                        // Громкость
                         Text(
                           'Громкость: ${(settings.ttsVolume * 100).toInt()}%',
                           style: const TextStyle(fontWeight: FontWeight.bold),
@@ -206,7 +207,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           },
                         ),
                         const SizedBox(height: 16),
-                        // Скорость речи
                         Text(
                           'Скорость речи: ${settings.ttsSpeechRate.toStringAsFixed(2)}',
                           style: const TextStyle(fontWeight: FontWeight.bold),
@@ -222,12 +222,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           },
                         ),
                         const SizedBox(height: 16),
-                        // Кнопка тестирования
                         Center(
                           child: ElevatedButton.icon(
                             onPressed: () async {
                               await _flutterTts.setVolume(settings.ttsVolume);
                               await _flutterTts.setSpeechRate(settings.ttsSpeechRate);
+                              if (settings.selectedVoice != null) {
+                                final selectedVoice = _filteredVoices.firstWhere(
+                                  (v) => v['name'] == settings.selectedVoice,
+                                  orElse: () => {},
+                                );
+                                if (selectedVoice.isNotEmpty) {
+                                  await _flutterTts.setVoice(selectedVoice);
+                                }
+                              }
                               await _flutterTts.speak('Привет, это тест голоса');
                             },
                             icon: const Icon(Icons.volume_up),
@@ -240,7 +248,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 const SizedBox(height: 24),
               ],
-              // 4. Выбор папки для видео
               _buildSectionHeader('Хранение видеозаписей'),
               Card(
                 child: Padding(
