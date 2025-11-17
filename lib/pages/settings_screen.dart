@@ -20,16 +20,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _loadAvailableVoices();
+    // Ждем инициализации context через addPostFrameCallback
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadAvailableVoices());
   }
 
   Future<void> _loadAvailableVoices() async {
     try {
       final voices = await _flutterTts.getVoices;
       if (voices is List) {
+        final currentLocale = Localizations.localeOf(context).toString();
         setState(() {
           _availableVoices = voices
-              .where((voice) => voice is Map && voice['locale'] != null)
+              .where((voice) =>
+                  voice is Map &&
+                  voice['locale'] != null &&
+                  (voice['locale'] == currentLocale ||
+                   voice['locale'].toString().startsWith(currentLocale.split('_')[0])
+                  ))
               .map((voice) => '${voice['name']} (${voice['locale']})')
               .toList();
           _isLoadingVoices = false;
@@ -46,7 +53,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _pickVideoStorageFolder(BuildContext context) async {
     try {
       String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
-      
       if (selectedDirectory != null) {
         if (context.mounted) {
           await context.read<SettingsProvider>().setVideoStoragePath(selectedDirectory);
@@ -109,9 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
               ),
-              
               const SizedBox(height: 24),
-              
               // Настройки голоса (только для voice)
               if (settings.communicationMethod == CommunicationMethod.voice) ...[
                 // 2. Настройка голосовых команд
@@ -141,9 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                 ),
-                
                 const SizedBox(height: 24),
-                
                 // 3. Настройки TTS
                 _buildSectionHeader('Настройки голосового синтеза (TTS)'),
                 Card(
@@ -163,27 +165,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         else if (_availableVoices.isEmpty)
                           const Text('Голоса не найдены')
                         else
-                          DropdownButtonFormField<String>(
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
+                          SizedBox(
+                            width: double.infinity,
+                            child: DropdownButtonFormField<String>(
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                              value: settings.selectedVoice,
+                              hint: const Text('Выберите голос'),
+                              items: _availableVoices.map((voice) {
+                                return DropdownMenuItem(
+                                  value: voice,
+                                  child: Text(
+                                    voice,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (value) {
+                                if (value != null) {
+                                  settingsProvider.setSelectedVoice(value);
+                                }
+                              },
                             ),
-                            value: settings.selectedVoice,
-                            hint: const Text('Выберите голос'),
-                            items: _availableVoices.map((voice) {
-                              return DropdownMenuItem(
-                                value: voice,
-                                child: Text(voice),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              if (value != null) {
-                                settingsProvider.setSelectedVoice(value);
-                              }
-                            },
                           ),
-                        
                         const SizedBox(height: 24),
-                        
                         // Громкость
                         Text(
                           'Громкость: ${(settings.ttsVolume * 100).toInt()}%',
@@ -199,9 +205,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             settingsProvider.setTtsVolume(value);
                           },
                         ),
-                        
                         const SizedBox(height: 16),
-                        
                         // Скорость речи
                         Text(
                           'Скорость речи: ${settings.ttsSpeechRate.toStringAsFixed(2)}',
@@ -217,9 +221,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             settingsProvider.setTtsSpeechRate(value);
                           },
                         ),
-                        
                         const SizedBox(height: 16),
-                        
                         // Кнопка тестирования
                         Center(
                           child: ElevatedButton.icon(
@@ -236,10 +238,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                 ),
-                
                 const SizedBox(height: 24),
               ],
-              
               // 4. Выбор папки для видео
               _buildSectionHeader('Хранение видеозаписей'),
               Card(
