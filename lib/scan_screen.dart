@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'scan_controller.dart';
 import 'pages/packing_camera_page.dart';
+import 'pages/settings_screen.dart';
 
 /// Screen that handles QR code scanning.
 class ScanScreen extends StatefulWidget {
@@ -109,14 +110,54 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
         });
   }
 
+  void _navigateToSettings() {
+    if (_isNavigating) return;
+    
+    _isNavigating = true;
+    // Останавливаем сканер перед переходом в настройки
+    controller?.pauseScanning();
+    
+    Navigator.of(context)
+        .push(
+          MaterialPageRoute(
+            builder: (context) => const SettingsScreen(),
+          ),
+        )
+        .then((_) {
+          debugPrint('🔙 Returned from settings screen');
+          _isNavigating = false;
+
+          // Возобновляем сканирование после возврата
+          if (mounted && controller != null) {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              if (mounted && !_isNavigating) {
+                controller?.resumeScanning();
+                setState(() {});
+                debugPrint('✅ Scanner resumed after settings');
+              }
+            });
+          }
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<ScanController>(context);
 
     if (!controller.scannerReady) {
       debugPrint('⏳ Scanner not ready');
-      return const Scaffold(
-        body: Center(
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('SellerProof'),
+          backgroundColor: Colors.black,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: _navigateToSettings,
+            ),
+          ],
+        ),
+        body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -148,6 +189,19 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
 
     return Scaffold(
       backgroundColor: Colors.black,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text('SellerProof'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: _navigateToSettings,
+            color: Colors.white,
+          ),
+        ],
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
