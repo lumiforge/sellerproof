@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../services/vosk_recognition_service.dart';
 import '../services/tts_service.dart';
 import '../scan_controller.dart';
+import '../providers/settings_provider.dart';
 
 class PackingCameraPage extends StatefulWidget {
   final String? initialCode;
@@ -63,7 +64,17 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   Future<void> _startRecording() async {
     if (!mounted) return;
     try {
-      await platform.invokeMethod('startCamera', {'scannedCode': _scannedCode});
+      // Get custom storage path from settings provider
+      final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
+      final storagePath = settingsProvider.storagePath;
+      
+      debugPrint('🎬 Starting recording with code: $_scannedCode, storagePath: $storagePath');
+      
+      await platform.invokeMethod('startCamera', {
+        'scannedCode': _scannedCode,
+        'storagePath': storagePath,
+      });
+      
       if (mounted) {
         setState(() { _isRecording = true; });
       }
