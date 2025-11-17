@@ -19,6 +19,10 @@ class MainActivity: FlutterActivity() {
                     call.argument<String?>("scannedCode")?.let { code ->
                         intent.putExtra("scannedCode", code)
                     }
+                    // Pass custom storage path if provided
+                    call.argument<String?>("storagePath")?.let { path ->
+                        intent.putExtra("storagePath", path)
+                    }
                     startActivityForResult(intent, CAMERA_REQUEST_CODE)
                     result.success(null)
                 }
