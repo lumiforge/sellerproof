@@ -33,12 +33,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
         setState(() {
           _filteredVoices = (voices as List)
               .where((v) => v is Map)
-              .map((v) => v as Map<String, dynamic>)
+              .map((v) {
+                final map = v as Map;
+                return Map<String, dynamic>.from(map);
+              })
               .toList();
           _isLoadingVoices = false;
         });
+        debugPrint('🎤 Total voices loaded: [32m${_filteredVoices.length}[0m');
       } else {
-        // fallback: single ru-RU locale entry
         setState(() {
           _filteredVoices = [{'name': 'ru-RU', 'locale': 'ru-RU'}];
           _isLoadingVoices = false;
@@ -47,6 +50,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } catch (e) {
       debugPrint('❌ Error loading or filtering voices: $e');
       setState(() {
+        _filteredVoices = [{'name': 'ru-RU', 'locale': 'ru-RU'}];
         _isLoadingVoices = false;
       });
     }
