@@ -314,7 +314,7 @@ class PackingCameraActivity : ComponentActivity() {
                             mediaRecorder?.start()
                             isRecording = true
                             btnStartStop.text = "Остановить запись"
-                            Toast.makeText(this@PackingCameraActivity, "Запись началась", Toast.LENGTH_SHORT).show()
+                            // Toast.makeText(this@PackingCameraActivity, "Запись началась", Toast.LENGTH_SHORT).show()
                             
                             // Отправляем сигнал Flutter что запись началась
                             sendRecordingStateToFlutter(true)
