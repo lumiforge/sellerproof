@@ -38,13 +38,17 @@ class PackingCameraActivity : ComponentActivity() {
     private var backgroundHandler: Handler? = null
     private var backgroundThread: HandlerThread? = null
     private var scannedCode: String? = null
+    private var customStoragePath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_packing_camera)
         
-        // Get scanned code from intent
+        // Get scanned code and storage path from intent
         scannedCode = intent.getStringExtra("scannedCode")
+        customStoragePath = intent.getStringExtra("storagePath")
+        
+        Log.d(TAG, "PackingCameraActivity started with code: $scannedCode, storagePath: $customStoragePath")
 
         textureView = findViewById(R.id.viewFinder)
         btnStartStop = findViewById(R.id.btnStartStop)
@@ -408,15 +412,40 @@ class PackingCameraActivity : ComponentActivity() {
 
     
     private fun getOutputMediaFile(): File {
-        val mediaStorageDir = File(getExternalFilesDir(null), "Movies/SellerProof")
-        if (!mediaStorageDir.exists()) {
-            mediaStorageDir.mkdirs()
+        // Use custom storage path if provided, otherwise use default
+        val mediaStorageDir = if (!customStoragePath.isNullOrEmpty()) {
+            File(customStoragePath!!)
+        } else {
+            File(getExternalFilesDir(null), "Movies/SellerProof")
         }
-        val videoFile = File(mediaStorageDir, "packing_${System.currentTimeMillis()}.mp4")
+        
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.e(TAG, "Failed to create directory: ${mediaStorageDir.absolutePath}")
+                // Fallback to default directory if custom path fails
+                val fallbackDir = File(getExternalFilesDir(null), "Movies/SellerProof")
+                fallbackDir.mkdirs()
+                Log.d(TAG, "Using fallback directory: ${fallbackDir.absolutePath}")
+                return createVideoFileInDirectory(fallbackDir)
+            }
+        }
+        
+        Log.d(TAG, "Using storage directory: ${mediaStorageDir.absolutePath}")
+        return createVideoFileInDirectory(mediaStorageDir)
+    }
+    
+    private fun createVideoFileInDirectory(directory: File): File {
+        val videoFileName = if (!scannedCode.isNullOrEmpty()) {
+            "${scannedCode}.mp4"
+        } else {
+            "packing_${System.currentTimeMillis()}.mp4"
+        }
+        
+        val videoFile = File(directory, videoFileName)
         
         // Save scanned code with video
         scannedCode?.let { code ->
-            val codeFile = File(mediaStorageDir, "packing_${System.currentTimeMillis()}.txt")
+            val codeFile = File(directory, "${videoFileName}.txt")
             codeFile.writeText(code)
             Log.d(TAG, "Saved scanned code: $code with video: ${videoFile.absolutePath}")
         }
