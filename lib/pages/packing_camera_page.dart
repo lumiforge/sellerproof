@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../services/vosk_recognition_service.dart';
+import '../services/tts_service.dart';
 import '../scan_controller.dart';
 
 class PackingCameraPage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
   static const platform = MethodChannel('com.lumiforge.sellerproof/camera');
 
   late VoskRecognitionService _voskService;
+  final TtsService _ttsService = TtsService();
   bool _isRecording = false;
   bool _isInitializing = true;
   bool _isStopping = false;
@@ -81,6 +83,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
           _isRecording = true;
         });
       }
+
+      // 🔊 Озвучиваем начало записи
+      await _ttsService.announceRecordingStarted();
     } on PlatformException catch (e) {
       debugPrint("Failed to start camera: '${e.message}'.");
       if (mounted) {
@@ -101,6 +106,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
     debugPrint('🛑 Starting stop recording process');
 
     try {
+      // 🔊 Озвучиваем остановку записи
+      await _ttsService.announceRecordingStopped();
+
       // Останавливаем голосовое управление
       await _voskService.stopListening();
       debugPrint('🎤 Voice recognition stopped');
