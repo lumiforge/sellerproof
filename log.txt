@@ -1,706 +1,853 @@
-A Dart VM Service on BV8900 is available at: http://127.0.0.1:40669/xVXao0iFiIg=/
-The Flutter DevTools debugger and profiler on BV8900 is available at: http://127.0.0.1:40669/xVXao0iFiIg=/devtools/?uri=ws://127.0.0.1:40669/xVXao0iFiIg=/ws
-I/Choreographer(23854): Skipped 211 frames!  The application may be doing too much work on its main thread.
-I/rge.sellerproof(23854): Compiler allocated 4973KB to compile void android.view.ViewRootImpl.performTraversals()
-D/BufferQueueConsumer(23854): [](id:5d2e00000000,api:0,p:-1,c:23854) connect: controlledByApp=false
-E/FBI     (23854): Can't load library: dlopen failed: library "libmagtsync.so" not found
-D/libMEOW (23854): meow new tls: 0xb400007a9b35b0f0
-D/libMEOW (23854): applied 1 plugins for [com.lumiforge.sellerproof]:
-D/libMEOW (23854):   plugin 1: [libMEOW_gift.so]: 0xb400007a5b290030
-D/libMEOW (23854): rebuild call chain: 0xb400007a9b38b120
-D/skia    (23854): GrGLMakeAssembledInterface verStr OpenGL ES 3.2 build 1.13@5776728
-D/skia    (23854): GrGLMakeAssembledGLESInterface verStr OpenGL ES 3.2 build 1.13@5776728
-D/skia    (23854): extensions init verString=OpenGL ES 3.2 build 1.13@5776728
-D/BufferQueueConsumer(23854): [](id:5d2e00000001,api:0,p:-1,c:23854) connect: controlledByApp=false
-E/ion     (23854): ioctl c0044901 failed with code -1: Invalid argument
-I/TextToSpeech(23854): Connected to TTS engine
-I/TextToSpeech(23854): Setting up the connection to TTS engine...
-D/BLASTBufferQueue(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1053041619770300(auto) mPendingTransactions.size=0 graphicBufferId=102452149878785 transform=0
-I/Choreographer(23854): Skipped 94 frames!  The application may be doing too much work on its main thread.
-D/BLASTBufferQueue(23854): [VRI[MainActivity]#0](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053041699298300(auto) mPendingTransactions.size=0 graphicBufferId=102452149878787 transform=0
-W/Parcel  (23854): Expecting binder but got null!
-I/OpenGLRenderer(23854): Davey! duration=1584ms; Flags=1, FrameTimelineVsyncId=163560959, IntendedVsync=1053040115061447, Vsync=1053041667506509, InputEventId=0, HandleInputStart=1053041668681223, AnimationStart=1053041668684223, PerformTraversalsStart=1053041668685377, DrawStart=1053041678252762, FrameDeadline=1053040135061447, FrameInterval=1053041668602377, FrameStartTime=16515373, SyncQueued=1053041680321685, SyncStart=1053041683417762, IssueDrawCommandsStart=1053041683989223, SwapBuffers=1053041697897223, FrameCompleted=1053041702585839, DequeueBufferDuration=0, QueueBufferDuration=888538, GpuCompleted=1053041702585839, SwapBuffersCompleted=1053041700650377, DisplayPresentTime=766, CommandSubmissionCompleted=1053041697897223, 
-I/flutter (23854): ✅ ScanController: Initialized successfully
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: false, lastCode: null
-I/flutter (23854): 🔄 ScanController: resumeScanning called
-I/flutter (23854): ✅ ScanScreen: Scanner started
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-I/flutter (23854): ✅ ScanController: Scanner resumed and started
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-D/CompatibilityChangeReporter(23854): Compat change id reported: 78294732; UID 10637; state: ENABLED
-I/DynamiteModule(23854): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
-I/DynamiteModule(23854): Selected local version of com.google.mlkit.dynamite.barcode
-D/QuirkSettingsLoader(23854): QuirkSettings$MetadataHolderService is not found.
-D/CameraX (23854): QuirkSettings from app metadata: null
-D/CameraX (23854): QuirkSettings by default: QuirkSettings{enabledWhenDeviceHasQuirk=true, forceEnabledQuirks=[], forceDisabledQuirks=[]}
-I/flutter (23854): 📱 ScanScreen: App resumed
-I/CameraManagerGlobal(23854): Connecting to camera service
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=979314552 in 30000ms(Backend next call timestamp 0). Attempt 1
-D/CompatibilityChangeReporter(23854): Compat change id reported: 194532703; UID 10637; state: ENABLED
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-I/Camera2CameraInfo(23854): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
-I/Camera2CameraInfo(23854): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
-D/TransportRuntime.JobInfoScheduler(23854): Scheduling upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=984295289 in 86400000ms(Backend next call timestamp 0). Attempt 1
-I/Camera2CameraInfo(23854): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
-I/CameraPresencePrvdr(23854): Starting CameraPresenceProvider monitoring.
-I/CameraPresenceSrc(23854): First observer added. Starting monitoring.
-I/Camera2PresenceSrc(23854): Starting system availability monitoring.
-D/Camera2PresenceSrc(23854): System onCameraAvailable: 0
-D/Camera2PresenceSrc(23854): System onCameraAvailable: 2
-D/Camera2PresenceSrc(23854): System onCameraAvailable: 1
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/BufferQueueConsumer(23854): [](id:5d2e00000002,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/BufferQueueConsumer(23854): [](id:5d2e00000003,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/BufferQueueConsumer(23854): [](id:5d2e00000004,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/Camera2PresenceSrc(23854): System onCameraUnavailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): 🔄 ScanController: resumeScanning called
-I/flutter (23854): ✅ ScanScreen: Scanner resumed after app resume
-D/ProfileInstaller(23854): Installing profile for com.lumiforge.sellerproof
-D/nativeloader(23854): Load /data/app/~~WgWwraoFPx02auvFbp_c5Q==/com.lumiforge.sellerproof-bsYRnl3M-NsoHYbvijbADw==/base.apk!/lib/arm64-v8a/libbarhopper_v3.so using class loader ns clns-4 (caller=/data/app/~~WgWwraoFPx02auvFbp_c5Q==/com.lumiforge.sellerproof-bsYRnl3M-NsoHYbvijbADw==/base.apk!classes18.dex): ok
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-I/tflite  (23854): Initialized TensorFlow Lite runtime.
-W/libc    (23854): Access denied finding property "ro.hardware.chipname"
-I/tflite  (23854): Created TensorFlow Lite XNNPACK delegate for CPU.
-I/tflite  (23854): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
-I/tflite  (23854): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
-I/native  (23854): I0000 00:00:1763408014.465720   24125 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-I/flutter (23854): ✅ ScanController: Scanner resumed and started
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/Choreographer(23854): Skipped 104 frames!  The application may be doing too much work on its main thread.
-D/BufferQueueConsumer(23854): [ImageReader-1600x1200f22m7-23854-2](id:5d2e00000004,api:4,p:851,c:23854) disconnect
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-2](id:5d2e00000004,api:4,p:851,c:23854) cancelBuffer: BufferQueue has been abandoned
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-2](id:5d2e00000004,api:4,p:851,c:23854) cancelBuffer: BufferQueue has been abandoned
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-2](id:5d2e00000004,api:4,p:851,c:23854) cancelBuffer: BufferQueue has been abandoned
-D/Camera2PresenceSrc(23854): System onCameraAvailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-W/OnBackInvokedCallback(23854): OnBackInvokedCallback is not enabled for the application.
-W/OnBackInvokedCallback(23854): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
-D/BufferQueueConsumer(23854): [ImageReader-1920x1440f23m4-23854-1](id:5d2e00000003,api:0,p:-1,c:23854) disconnect
-I/flutter (23854): 🎤 Voices response: [{features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: es-us-x-sfb-local, locale: es-US, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	legacySetLanguageVoice	networkRetriesCount, latency: low, name: ur-PK-language, locale: ur-PK, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: ja-jp-x-htm-network, locale: ja-JP, network_required: 1, quality: high}, {features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: th-th-x-thd-network, locale: th-TH, network_required: 1, quality: high}, {features: networkTimeoutMsnotInstalled	networkRetriesCount, latency: low, name: it-it-x-itd-local, locale: it-IT, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	legacySetLanguageVoice	networkRetriesCount, latency: low, name: en-AU-language, locale: en-AU, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstall
-I/Choreographer(23854): Skipped 40 frames!  The application may be doing too much work on its main thread.
-I/ScrollIdentify(23854): on fling
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/ScrollIdentify(23854): on fling
-I/flutter (23854): 🎤 Total RU voices loaded: 11
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/ScrollIdentify(23854): on fling
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/ScrollIdentify(23854): on fling
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/BLASTBufferQueue(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1](f:0,a:1) destructor()
-D/BufferQueueConsumer(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1(BLAST Consumer)1](id:5d2e00000001,api:0,p:-1,c:23854) disconnect
-D/BLASTBufferQueue(23854): [VRI[MainActivity]#0](f:0,a:1) destructor()
-D/BufferQueueConsumer(23854): [VRI[MainActivity]#0(BLAST Consumer)0](id:5d2e00000000,api:0,p:-1,c:23854) disconnect
-I/libPerfCtl(23854): fbcNotifySbeRescue ret=-1
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): 📱 ScanScreen: App paused
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/BpBinder(23854): onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
-D/BufferQueueConsumer(23854): [ImageReader-1920x1440f23m4-23854-0](id:5d2e00000002,api:0,p:-1,c:23854) disconnect
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/FilePickerDelegate(23854): [SingleFilePick] File URI:content://com.android.externalstorage.documents/tree/primary%3ADownload%2FAaassss/document/primary%3ADownload%2FAaassss
-I/rge.sellerproof(23854): hiddenapi: Accessing hidden method Landroid/os/storage/StorageManager;->getVolumeList()[Landroid/os/storage/StorageVolume; (runtime_flags=0, domain=platform, api=unsupported) from Lcom/mr/flutter/plugin/filepicker/FileUtils; (domain=app) using reflection: allowed
-D/BufferQueueConsumer(23854): [](id:5d2e00000005,api:0,p:-1,c:23854) connect: controlledByApp=false
-D/BufferQueueConsumer(23854): [](id:5d2e00000006,api:0,p:-1,c:23854) connect: controlledByApp=false
-I/libPerfCtl(23854): fbcNotifySbeRescue ret=-1
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/BLASTBufferQueue(23854): [VRI[MainActivity]#2](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053057004279763(auto) mPendingTransactions.size=0 graphicBufferId=102452149878820 transform=0
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/BLASTBufferQueue(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1053057037698993(auto) mPendingTransactions.size=0 graphicBufferId=102452149878819 transform=0
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): 📱 ScanScreen: App resumed
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): 🔙 Returned from settings screen
-I/flutter (23854): 🔄 ScanController: resumeScanning called
-I/flutter (23854): ✅ Scanner resumed after settings
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-I/flutter (23854): ✅ ScanController: Scanner resumed and started
-I/DynamiteModule(23854): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
-I/DynamiteModule(23854): Selected local version of com.google.mlkit.dynamite.barcode
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/BufferQueueConsumer(23854): [](id:5d2e00000007,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/BufferQueueConsumer(23854): [](id:5d2e00000008,api:0,p:-1,c:23854) connect: controlledByApp=true
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-D/BufferQueueConsumer(23854): [](id:5d2e00000009,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/Camera2PresenceSrc(23854): System onCameraUnavailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/tflite  (23854): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
-I/tflite  (23854): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
-I/native  (23854): I0000 00:00:1763408030.059171   24038 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): 📦 ScanController: Code detected: OZN1306390352
-D/BufferQueueConsumer(23854): [ImageReader-1600x1200f22m7-23854-5](id:5d2e00000009,api:4,p:851,c:23854) disconnect
-I/flutter (23854): 🔊 TtsService: Запись 0 3 5 2 началась
-I/flutter (23854): ⏸️ ScanController: Scanner stopped after detection
-I/flutter (23854): 📦 Code scanned: OZN1306390352, navigating...
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: false, lastCode: OZN1306390352
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-5](id:5d2e00000009,api:4,p:851,c:23854) queueBuffer: BufferQueue has been abandoned
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-5](id:5d2e00000009,api:4,p:851,c:23854) cancelBuffer: BufferQueue has been abandoned
-I/flutter (23854): 🚀 Navigating to recording with code: OZN1306390352
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-5](id:5d2e00000009,api:4,p:851,c:23854) cancelBuffer: BufferQueue has been abandoned
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-5](id:5d2e00000009,api:4,p:851,c:23854) cancelBuffer: BufferQueue has been abandoned
-E/BufferQueueProducer(23854): [ImageReader-1600x1200f22m7-23854-5](id:5d2e00000009,api:4,p:851,c:23854) cancelBuffer: BufferQueue has been abandoned
-I/flutter (23854): 🆕 Creating new VoskRecognitionService instance
-W/OnBackInvokedCallback(23854): OnBackInvokedCallback is not enabled for the application.
-W/OnBackInvokedCallback(23854): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
-D/Camera2PresenceSrc(23854): System onCameraAvailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/BufferQueueConsumer(23854): [ImageReader-1920x1440f23m4-23854-3](id:5d2e00000007,api:0,p:-1,c:23854) disconnect
-D/BufferQueueConsumer(23854): [ImageReader-1920x1440f23m4-23854-4](id:5d2e00000008,api:0,p:-1,c:23854) disconnect
-I/flutter (23854): Extracting model to /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22...
-D/TTS     (23854): Utterance ID has started: 4dcccf17-f22f-404a-b78d-dabf09a9e6e5
-I/BpBinder(23854): onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): ✅ Model extracted successfully
-D/nativeloader(23854): Load /data/app/~~WgWwraoFPx02auvFbp_c5Q==/com.lumiforge.sellerproof-bsYRnl3M-NsoHYbvijbADw==/base.apk!/lib/arm64-v8a/libjnidispatch.so using class loader ns clns-4 (caller=/data/app/~~WgWwraoFPx02auvFbp_c5Q==/com.lumiforge.sellerproof-bsYRnl3M-NsoHYbvijbADw==/base.apk!classes18.dex): ok
-I/VoskAPI (23854): ReadDataFiles():model.cc:213) Decoding params beam=10 max-active=3000 lattice-beam=2
-I/VoskAPI (23854): ReadDataFiles():model.cc:216) Silence phones 1:2:3:4:5:6:7:8:9:10
-I/VoskAPI (23854): RemoveOrphanNodes():nnet-nnet.cc:948) Removed 0 orphan nodes.
-I/VoskAPI (23854): RemoveOrphanComponents():nnet-nnet.cc:847) Removing 0 orphan components.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/VoskAPI (23854): ReadDataFiles():model.cc:249) Loading i-vector extractor from /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/ivector/final.ie
-I/VoskAPI (23854): ComputeDerivedVars():ivector-extractor.cc:183) Computing derived variables for iVector extractor
-I/VoskAPI (23854): ComputeDerivedVars():ivector-extractor.cc:204) Done.
-I/VoskAPI (23854): ReadDataFiles():model.cc:285) Loading HCL and G from /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/HCLr.fst /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/Gr.fst
-D/TTS     (23854): Utterance ID has completed: 4dcccf17-f22f-404a-b78d-dabf09a9e6e5
-I/VoskAPI (23854): ReadDataFiles():model.cc:311) Loading winfo /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/phones/word_boundary.int
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/AudioRecord(23854): set(): 0xb4000079ab3452a0, inputSource 6, sampleRate 16000, format 0x1, channelMask 0x10, frameCount 3200, notificationFrames 0, sessionId 0, transferType 0, flags 0, attributionSource AttributionSourceState{pid: -1, uid: 10637, packageName: com.lumiforge.sellerproof, attributionTag: (null), token: , renouncedPermissions: [], next: []} uid -1, pid -1
-D/AudioRecord(23854): openRecord_l: 0xb4000079ab3452a0, mCblk = 0x7b54a67000
-I/flutter (23854): ✅ Vosk initialized successfully
-I/flutter (23854): 📱 ScanScreen: App resumed
-I/flutter (23854): 🔊 TtsService: Запись 0 3 5 2 началась
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/TTS     (23854): Utterance ID has started: 55b336d1-3444-42e7-b832-dc9cc32f81af
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/libMEOW (23854): meow new tls: 0xb400007a9e13ded0
-D/libMEOW (23854): applied 1 plugins for [com.lumiforge.sellerproof]:
-D/libMEOW (23854):   plugin 1: [libMEOW_gift.so]: 0xb400007a5b290030
-D/libMEOW (23854): rebuild call chain: 0xb400007a9e17df10
-D/libMEOW (23854): meow delete tls: 0xb400007a9e13ded0
-D/CompatibilityChangeReporter(23854): Compat change id reported: 210923482; UID 10637; state: ENABLED
-D/VRI[PackingCameraActivity](23854): hardware acceleration = true, forceHwAccelerated = false
-D/InputTransport(23854): Create ARC handle: 0xb4000078bb6ce000
-D/BufferQueueConsumer(23854): [](id:5d2e0000000a,api:0,p:-1,c:23854) connect: controlledByApp=false
-D/TextureView(23854): getHardwareLayer, createNewSurface:true
-D/BufferQueueConsumer(23854): [](id:5d2e0000000b,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/Camera2PresenceSrc(23854): System onCameraUnavailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/BLASTBufferQueue(23854): [VRI[PackingCameraActivity]#4](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053070668872687(auto) mPendingTransactions.size=0 graphicBufferId=102452149878845 transform=0
-W/Parcel  (23854): Expecting binder but got null!
-D/PackingCameraActivity(23854): Preview: exposure compensation = 0 (range: -4..4)
-D/PackingCameraActivity(23854): Preview: FPS range: 30-30
-D/PackingCameraActivity(23854): Preview settings applied (no exposure boost)
-D/MediaRecorder(23854): constructor+ 0xb40000792b2bdd50
-D/MediaRecorder(23854): constructor- 0xb40000792b2bdd50
-D/PackingCameraActivity(23854): Saved scanned code: OZN1306390352 with video: /storage/emulated/0/Android/data/com.lumiforge.sellerproof/files/Movies/SellerProof/packing_1763408039485.mp4
-D/MediaRecorder(23854): init+ 0xb40000792b2bdd50
-D/MediaRecorder(23854): init- 0xb40000792b2bdd50
-D/MediaRecorder(23854): prepare+ 0xb40000792b2bdd50
-I/flutter (23854): 🎤 startListening called, current state: VoskState.ready
-D/AudioRecord(23854): start(10018): 0xb4000079ab3452a0, sync event 0 trigger session 0
-I/flutter (23854): ✅ Vosk: Started continuous listening
-I/flutter (23854): ✅ Voice recognition started for recording
-D/AudioRecord(23854): start(10018): return status 0
-D/BLASTBufferQueue(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3](f:0,a:1) destructor()
-D/BufferQueueConsumer(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3(BLAST Consumer)3](id:5d2e00000006,api:0,p:-1,c:23854) disconnect
-D/BLASTBufferQueue(23854): [VRI[MainActivity]#2](f:0,a:1) destructor()
-E/BLASTBufferQueue(23854): [VRI[MainActivity]#2](f:0,a:1) Applying pending transactions on dtor 2
-D/BufferQueueConsumer(23854): [VRI[MainActivity]#2(BLAST Consumer)2](id:5d2e00000005,api:0,p:-1,c:23854) disconnect
-I/flutter (23854): 📱 ScanScreen: App paused
-D/MediaRecorder(23854): prepare- 0xb40000792b2bdd50
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-D/PackingCameraActivity(23854): Recording: Adaptive exposure compensation = 2 (range: -4..4)
-D/PackingCameraActivity(23854): Recording: Video stabilization enabled
-D/PackingCameraActivity(23854): Available FPS ranges:
-D/PackingCameraActivity(23854):   - 10 to 10
-D/PackingCameraActivity(23854):   - 15 to 15
-D/PackingCameraActivity(23854):   - 15 to 20
-D/PackingCameraActivity(23854):   - 20 to 20
-D/PackingCameraActivity(23854):   - 5 to 30
-D/PackingCameraActivity(23854):   - 30 to 30
-D/PackingCameraActivity(23854): Recording: FPS range: 5-30
-D/PackingCameraActivity(23854): Recording settings configured with MAX brightness
-D/MediaRecorder(23854): start+ 0xb40000792b2bdd50
-D/MediaRecorder(23854): start- 0xb40000792b2bdd50
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой"
-I/flutter (23854): }
-D/TTS     (23854): Utterance ID has completed: 55b336d1-3444-42e7-b832-dc9cc32f81af
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой начала"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой начала"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой начала"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой начала"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой начала"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "джой начала"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk result: {
-I/flutter (23854):   "text" : "джой началась"
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : ""
-I/flutter (23854): }
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "стоп"
-I/flutter (23854): }
-I/flutter (23854): 🛑 Stop command detected: стоп (from text: "стоп")
-I/flutter (23854): 🛑 Stop command received from Vosk
-I/flutter (23854): 🛑 Starting stop recording process
-I/flutter (23854): 🛑 stopListening called, current state: VoskState.listening
-D/AudioRecord(23854): stop(10018): 0xb4000079ab3452a0, mActive: 1
-D/AudioTrackShared(23854): this(0xb40000793b316b10), mCblk(0x7b54a67000), front(105600), mIsOut 0, interrupt() FUTEX_WAKE
-D/AudioRecord(23854): stop(10018) done
-D/TTS     (23854): Utterance ID has started: 0e099bbf-996f-4fa8-8ed5-1a9ed56c45d6
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): ✅ Vosk: Stopped listening
-I/flutter (23854): 🎤 Voice recognition stopped
-I/flutter (23854): 🎤 Vosk partial: {
-I/flutter (23854):   "partial" : "стоп"
-I/flutter (23854): }
-I/flutter (23854): ⚠️ Stop command already processed, ignoring
-I/flutter (23854): 🎤 Vosk result: {
-I/flutter (23854):   "text" : "стоп"
-I/flutter (23854): }
-I/flutter (23854): ⚠️ Stop command already processed, ignoring
-D/MediaRecorder(23854): stop+ 0xb40000792b2bdd50
-D/MediaRecorder(23854): stop- 0xb40000792b2bdd50
-D/MediaRecorder(23854): release+ 0xb40000792b2bdd50
-D/MediaRecorder(23854): release- 0xb40000792b2bdd50
-D/MediaRecorder(23854): destructor+ 0xb40000792b2bdd50
-D/MediaRecorder(23854): destructor- 0xb40000792b2bdd50
-I/flutter (23854): 📹 Camera stopped
-D/Camera2PresenceSrc(23854): System onCameraAvailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/BufferQueueConsumer(23854): [](id:5d2e0000000c,api:0,p:-1,c:23854) connect: controlledByApp=false
-D/BufferQueueConsumer(23854): [](id:5d2e0000000d,api:0,p:-1,c:23854) connect: controlledByApp=false
-D/BLASTBufferQueue(23854): [VRI[MainActivity]#5](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053079951258764(auto) mPendingTransactions.size=0 graphicBufferId=102452149878861 transform=0
-I/flutter (23854): 🔙 Popping to scan screen
-I/flutter (23854): 🔙 Returned from recording screen
-I/flutter (23854): 🔄 Resetting and resuming scanner
-I/flutter (23854): 🔄 ScanController: reset called
-I/flutter (23854): ✅ ScanController: Reset complete
-D/BLASTBufferQueue(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#6](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1053079988137995(auto) mPendingTransactions.size=0 graphicBufferId=102452149878860 transform=0
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: false, lastCode: null
-W/OnBackInvokedCallback(23854): OnBackInvokedCallback is not enabled for the application.
-W/OnBackInvokedCallback(23854): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
-I/flutter (23854): 📱 ScanScreen: App resumed
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/TTS     (23854): Utterance ID has completed: 0e099bbf-996f-4fa8-8ed5-1a9ed56c45d6
-D/BLASTBufferQueue(23854): [VRI[PackingCameraActivity]#4](f:0,a:1) destructor()
-D/BufferQueueConsumer(23854): [VRI[PackingCameraActivity]#4(BLAST Consumer)4](id:5d2e0000000a,api:0,p:-1,c:23854) disconnect
-D/BufferQueueConsumer(23854): [SurfaceTexture-0-23854-0](id:5d2e0000000b,api:0,p:-1,c:23854) disconnect
-D/View    (23854): [Warning] assignParent to null: this = DecorView@8051005[PackingCameraActivity]
-D/InputTransport(23854): Destroy ARC handle: 0xb4000078bb6ce000
-I/flutter (23854): 🗑️ Disposing PackingCameraPage
-I/flutter (23854): 🔄 ScanController: resumeScanning called
-I/flutter (23854): ✅ ScanScreen: Scanner resumed after app resume
-I/flutter (23854): 🔄 ScanController: resumeScanning called
-I/flutter (23854): ✅ Scanner resumed after return
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-I/flutter (23854): ✅ ScanController: Scanner resumed and started
-I/DynamiteModule(23854): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
-I/DynamiteModule(23854): Selected local version of com.google.mlkit.dynamite.barcode
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/BufferQueueConsumer(23854): [](id:5d2e0000000e,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/BufferQueueConsumer(23854): [](id:5d2e0000000f,api:0,p:-1,c:23854) connect: controlledByApp=true
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-D/BufferQueueConsumer(23854): [](id:5d2e00000010,api:0,p:-1,c:23854) connect: controlledByApp=true
-D/Camera2PresenceSrc(23854): System onCameraUnavailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/flutter (23854): ✅ ScanController: Scanner resumed and started
-I/flutter (23854): 🎨 Building ScanScreen - isScanning: true, lastCode: null
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-I/tflite  (23854): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
-I/tflite  (23854): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
-I/native  (23854): I0000 00:00:1763408050.506534   24138 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/TransportRuntime.SQLiteEventStore(23854): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
-D/TransportRuntime.JobInfoScheduler(23854): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/BLASTBufferQueue(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#6](f:0,a:1) destructor()
-D/BufferQueueConsumer(23854): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#6(BLAST Consumer)6](id:5d2e0000000d,api:0,p:-1,c:23854) disconnect
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-I/flutter (23854): 📱 ScanScreen: App paused
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/libPerfCtl(23854): fbcNotifySbeRescue ret=-1
-D/BLASTBufferQueue(23854): [VRI[MainActivity]#5](f:0,a:1) destructor()
-D/BufferQueueConsumer(23854): [VRI[MainActivity]#5(BLAST Consumer)5](id:5d2e0000000c,api:0,p:-1,c:23854) disconnect
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/TransportRuntime.CctTransportBackend(23854): Making request to: https://firebaselogging.googleapis.com/v0cc/log/batch?format=json_proto3
-D/Camera2PresenceSrc(23854): System onCameraAvailable: 0
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-I/TransportRuntime.CctTransportBackend(23854): Status Code: 200
-I/TransportRuntime.CctTransportBackend(23854): Content-Type: application/json; charset=UTF-8
-I/TransportRuntime.CctTransportBackend(23854): Content-Encoding: gzip
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
-D/Camera2PresenceSrc(23854): System onCameraAccessPrioritiesChanged.
-D/Camera2PresenceSrc(23854): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+A Dart VM Service on BV8900 is available at: http://127.0.0.1:34811/CdzWFJD7KYg=/
+The Flutter DevTools debugger and profiler on BV8900 is available at: http://127.0.0.1:34811/CdzWFJD7KYg=/devtools/?uri=ws://127.0.0.1:34811/CdzWFJD7KYg=/ws
+D/BLASTBufferQueue(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1053812820825808(auto) mPendingTransactions.size=0 graphicBufferId=116359253983233 transform=0
+I/Choreographer(27092): Skipped 95 frames!  The application may be doing too much work on its main thread.
+D/BLASTBufferQueue(27092): [VRI[MainActivity]#0](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053812917344654(auto) mPendingTransactions.size=0 graphicBufferId=116359253983235 transform=0
+W/Parcel  (27092): Expecting binder but got null!
+I/OpenGLRenderer(27092): Davey! duration=1613ms; Flags=1, FrameTimelineVsyncId=163651394, IntendedVsync=1053811302539441, Vsync=1053812872535471, InputEventId=0, HandleInputStart=1053812886913654, AnimationStart=1053812886919039, PerformTraversalsStart=1053812886921192, DrawStart=1053812896205115, FrameDeadline=1053811322539441, FrameInterval=1053812886381039, FrameStartTime=16526274, SyncQueued=1053812898203577, SyncStart=1053812902324423, IssueDrawCommandsStart=1053812903000039, SwapBuffers=1053812916234500, FrameCompleted=1053812920636962, DequeueBufferDuration=0, QueueBufferDuration=502769, GpuCompleted=1053812920636962, SwapBuffersCompleted=1053812918071731, DisplayPresentTime=0, CommandSubmissionCompleted=1053812916234500, 
+I/flutter (27092): ✅ ScanController: Initialized successfully
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: false, lastCode: null
+I/flutter (27092): 🔄 ScanController: resumeScanning called
+I/flutter (27092): ✅ ScanScreen: Scanner started
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+I/flutter (27092): ✅ ScanController: Scanner resumed and started
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/CompatibilityChangeReporter(27092): Compat change id reported: 78294732; UID 10638; state: ENABLED
+I/DynamiteModule(27092): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
+I/DynamiteModule(27092): Selected local version of com.google.mlkit.dynamite.barcode
+D/QuirkSettingsLoader(27092): QuirkSettings$MetadataHolderService is not found.
+D/CameraX (27092): QuirkSettings from app metadata: null
+D/CameraX (27092): QuirkSettings by default: QuirkSettings{enabledWhenDeviceHasQuirk=true, forceEnabledQuirks=[], forceDisabledQuirks=[]}
+I/flutter (27092): 📱 ScanScreen: App resumed
+I/CameraManagerGlobal(27092): Connecting to camera service
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=979314552 in 30000ms(Backend next call timestamp 0). Attempt 1
+D/CompatibilityChangeReporter(27092): Compat change id reported: 194532703; UID 10638; state: ENABLED
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Scheduling upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=984295289 in 86400000ms(Backend next call timestamp 0). Attempt 1
+I/Camera2CameraInfo(27092): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+I/Camera2CameraInfo(27092): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+I/Camera2CameraInfo(27092): Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+I/CameraPresencePrvdr(27092): Starting CameraPresenceProvider monitoring.
+I/CameraPresenceSrc(27092): First observer added. Starting monitoring.
+I/Camera2PresenceSrc(27092): Starting system availability monitoring.
+D/Camera2PresenceSrc(27092): System onCameraAvailable: 0
+D/Camera2PresenceSrc(27092): System onCameraAvailable: 1
+D/Camera2PresenceSrc(27092): System onCameraAvailable: 2
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BufferQueueConsumer(27092): [](id:69d400000002,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/BufferQueueConsumer(27092): [](id:69d400000003,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/BufferQueueConsumer(27092): [](id:69d400000004,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/Camera2PresenceSrc(27092): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 🔄 ScanController: resumeScanning called
+I/flutter (27092): ✅ ScanScreen: Scanner resumed after app resume
+D/ProfileInstaller(27092): Installing profile for com.lumiforge.sellerproof
+I/flutter (27092): ✅ ScanController: Scanner resumed and started
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/nativeloader(27092): Load /data/app/~~wSyFmmgYTy1mzxwyy2H-pA==/com.lumiforge.sellerproof-by8cGatMrN09opNC7zHDZg==/base.apk!/lib/arm64-v8a/libbarhopper_v3.so using class loader ns clns-4 (caller=/data/app/~~wSyFmmgYTy1mzxwyy2H-pA==/com.lumiforge.sellerproof-by8cGatMrN09opNC7zHDZg==/base.apk!classes18.dex): ok
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+I/tflite  (27092): Initialized TensorFlow Lite runtime.
+W/libc    (27092): Access denied finding property "ro.hardware.chipname"
+I/tflite  (27092): Created TensorFlow Lite XNNPACK delegate for CPU.
+I/tflite  (27092): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+I/tflite  (27092): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
+I/native  (27092): I0000 00:00:1763408785.356096   27304 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/Choreographer(27092): Skipped 95 frames!  The application may be doing too much work on its main thread.
+D/BufferQueueConsumer(27092): [ImageReader-1600x1200f22m7-27092-2](id:69d400000004,api:4,p:851,c:27092) disconnect
+E/BufferQueueProducer(27092): [ImageReader-1600x1200f22m7-27092-2](id:69d400000004,api:4,p:851,c:27092) dequeueBuffer: BufferQueue has been abandoned
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+E/BufferQueueProducer(27092): [ImageReader-1600x1200f22m7-27092-2](id:69d400000004,api:4,p:851,c:27092) cancelBuffer: BufferQueue has been abandoned
+D/Camera2PresenceSrc(27092): System onCameraAvailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+W/OnBackInvokedCallback(27092): OnBackInvokedCallback is not enabled for the application.
+W/OnBackInvokedCallback(27092): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+D/BufferQueueConsumer(27092): [ImageReader-1920x1440f23m4-27092-0](id:69d400000002,api:0,p:-1,c:27092) disconnect
+D/BufferQueueConsumer(27092): [ImageReader-1920x1440f23m4-27092-1](id:69d400000003,api:0,p:-1,c:27092) disconnect
+I/flutter (27092): 🎤 Voices response: [{features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: es-us-x-sfb-local, locale: es-US, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	legacySetLanguageVoice	networkRetriesCount, latency: low, name: ur-PK-language, locale: ur-PK, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: ja-jp-x-htm-network, locale: ja-JP, network_required: 1, quality: high}, {features: networkTimeoutMs	notInstalled	networkRetriesCount, latency: low, name: th-th-x-thd-network, locale: th-TH, network_required: 1, quality: high}, {features: networkTimeoutMsnotInstalled	networkRetriesCount, latency: low, name: it-it-x-itd-local, locale: it-IT, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstalled	legacySetLanguageVoice	networkRetriesCount, latency: low, name: en-AU-language, locale: en-AU, network_required: 0, quality: high}, {features: networkTimeoutMs	notInstall
+I/ScrollIdentify(27092): on fling
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 🎤 Total RU voices loaded: 11
+I/ScrollIdentify(27092): on fling
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1](f:0,a:1) destructor()
+D/BLASTBufferQueue(27092): [VRI[MainActivity]#0](f:0,a:1) destructor()
+D/BufferQueueConsumer(27092): [VRI[MainActivity]#0(BLAST Consumer)0](id:69d400000000,api:0,p:-1,c:27092) disconnect
+D/BufferQueueConsumer(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#1(BLAST Consumer)1](id:69d400000001,api:0,p:-1,c:27092) disconnect
+I/libPerfCtl(27092): fbcNotifySbeRescue ret=-1
+I/flutter (27092): 📱 ScanScreen: App paused
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+I/BpBinder(27092): onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/FilePickerDelegate(27092): [SingleFilePick] File URI:content://com.android.externalstorage.documents/tree/primary%3ADownload%2FRerere/document/primary%3ADownload%2FRerere
+I/rge.sellerproof(27092): hiddenapi: Accessing hidden method Landroid/os/storage/StorageManager;->getVolumeList()[Landroid/os/storage/StorageVolume; (runtime_flags=0, domain=platform, api=unsupported) from Lcom/mr/flutter/plugin/filepicker/FileUtils; (domain=app) using reflection: allowed
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BufferQueueConsumer(27092): [](id:69d400000005,api:0,p:-1,c:27092) connect: controlledByApp=false
+D/BufferQueueConsumer(27092): [](id:69d400000006,api:0,p:-1,c:27092) connect: controlledByApp=false
+I/libPerfCtl(27092): fbcNotifySbeRescue ret=-1
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(27092): [VRI[MainActivity]#2](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053831125550270(auto) mPendingTransactions.size=0 graphicBufferId=116359253983266 transform=0
+D/BLASTBufferQueue(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1053831153845040(auto) mPendingTransactions.size=0 graphicBufferId=116359253983265 transform=0
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 📱 ScanScreen: App resumed
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 🔙 Returned from settings screen
+I/flutter (27092): 🔄 ScanController: resumeScanning called
+I/flutter (27092): ✅ Scanner resumed after settings
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+I/flutter (27092): ✅ ScanController: Scanner resumed and started
+I/DynamiteModule(27092): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
+I/DynamiteModule(27092): Selected local version of com.google.mlkit.dynamite.barcode
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/BufferQueueConsumer(27092): [](id:69d400000007,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/BufferQueueConsumer(27092): [](id:69d400000008,api:0,p:-1,c:27092) connect: controlledByApp=true
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/BufferQueueConsumer(27092): [](id:69d400000009,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/Camera2PresenceSrc(27092): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/tflite  (27092): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+I/tflite  (27092): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
+I/native  (27092): I0000 00:00:1763408807.110201   27313 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 📦 ScanController: Code detected: OZN1306390352
+D/BufferQueueConsumer(27092): [ImageReader-1600x1200f22m7-27092-5](id:69d400000009,api:4,p:851,c:27092) disconnect
+I/flutter (27092): 🔊 TtsService: Запись 0 3 5 2 началась
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+I/flutter (27092): 📦 Code scanned: OZN1306390352, navigating...
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: false, lastCode: OZN1306390352
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+E/BufferQueueProducer(27092): [ImageReader-1600x1200f22m7-27092-5](id:69d400000009,api:4,p:851,c:27092) queueBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(27092): [ImageReader-1600x1200f22m7-27092-5](id:69d400000009,api:4,p:851,c:27092) cancelBuffer: BufferQueue has been abandoned
+I/flutter (27092): 🚀 Navigating to recording with code: OZN1306390352
+I/flutter (27092): ⏸️ ScanController: Scanner stopped after detection
+E/BufferQueueProducer(27092): [ImageReader-1600x1200f22m7-27092-5](id:69d400000009,api:4,p:851,c:27092) cancelBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(27092): [ImageReader-1600x1200f22m7-27092-5](id:69d400000009,api:4,p:851,c:27092) cancelBuffer: BufferQueue has been abandoned
+E/BufferQueueProducer(27092): [ImageReader-1600x1200f22m7-27092-5](id:69d400000009,api:4,p:851,c:27092) cancelBuffer: BufferQueue has been abandoned
+I/flutter (27092): 🆕 Creating new VoskRecognitionService instance
+W/OnBackInvokedCallback(27092): OnBackInvokedCallback is not enabled for the application.
+W/OnBackInvokedCallback(27092): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+D/Camera2PresenceSrc(27092): System onCameraAvailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BufferQueueConsumer(27092): [ImageReader-1920x1440f23m4-27092-3](id:69d400000007,api:0,p:-1,c:27092) disconnect
+D/BufferQueueConsumer(27092): [ImageReader-1920x1440f23m4-27092-4](id:69d400000008,api:0,p:-1,c:27092) disconnect
+I/flutter (27092): Extracting model to /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22...
+D/TTS     (27092): Utterance ID has started: 7baf939a-400d-493c-a09a-f5c93c24dc8f
+I/BpBinder(27092): onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+I/flutter (27092): ✅ Model extracted successfully
+D/nativeloader(27092): Load /data/app/~~wSyFmmgYTy1mzxwyy2H-pA==/com.lumiforge.sellerproof-by8cGatMrN09opNC7zHDZg==/base.apk!/lib/arm64-v8a/libjnidispatch.so using class loader ns clns-4 (caller=/data/app/~~wSyFmmgYTy1mzxwyy2H-pA==/com.lumiforge.sellerproof-by8cGatMrN09opNC7zHDZg==/base.apk!classes18.dex): ok
+I/VoskAPI (27092): ReadDataFiles():model.cc:213) Decoding params beam=10 max-active=3000 lattice-beam=2
+I/VoskAPI (27092): ReadDataFiles():model.cc:216) Silence phones 1:2:3:4:5:6:7:8:9:10
+I/VoskAPI (27092): RemoveOrphanNodes():nnet-nnet.cc:948) Removed 0 orphan nodes.
+I/VoskAPI (27092): RemoveOrphanComponents():nnet-nnet.cc:847) Removing 0 orphan components.
+I/VoskAPI (27092): ReadDataFiles():model.cc:249) Loading i-vector extractor from /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/ivector/final.ie
+I/VoskAPI (27092): ComputeDerivedVars():ivector-extractor.cc:183) Computing derived variables for iVector extractor
+I/VoskAPI (27092): ComputeDerivedVars():ivector-extractor.cc:204) Done.
+I/VoskAPI (27092): ReadDataFiles():model.cc:285) Loading HCL and G from /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/HCLr.fst /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/Gr.fst
+D/TTS     (27092): Utterance ID has completed: 7baf939a-400d-493c-a09a-f5c93c24dc8f
+I/VoskAPI (27092): ReadDataFiles():model.cc:311) Loading winfo /data/user/0/com.lumiforge.sellerproof/cache/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22/graph/phones/word_boundary.int
+W/VRI[MainActivity](27092): Cancelling event (no window focus):KeyEvent { action=ACTION_UP, keyCode=KEYCODE_VOLUME_UP, scanCode=115, metaState=0, flags=0x28, repeatCount=0, eventTime=1053846088266425, downTime=1053845235836000, deviceId=2, source=0x101, displayId=-1 }
+W/VRI[MainActivity](27092): Cancelling event (no window focus):KeyEvent { action=ACTION_UP, keyCode=KEYCODE_VOLUME_UP, scanCode=115, metaState=0, flags=0x28, repeatCount=0, eventTime=1053846088266425, downTime=1053845235836000, deviceId=2, source=0x101, displayId=-1 }
+W/VRI[MainActivity](27092): Cancelling event (no window focus):KeyEvent { action=ACTION_UP, keyCode=KEYCODE_VOLUME_UP, scanCode=115, metaState=0, flags=0x28, repeatCount=0, eventTime=1053846088266425, downTime=1053845235836000, deviceId=2, source=0x101, displayId=-1 }
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/AudioRecord(27092): set(): 0xb4000079ab33dec0, inputSource 6, sampleRate 16000, format 0x1, channelMask 0x10, frameCount 3200, notificationFrames 0, sessionId 0, transferType 0, flags 0, attributionSource AttributionSourceState{pid: -1, uid: 10638, packageName: com.lumiforge.sellerproof, attributionTag: (null), token: , renouncedPermissions: [], next: []} uid -1, pid -1
+D/AudioRecord(27092): openRecord_l: 0xb4000079ab33dec0, mCblk = 0x7b54a77000
+I/flutter (27092): ✅ Vosk initialized successfully
+I/flutter (27092): 📱 ScanScreen: App resumed
+I/flutter (27092): 🔊 TtsService: Запись 0 3 5 2 началась
+D/TTS     (27092): Utterance ID has started: e55ce245-fdf5-400e-ac08-a2ae7e608bdf
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/libMEOW (27092): meow new tls: 0xb400007a9f3ef180
+D/libMEOW (27092): applied 1 plugins for [com.lumiforge.sellerproof]:
+D/libMEOW (27092):   plugin 1: [libMEOW_gift.so]: 0xb400007a5b290030
+D/libMEOW (27092): rebuild call chain: 0xb400007a9f41f1b0
+D/libMEOW (27092): meow delete tls: 0xb400007a9f3ef180
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/CompatibilityChangeReporter(27092): Compat change id reported: 210923482; UID 10638; state: ENABLED
+D/VRI[PackingCameraActivity](27092): hardware acceleration = true, forceHwAccelerated = false
+D/InputTransport(27092): Create ARC handle: 0xb4000078bb6d3550
+I/rge.sellerproof(27092): NativeAlloc concurrent copying GC freed 859KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 4787KB/9575KB, paused 243us,295us total 108.994ms
+D/BufferQueueConsumer(27092): [](id:69d40000000a,api:0,p:-1,c:27092) connect: controlledByApp=false
+D/TextureView(27092): getHardwareLayer, createNewSurface:true
+D/BufferQueueConsumer(27092): [](id:69d40000000b,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/Camera2PresenceSrc(27092): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(27092): [VRI[PackingCameraActivity]#4](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053850063561733(auto) mPendingTransactions.size=0 graphicBufferId=116359253983293 transform=0
+W/Parcel  (27092): Expecting binder but got null!
+D/TransportRuntime.CctTransportBackend(27092): Making request to: https://firebaselogging.googleapis.com/v0cc/log/batch?format=json_proto3
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/PackingCameraActivity(27092): Preview: exposure compensation = 0 (range: -4..4)
+D/PackingCameraActivity(27092): Preview: FPS range: 30-30
+D/PackingCameraActivity(27092): Preview settings applied (no exposure boost)
+D/MediaRecorder(27092): constructor+ 0xb40000792b2c0a50
+D/MediaRecorder(27092): constructor- 0xb40000792b2c0a50
+I/flutter (27092): 🎤 startListening called, current state: VoskState.ready
+I/flutter (27092): ✅ Vosk: Started continuous listening
+I/flutter (27092): ✅ Voice recognition started for recording
+D/AudioRecord(27092): start(10023): 0xb4000079ab33dec0, sync event 0 trigger session 0
+D/PackingCameraActivity(27092): Saved scanned code: OZN1306390352 with video: /storage/emulated/0/Android/data/com.lumiforge.sellerproof/files/Movies/SellerProof/packing_1763408818955.mp4
+D/MediaRecorder(27092): init+ 0xb40000792b2c0a50
+D/AudioRecord(27092): start(10023): return status 0
+D/MediaRecorder(27092): init- 0xb40000792b2c0a50
+D/MediaRecorder(27092): prepare+ 0xb40000792b2c0a50
+I/TransportRuntime.CctTransportBackend(27092): Status Code: 200
+I/TransportRuntime.CctTransportBackend(27092): Content-Type: application/json; charset=UTF-8
+I/TransportRuntime.CctTransportBackend(27092): Content-Encoding: gzip
+D/BLASTBufferQueue(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3](f:0,a:1) destructor()
+D/BufferQueueConsumer(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#3(BLAST Consumer)3](id:69d400000006,api:0,p:-1,c:27092) disconnect
+D/BLASTBufferQueue(27092): [VRI[MainActivity]#2](f:0,a:1) destructor()
+E/BLASTBufferQueue(27092): [VRI[MainActivity]#2](f:0,a:1) Applying pending transactions on dtor 2
+D/BufferQueueConsumer(27092): [VRI[MainActivity]#2(BLAST Consumer)2](id:69d400000005,api:0,p:-1,c:27092) disconnect
+I/flutter (27092): 📱 ScanScreen: App paused
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/MediaRecorder(27092): prepare- 0xb40000792b2c0a50
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+D/PackingCameraActivity(27092): Recording: Adaptive exposure compensation = 2 (range: -4..4)
+D/PackingCameraActivity(27092): Recording: Video stabilization enabled
+D/PackingCameraActivity(27092): Available FPS ranges:
+D/PackingCameraActivity(27092):   - 10 to 10
+D/PackingCameraActivity(27092):   - 15 to 15
+D/PackingCameraActivity(27092):   - 15 to 20
+D/PackingCameraActivity(27092):   - 20 to 20
+D/PackingCameraActivity(27092):   - 5 to 30
+D/PackingCameraActivity(27092):   - 30 to 30
+D/PackingCameraActivity(27092): Recording: FPS range: 5-30
+D/PackingCameraActivity(27092): Recording settings configured with MAX brightness
+D/MediaRecorder(27092): start+ 0xb40000792b2c0a50
+D/MediaRecorder(27092): start- 0xb40000792b2c0a50
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : "только"
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : "только"
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : "стой"
+I/flutter (27092): }
+D/TTS     (27092): Utterance ID has completed: e55ce245-fdf5-400e-ac08-a2ae7e608bdf
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : "стоит"
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : "стоит"
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk result: {
+I/flutter (27092):   "text" : "стоит началась"
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk result: {
+I/flutter (27092):   "text" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : ""
+I/flutter (27092): }
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : "стоп"
+I/flutter (27092): }
+I/flutter (27092): 🛑 Stop command detected: стоп (from text: "стоп")
+I/flutter (27092): 🛑 Stop command received from Vosk
+I/flutter (27092): 🛑 Starting stop recording process
+I/flutter (27092): 🛑 stopListening called, current state: VoskState.listening
+D/AudioRecord(27092): stop(10023): 0xb4000079ab33dec0, mActive: 1
+D/AudioTrackShared(27092): this(0xb40000793b304f90), mCblk(0x7b54a77000), front(153600), mIsOut 0, interrupt() FUTEX_WAKE
+D/AudioRecord(27092): stop(10023) done
+D/TTS     (27092): Utterance ID has started: bb05cb48-03e4-44fc-981a-46c13299d45d
+I/flutter (27092): ✅ Vosk: Stopped listening
+I/flutter (27092): 🎤 Voice recognition stopped
+I/flutter (27092): 🎤 Vosk partial: {
+I/flutter (27092):   "partial" : "стоп"
+I/flutter (27092): }
+I/flutter (27092): ⚠️ Stop command already processed, ignoring
+I/flutter (27092): 🎤 Vosk result: {
+I/flutter (27092):   "text" : "стоп"
+I/flutter (27092): }
+I/flutter (27092): ⚠️ Stop command already processed, ignoring
+D/MediaRecorder(27092): stop+ 0xb40000792b2c0a50
+D/MediaRecorder(27092): stop- 0xb40000792b2c0a50
+D/MediaRecorder(27092): release+ 0xb40000792b2c0a50
+D/MediaRecorder(27092): release- 0xb40000792b2c0a50
+D/MediaRecorder(27092): destructor+ 0xb40000792b2c0a50
+D/MediaRecorder(27092): destructor- 0xb40000792b2c0a50
+I/flutter (27092): 📹 Camera stopped
+D/Camera2PresenceSrc(27092): System onCameraAvailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BufferQueueConsumer(27092): [](id:69d40000000c,api:0,p:-1,c:27092) connect: controlledByApp=false
+D/BufferQueueConsumer(27092): [](id:69d40000000d,api:0,p:-1,c:27092) connect: controlledByApp=false
+D/BLASTBufferQueue(27092): [VRI[MainActivity]#5](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=1053862086092118(auto) mPendingTransactions.size=0 graphicBufferId=116359253983307 transform=0
+I/flutter (27092): 🔙 Popping to scan screen
+I/flutter (27092): 🔙 Returned from recording screen
+I/flutter (27092): 🔄 Resetting and resuming scanner
+I/flutter (27092): 🔄 ScanController: reset called
+I/flutter (27092): ✅ ScanController: Reset complete
+D/BLASTBufferQueue(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#6](f:0,a:1) acquireNextBufferLocked size=1080x2352 mFrameNumber=1 applyTransaction=true mTimestamp=1053862121281041(auto) mPendingTransactions.size=0 graphicBufferId=116359253983306 transform=0
+W/OnBackInvokedCallback(27092): OnBackInvokedCallback is not enabled for the application.
+W/OnBackInvokedCallback(27092): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: false, lastCode: null
+I/flutter (27092): 📱 ScanScreen: App resumed
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(27092): [VRI[PackingCameraActivity]#4](f:0,a:1) destructor()
+D/BufferQueueConsumer(27092): [VRI[PackingCameraActivity]#4(BLAST Consumer)4](id:69d40000000a,api:0,p:-1,c:27092) disconnect
+D/TTS     (27092): Utterance ID has completed: bb05cb48-03e4-44fc-981a-46c13299d45d
+D/BufferQueueConsumer(27092): [SurfaceTexture-0-27092-0](id:69d40000000b,api:0,p:-1,c:27092) disconnect
+D/View    (27092): [Warning] assignParent to null: this = DecorView@f0efa61[PackingCameraActivity]
+D/InputTransport(27092): Destroy ARC handle: 0xb4000078bb6d3550
+I/flutter (27092): 🗑️ Disposing PackingCameraPage
+I/flutter (27092): 🔄 ScanController: resumeScanning called
+I/flutter (27092): ✅ ScanScreen: Scanner resumed after app resume
+I/flutter (27092): 🔄 ScanController: resumeScanning called
+I/flutter (27092): ✅ Scanner resumed after return
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+I/flutter (27092): ✅ ScanController: Scanner resumed and started
+I/DynamiteModule(27092): Considering local module com.google.mlkit.dynamite.barcode:10000 and remote module com.google.mlkit.dynamite.barcode:0
+I/DynamiteModule(27092): Selected local version of com.google.mlkit.dynamite.barcode
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=979314552 in 887400ms(Backend next call timestamp 1763409719057). Attempt 1
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/BufferQueueConsumer(27092): [](id:69d40000000e,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/BufferQueueConsumer(27092): [](id:69d40000000f,api:0,p:-1,c:27092) connect: controlledByApp=true
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/BufferQueueConsumer(27092): [](id:69d400000010,api:0,p:-1,c:27092) connect: controlledByApp=true
+D/Camera2PresenceSrc(27092): System onCameraUnavailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+I/flutter (27092): ✅ ScanController: Scanner resumed and started
+I/flutter (27092): 🎨 Building ScanScreen - isScanning: true, lastCode: null
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+I/tflite  (27092): Replacing 43 out of 43 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+I/tflite  (27092): Replacing 35 out of 47 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 23 partitions for the whole graph.
+I/native  (27092): I0000 00:00:1763408832.479007   27322 oned_decoder_client.cc:696] barhopper::deep_learning::OnedDecoderClient is created successfully.
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/TransportRuntime.SQLiteEventStore(27092): Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+D/TransportRuntime.JobInfoScheduler(27092): Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#6](f:0,a:1) destructor()
+D/BufferQueueConsumer(27092): [SurfaceView[com.lumiforge.sellerproof/com.lumiforge.sellerproof.MainActivity]#6(BLAST Consumer)6](id:69d40000000d,api:0,p:-1,c:27092) disconnect
+I/flutter (27092): 📱 ScanScreen: App paused
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/BLASTBufferQueue(27092): [VRI[MainActivity]#5](f:0,a:1) destructor()
+D/BufferQueueConsumer(27092): [VRI[MainActivity]#5(BLAST Consumer)5](id:69d40000000c,api:0,p:-1,c:27092) disconnect
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAvailable: 0
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): System onCameraAccessPrioritiesChanged.
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+D/Camera2PresenceSrc(27092): [FetchData] Refreshed camera list: CameraIdentifier{cameraIds=0}, CameraIdentifier{cameraIds=1}, CameraIdentifier{cameraIds=2}
+
+Application finished.
 
