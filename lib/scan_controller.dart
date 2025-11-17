@@ -8,29 +8,20 @@ class ScanController extends ChangeNotifier {
   bool scannerReady = false;
   bool isScanning = false;
   String? lastScannedCode;
-  
   final TtsService _ttsService = TtsService();
 
-  /// Call this when initializing the scanner screen.
   Future<void> initialize() async {
     debugPrint('🔧 ScanController: initialize called');
-
-    // Check if already initialized
     if (scannerReady) {
       debugPrint('✅ ScanController: Already initialized');
       return;
     }
-
     try {
-      // Initialize TTS service
       await _ttsService.initialize();
-      
-      // Initialize scanner controller with optimal settings
       scannerController = MobileScannerController(
         autoStart: false,
         facing: CameraFacing.back,
         torchEnabled: false,
-        // Включаем все основные форматы
         formats: const [
           BarcodeFormat.qrCode,
           BarcodeFormat.ean13,
@@ -43,12 +34,9 @@ class ScanController extends ChangeNotifier {
           BarcodeFormat.upcA,
           BarcodeFormat.upcE,
         ],
-        // Высокая скорость детекции
         detectionSpeed: DetectionSpeed.noDuplicates,
-        // Высокое разрешение для лучшего распознавания
         returnImage: false,
       );
-
       scannerReady = true;
       notifyListeners();
       debugPrint('✅ ScanController: Initialized successfully');
@@ -57,7 +45,6 @@ class ScanController extends ChangeNotifier {
     }
   }
 
-  /// Start scanning
   void startScanning() {
     debugPrint('▶️ ScanController: startScanning called');
     isScanning = true;
@@ -66,35 +53,28 @@ class ScanController extends ChangeNotifier {
     debugPrint('✅ ScanController: Scanner started');
   }
 
-  /// Handle detection (MobileScanner 4.x BarcodeCapture)
   Future<void> onDetected(BarcodeCapture capture) async {
     if (!isScanning) {
       debugPrint('⚠️ ScanController: Not scanning, ignoring detection');
       return;
     }
-
     final barcodes = capture.barcodes;
     for (final barcode in barcodes) {
       final codeValue = barcode.rawValue;
       if (codeValue != null && codeValue.isNotEmpty) {
         debugPrint('📦 ScanController: Code detected: $codeValue');
-
-        // Stop scanner
         await scannerController?.stop();
         isScanning = false;
         lastScannedCode = codeValue;
         notifyListeners();
-
-        // 🔊 Озвучиваем последние 4 цифры кода
-        await _ttsService.speakLastFourDigits(codeValue);
-
+        // Вместо speakLastFourDigits теперь один шаблон записи
+        await _ttsService.speakRecordWithCode(codeValue);
         debugPrint('⏸️ ScanController: Scanner stopped after detection');
         return;
       }
     }
   }
 
-  /// Reset scanning
   void reset() {
     debugPrint('🔄 ScanController: reset called');
     lastScannedCode = null;
@@ -103,21 +83,15 @@ class ScanController extends ChangeNotifier {
     debugPrint('✅ ScanController: Reset complete');
   }
 
-  /// Resume scanning after recording
   void resumeScanning() {
     debugPrint('🔄 ScanController: resumeScanning called');
-
     if (!scannerReady) {
       debugPrint('⚠️ ScanController: Scanner not ready, cannot resume');
       return;
     }
-
     lastScannedCode = null;
     isScanning = true;
-
-    // Используем addPostFrameCallback для безопасного запуска сканера
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Сокращаем задержку до 300ms для более быстрого отклика
       Future.delayed(const Duration(milliseconds: 300), () {
         try {
           scannerController?.start();
