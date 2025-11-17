@@ -15,9 +15,11 @@ class ScanAndRecordController extends ChangeNotifier {
   bool isRecording = false;
   String? lastScannedCode;
   String? savedVideoPath;
+  String? customStoragePath;
 
   /// Call this when initializing the screen.
-  Future<void> initialize() async {
+  Future<void> initialize({String? storagePath}) async {
+    customStoragePath = storagePath;
     // Initialize scanner controller with autoStart disabled
     scannerController = MobileScannerController(autoStart: false);
 
@@ -31,6 +33,11 @@ class ScanAndRecordController extends ChangeNotifier {
 
     cameraReady = true;
     notifyListeners();
+  }
+
+  /// Update storage path from settings
+  void updateStoragePath(String? path) {
+    customStoragePath = path;
   }
 
   /// Start scanning, called when the camera is shown and no recording.
@@ -65,16 +72,34 @@ class ScanAndRecordController extends ChangeNotifier {
       return;
     }
 
-    final dir = await getApplicationDocumentsDirectory();
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final videoPath = '${dir.path}/scan_video_$timestamp.mp4';
+    // Используем customStoragePath, если задан, иначе стандартную папку
+    final Directory dir = customStoragePath != null && customStoragePath!.isNotEmpty
+        ? Directory(customStoragePath!)
+        : await getApplicationDocumentsDirectory();
+    
+    // Убедимся, что директория существует
+    if (!await dir.exists()) {
+      try {
+        await dir.create(recursive: true);
+      } catch (e) {
+        debugPrint('Ошибка создания директории: $e');
+        // Fallback на стандартную папку
+        final fallbackDir = await getApplicationDocumentsDirectory();
+        final timestamp = DateTime.now().millisecondsSinceEpoch;
+        savedVideoPath = '${fallbackDir.path}/scan_video_$timestamp.mp4';
+      }
+    }
+    
+    if (savedVideoPath == null) {
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      savedVideoPath = '${dir.path}/scan_video_$timestamp.mp4';
+    }
 
     try {
       // Wait a bit for scanner to fully stop before starting recording
       await Future.delayed(Duration(milliseconds: 500));
       await cameraController!.startVideoRecording();
       isRecording = true;
-      savedVideoPath = videoPath;
       notifyListeners();
     } catch (e) {
       debugPrint('Ошибка запуска записи видео: $e');
@@ -88,12 +113,24 @@ class ScanAndRecordController extends ChangeNotifier {
     }
     final file = await cameraController!.stopVideoRecording();
     final File recordedFile = File(file.path);
-    await recordedFile.copy(savedVideoPath!);
+    
+    if (savedVideoPath != null) {
+      try {
+        await recordedFile.copy(savedVideoPath!);
+        debugPrint('Видео сохранено: $savedVideoPath');
+      } catch (e) {
+        debugPrint('Ошибка копирования видео: $e');
+      }
+    }
+    
     isRecording = false;
     notifyListeners();
+    
     // Optionally, persist code+video association in a simple file/db.
-    final logFile = File('${savedVideoPath!}.txt');
-    await logFile.writeAsString(lastScannedCode ?? '');
+    if (savedVideoPath != null) {
+      final logFile = File('${savedVideoPath!}.txt');
+      await logFile.writeAsString(lastScannedCode ?? '');
+    }
 
     // Restart scanner after recording stops
     await Future.delayed(Duration(milliseconds: 500));
@@ -103,6 +140,7 @@ class ScanAndRecordController extends ChangeNotifier {
   /// Reset scanning after stop.
   Future<void> reset() async {
     lastScannedCode = null;
+    savedVideoPath = null;
     isScanning = false;
     isRecording = false;
     // Wait a bit before restarting scanner
