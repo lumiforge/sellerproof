@@ -25,21 +25,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _loadAvailableVoices() async {
     try {
+      await _flutterTts.setLanguage('ru-RU');
       final voices = await _flutterTts.getVoices;
-      final locale = Localizations.localeOf(context).toString();
-      setState(() {
-        _filteredVoices = (voices as List)
-            .where((voice) =>
-                voice is Map &&
-                voice['locale'] != null &&
-                (voice['locale'] == locale ||
-                 voice['locale'].toString().startsWith(locale.split('_')[0])
-                ))
-            .map((voice) => voice as Map<String, dynamic>)
-            .toList();
-        _isLoadingVoices = false;
-      });
+      debugPrint('🎤 Voices response: $voices');
+
+      if (voices is List && (voices as List).isNotEmpty) {
+        setState(() {
+          _filteredVoices = (voices as List)
+              .where((v) => v is Map)
+              .map((v) => v as Map<String, dynamic>)
+              .toList();
+          _isLoadingVoices = false;
+        });
+      } else {
+        // fallback: single ru-RU locale entry
+        setState(() {
+          _filteredVoices = [{'name': 'ru-RU', 'locale': 'ru-RU'}];
+          _isLoadingVoices = false;
+        });
+      }
     } catch (e) {
+      debugPrint('❌ Error loading or filtering voices: $e');
       setState(() {
         _isLoadingVoices = false;
       });
