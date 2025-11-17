@@ -48,13 +48,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _onVoiceSelect(String? voiceId) async {
     if (voiceId != null) {
-      // Находим выбранный voice object
       final selectedVoice = _filteredVoices.firstWhere(
         (v) => v['name'] == voiceId,
         orElse: () => {},
       );
       if (selectedVoice.isNotEmpty) {
-        await _flutterTts.setVoice(selectedVoice);
+        await _flutterTts.setVoice(selectedVoice.map((k, v) => MapEntry(k.toString(), v.toString())));
         context.read<SettingsProvider>().setSelectedVoice(voiceId);
       }
     }
@@ -178,12 +177,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               value: settings.selectedVoice,
                               hint: const Text('Выберите голос'),
                               items: _filteredVoices.map((voice) {
-                                return DropdownMenuItem(
-                                  value: voice['name'],
-                                  child: Text(
-                                    '${voice['name']} (${voice['locale']})',
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                final name = voice['name'].toString();
+                                final locale = voice['locale'].toString();
+                                return DropdownMenuItem<String>(
+                                  value: name,
+                                  child: Text('$name ($locale)', overflow: TextOverflow.ellipsis),
                                 );
                               }).toList(),
                               onChanged: (voiceId) {
@@ -233,7 +231,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   orElse: () => {},
                                 );
                                 if (selectedVoice.isNotEmpty) {
-                                  await _flutterTts.setVoice(selectedVoice);
+                                  await _flutterTts.setVoice(selectedVoice.map((k, v) => MapEntry(k.toString(), v.toString())));
                                 }
                               }
                               await _flutterTts.speak('Привет, это тест голоса');
