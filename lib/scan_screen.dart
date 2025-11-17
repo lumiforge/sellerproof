@@ -115,7 +115,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
     
     _isNavigating = true;
     // Останавливаем сканер перед переходом в настройки
-    controller?.pauseScanning();
+    controller?.scannerController?.stop();
     
     Navigator.of(context)
         .push(
