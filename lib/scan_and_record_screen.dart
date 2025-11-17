@@ -4,8 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'scan_and_record_controller.dart';
 import 'providers/settings_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-/// Screen that handles scanning barcodes + video recording.
 class ScanAndRecordScreen extends StatefulWidget {
   const ScanAndRecordScreen({super.key});
 
@@ -20,13 +20,50 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
   void initState() {
     super.initState();
     Future.microtask(() async {
+      await _requestPermissions();
       controller = Provider.of<ScanAndRecordController>(context, listen: false);
       final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
       final storagePath = settingsProvider.settings.videoStoragePath;
-      
       await controller.initialize(storagePath: storagePath);
-      controller.startScanning(); // Start scanning after initialization
+      controller.startScanning();
       setState(() {});
+    });
+  }
+
+  Future<void> _requestPermissions() async {
+    final statuses = await [
+      Permission.storage,
+      Permission.manageExternalStorage,
+      Permission.camera,
+      Permission.microphone,
+    ].request();
+    
+    if (!(statuses[Permission.storage]?.isGranted ?? false)) {
+      _showPermissionsDialog('Требуется разрешение для доступа к хранилищу файлов.');
+    }
+    if (!(statuses[Permission.camera]?.isGranted ?? false)) {
+      _showPermissionsDialog('Требуется разрешение для использования камеры.');
+    }
+    if (!(statuses[Permission.microphone]?.isGranted ?? false)) {
+      _showPermissionsDialog('Требуется разрешение для записи звука.');
+    }
+  }
+
+  void _showPermissionsDialog(String message) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Разрешения'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     });
   }
 
@@ -35,12 +72,9 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
     controller = Provider.of<ScanAndRecordController>(context);
     final settingsProvider = Provider.of<SettingsProvider>(context);
     final storagePath = settingsProvider.settings.videoStoragePath;
-    
-    // Обновляем путь в контроллере, если он изменился
     if (controller.cameraReady && controller.customStoragePath != storagePath) {
       controller.updateStoragePath(storagePath);
     }
-    
     if (!controller.cameraReady) {
       return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
@@ -49,7 +83,6 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Show scanner when not recording
           if (!controller.isRecording &&
               (controller.isScanning || controller.lastScannedCode == null))
             MobileScanner(
@@ -59,12 +92,9 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
                 controller.onDetected(capture);
               },
             ),
-          // Show camera preview when recording
           if (controller.isRecording && controller.cameraController != null)
             CameraPreview(controller.cameraController!),
-          // Scanner overlay
           if (!controller.isRecording) ScannerOverlay(),
-          // Video recording overlay status
           if (controller.isRecording)
             Align(
               alignment: Alignment.topCenter,
@@ -89,7 +119,6 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
             ),
         ],
       ),
-      // For demo, provide a stop record button if recording.
       floatingActionButton: controller.isRecording
           ? FloatingActionButton(
               backgroundColor: Colors.red,
@@ -106,7 +135,6 @@ class _ScanAndRecordScreenState extends State<ScanAndRecordScreen> {
 
 class ScannerOverlay extends StatelessWidget {
   const ScannerOverlay({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -127,7 +155,7 @@ class ScannerOverlay extends StatelessWidget {
           right: 0,
           child: Center(
             child: Card(
-              color: Colors.black.withAlpha(179), // 0.7*255=178.5
+              color: Colors.black.withAlpha(179),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
