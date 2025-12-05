@@ -18,6 +18,7 @@ dependencies:
   shared_preferences: ^2.3.3
   file_picker: ^8.1.6
   permission_handler: ^11.0.1
+  dio: ^5.9.0
 dependency_overrides:
   vosk_flutter:
     git:

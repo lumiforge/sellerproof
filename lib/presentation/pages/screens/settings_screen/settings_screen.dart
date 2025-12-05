@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:sellerproof/data/models/app_settings.dart';
+import 'package:sellerproof/domain/entities/app_settings.dart';
 import 'package:sellerproof/providers/settings_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
