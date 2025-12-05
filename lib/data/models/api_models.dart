@@ -146,9 +146,9 @@ class RegisterRequest {
   final String password;
   @JsonKey(name: 'full_name')
   final String fullName;
-  @JsonKey(name: 'invite_code')
+  @JsonKey(name: 'invite_code', includeIfNull: false)
   final String? inviteCode;
-  @JsonKey(name: 'organization_name')
+  @JsonKey(name: 'organization_name', includeIfNull: false)
   final String? organizationName;
   RegisterRequest({
     required this.email,
@@ -197,6 +197,7 @@ class UserInfo {
   });
   factory UserInfo.fromJson(Map<String, dynamic> json) =>
       _$UserInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$UserInfoToJson(this);
 }
 
 @JsonSerializable()

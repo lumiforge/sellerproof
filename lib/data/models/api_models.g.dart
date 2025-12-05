@@ -185,8 +185,8 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
       'email': instance.email,
       'password': instance.password,
       'full_name': instance.fullName,
-      'invite_code': instance.inviteCode,
-      'organization_name': instance.organizationName,
+      if (instance.inviteCode != null) 'invite_code': instance.inviteCode,
+      if (instance.organizationName != null) 'organization_name': instance.organizationName,
     };
 
 RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
