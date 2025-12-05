@@ -275,16 +275,16 @@ class VoskRecognitionService {
     );
   }
 
-  // Полная очистка (только для сброса singleton)
-  Future<void> _fullDispose() async {
-    debugPrint('🗑️ VoskRecognitionService: full dispose');
-    await stopListening();
-    await _resultSubscription?.cancel();
-    await _partialSubscription?.cancel();
-    _speechService = null;
-    _recognizer?.dispose();
-    _model?.dispose();
-    _vosk = null;
-    _initCompleter = null;
-  }
+  // // Полная очистка (только для сброса singleton)
+  // Future<void> _fullDispose() async {
+  //   debugPrint('🗑️ VoskRecognitionService: full dispose');
+  //   await stopListening();
+  //   await _resultSubscription?.cancel();
+  //   await _partialSubscription?.cancel();
+  //   _speechService = null;
+  //   _recognizer?.dispose();
+  //   _model?.dispose();
+  //   _vosk = null;
+  //   _initCompleter = null;
+  // }
 }

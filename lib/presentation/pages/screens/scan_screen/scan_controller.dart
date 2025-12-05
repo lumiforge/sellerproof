@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import '../../../services/tts_service.dart';
+import 'package:sellerproof/data/repositories/services/tts_service.dart';
 
 /// Controller for scanning logic only.
 class ScanController extends ChangeNotifier {

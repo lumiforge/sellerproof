@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import '../../../models/app_settings.dart';
-import '../../../providers/settings_provider.dart';
+import 'package:sellerproof/data/models/app_settings.dart';
+import 'package:sellerproof/providers/settings_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -204,7 +204,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                               ),
-                              value: settings.selectedVoice,
+                              initialValue: settings.selectedVoice,
                               hint: const Text('Выберите голос'),
                               items: _filteredVoices.map((voice) {
                                 final name = voice['name'].toString();

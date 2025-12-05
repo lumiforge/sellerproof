@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../services/vosk_recognition_service.dart';
-import '../../../services/tts_service.dart';
-
-import '../../../providers/settings_provider.dart';
+import 'package:sellerproof/data/repositories/services/tts_service.dart';
+import 'package:sellerproof/data/repositories/services/vosk_recognition_service.dart';
+import 'package:sellerproof/providers/settings_provider.dart';
 
 class PackingCameraPage extends StatefulWidget {
   final String? initialCode;
