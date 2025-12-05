@@ -9,3 +9,6 @@ git:
 
 api-update:
 	cp ../sellerproof-backend/docs/swagger.yaml swagger.yaml
+
+gen:
+	flutter pub run build_runner build --delete-conflicting-outputs	

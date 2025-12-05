@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:sellerproof/injection_container.dart' as di;
 import 'package:sellerproof/presentation/pages/screens/scan_screen/scan_controller.dart';
 import 'package:sellerproof/presentation/pages/screens/scan_screen/scan_screen.dart';
 
@@ -8,7 +9,7 @@ import 'providers/settings_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await di.setupLocator();
   // Создаем провайдер настроек и загружаем настройки
   final settingsProvider = SettingsProvider();
   await settingsProvider.loadSettings();
