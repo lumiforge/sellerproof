@@ -6,3 +6,6 @@ git:
 	git add -A
 	git commit -m "$(M)"
 	git push origin main
+
+update-api:
+	cp ../sellerproof-backend/docs/swagger.yaml swagger.yaml
