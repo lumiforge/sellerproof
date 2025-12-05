@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import '../models/app_settings.dart';
-import '../providers/settings_provider.dart';
+import '../../../models/app_settings.dart';
+import '../../../providers/settings_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -29,23 +29,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final voices = await _flutterTts.getVoices;
       debugPrint('🎤 Voices response: $voices');
 
-      if (voices is List && (voices as List).isNotEmpty) {
+      if (voices is List && (voices).isNotEmpty) {
         setState(() {
-          _filteredVoices = (voices as List)
-              .where((v) => v is Map)
+          _filteredVoices = (voices)
+              .whereType<Map>()
               .map((v) {
-                final map = v as Map;
+                final map = v;
                 return Map<String, dynamic>.from(map);
               })
               .where((voice) {
                 final locale = voice['locale']?.toString().toLowerCase() ?? '';
-                final language = voice['language']?.toString().toLowerCase() ?? '';
+                final language =
+                    voice['language']?.toString().toLowerCase() ?? '';
                 final name = voice['name']?.toString().toLowerCase() ?? '';
-                return locale.contains('ru')
-                  || language.contains('ru')
-                  || name.contains('russian')
-                  || name.contains('русск')
-                  || name.contains('ru-ru');
+                return locale.contains('ru') ||
+                    language.contains('ru') ||
+                    name.contains('russian') ||
+                    name.contains('русск') ||
+                    name.contains('ru-ru');
               })
               .toList();
           _isLoadingVoices = false;
@@ -53,14 +54,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
         debugPrint('🎤 Total RU voices loaded: ${_filteredVoices.length}');
       } else {
         setState(() {
-          _filteredVoices = [{'name': 'ru-RU', 'locale': 'ru-RU'}];
+          _filteredVoices = [
+            {'name': 'ru-RU', 'locale': 'ru-RU'},
+          ];
           _isLoadingVoices = false;
         });
       }
     } catch (e) {
       debugPrint('❌ Error loading or filtering voices: $e');
       setState(() {
-        _filteredVoices = [{'name': 'ru-RU', 'locale': 'ru-RU'}];
+        _filteredVoices = [
+          {'name': 'ru-RU', 'locale': 'ru-RU'},
+        ];
         _isLoadingVoices = false;
       });
     }
@@ -73,7 +78,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         orElse: () => {},
       );
       if (selectedVoice.isNotEmpty) {
-        await _flutterTts.setVoice(selectedVoice.map((k, v) => MapEntry(k.toString(), v.toString())));
+        await _flutterTts.setVoice(
+          selectedVoice.map((k, v) => MapEntry(k.toString(), v.toString())),
+        );
         context.read<SettingsProvider>().setSelectedVoice(voiceId);
       }
     }
@@ -84,7 +91,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
       if (selectedDirectory != null) {
         if (context.mounted) {
-          await context.read<SettingsProvider>().setVideoStoragePath(selectedDirectory);
+          await context.read<SettingsProvider>().setVideoStoragePath(
+            selectedDirectory,
+          );
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Папка выбрана: $selectedDirectory')),
           );
@@ -92,9 +101,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Ошибка выбора папки: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Ошибка выбора папки: $e')));
       }
     }
   }
@@ -102,10 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Настройки'),
-        elevation: 2,
-      ),
+      appBar: AppBar(title: const Text('Настройки'), elevation: 2),
       body: Consumer<SettingsProvider>(
         builder: (context, settingsProvider, child) {
           final settings = settingsProvider.settings;
@@ -130,7 +136,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     const Divider(height: 1),
                     RadioListTile<CommunicationMethod>(
                       title: const Text('Bluetooth кнопка'),
-                      subtitle: const Text('Использовать Bluetooth кнопку для управления'),
+                      subtitle: const Text(
+                        'Использовать Bluetooth кнопку для управления',
+                      ),
                       value: CommunicationMethod.bluetoothButton,
                       groupValue: settings.communicationMethod,
                       onChanged: (value) {
@@ -143,7 +151,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              if (settings.communicationMethod == CommunicationMethod.voice) ...[
+              if (settings.communicationMethod ==
+                  CommunicationMethod.voice) ...[
                 _buildSectionHeader('Голосовые команды'),
                 Card(
                   child: Padding(
@@ -202,7 +211,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 final locale = voice['locale'].toString();
                                 return DropdownMenuItem<String>(
                                   value: name,
-                                  child: Text('$name ($locale)', overflow: TextOverflow.ellipsis),
+                                  child: Text(
+                                    '$name ($locale)',
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 );
                               }).toList(),
                               onChanged: (voiceId) {
@@ -245,17 +257,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           child: ElevatedButton.icon(
                             onPressed: () async {
                               await _flutterTts.setVolume(settings.ttsVolume);
-                              await _flutterTts.setSpeechRate(settings.ttsSpeechRate);
+                              await _flutterTts.setSpeechRate(
+                                settings.ttsSpeechRate,
+                              );
                               if (settings.selectedVoice != null) {
-                                final selectedVoice = _filteredVoices.firstWhere(
-                                  (v) => v['name'] == settings.selectedVoice,
-                                  orElse: () => {},
-                                );
+                                final selectedVoice = _filteredVoices
+                                    .firstWhere(
+                                      (v) =>
+                                          v['name'] == settings.selectedVoice,
+                                      orElse: () => {},
+                                    );
                                 if (selectedVoice.isNotEmpty) {
-                                  await _flutterTts.setVoice(selectedVoice.map((k, v) => MapEntry(k.toString(), v.toString())));
+                                  await _flutterTts.setVoice(
+                                    selectedVoice.map(
+                                      (k, v) =>
+                                          MapEntry(k.toString(), v.toString()),
+                                    ),
+                                  );
                                 }
                               }
-                              await _flutterTts.speak('Привет, это тест голоса');
+                              await _flutterTts.speak(
+                                'Привет, это тест голоса',
+                              );
                             },
                             icon: const Icon(Icons.volume_up),
                             label: const Text('Проверить голос'),

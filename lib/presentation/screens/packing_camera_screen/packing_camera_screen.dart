@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../services/vosk_recognition_service.dart';
-import '../services/tts_service.dart';
-import '../scan_controller.dart';
-import '../providers/settings_provider.dart';
+import '../../../services/vosk_recognition_service.dart';
+import '../../../services/tts_service.dart';
+
+import '../../../providers/settings_provider.dart';
 
 class PackingCameraPage extends StatefulWidget {
   final String? initialCode;
@@ -45,7 +45,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
     try {
       await _voskService.initialize();
       if (mounted) {
-        setState(() { _isInitializing = false; });
+        setState(() {
+          _isInitializing = false;
+        });
       }
       await _startRecording();
       await Future.delayed(const Duration(milliseconds: 500));
@@ -55,7 +57,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
       debugPrint('Failed to initialize Vosk: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Ошибка инициализации голосового управления: $e')),
+          SnackBar(
+            content: Text('Ошибка инициализации голосового управления: $e'),
+          ),
         );
       }
     }
@@ -65,18 +69,25 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
     if (!mounted) return;
     try {
       // Get custom storage path from settings provider
-      final settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
+      final settingsProvider = Provider.of<SettingsProvider>(
+        context,
+        listen: false,
+      );
       final storagePath = settingsProvider.settings.videoStoragePath;
- 
-      debugPrint('🎬 Starting recording with code: $_scannedCode, storagePath: $storagePath');
-      
+
+      debugPrint(
+        '🎬 Starting recording with code: $_scannedCode, storagePath: $storagePath',
+      );
+
       await platform.invokeMethod('startCamera', {
         'scannedCode': _scannedCode,
         'storagePath': storagePath,
       });
-      
+
       if (mounted) {
-        setState(() { _isRecording = true; });
+        setState(() {
+          _isRecording = true;
+        });
       }
       // Новая озвучка — "Запись {код} началась"
       if (_scannedCode != null && _scannedCode!.isNotEmpty) {
@@ -110,7 +121,9 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
         debugPrint("⚠️ Failed to stop camera: '${e.message}'.");
       }
       if (mounted) {
-        setState(() { _isRecording = false; });
+        setState(() {
+          _isRecording = false;
+        });
       }
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -145,7 +158,10 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
             children: [
               CircularProgressIndicator(color: Colors.white),
               SizedBox(height: 16),
-              Text('Инициализация камеры...', style: TextStyle(color: Colors.white, fontSize: 16)),
+              Text(
+                'Инициализация камеры...',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
             ],
           ),
         ),
@@ -170,7 +186,12 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
               left: 0,
               right: 0,
               child: Container(
-                padding: const EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
+                padding: const EdgeInsets.only(
+                  top: 50,
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -192,9 +213,23 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Код:', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+                            const Text(
+                              'Код:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             const SizedBox(height: 4),
-                            Text(_scannedCode!, style: const TextStyle(color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold)),
+                            Text(
+                              _scannedCode!,
+                              style: const TextStyle(
+                                color: Colors.green,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -219,13 +254,31 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(width: 16, height: 16, decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle)),
+                          Container(
+                            width: 16,
+                            height: 16,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
                           const SizedBox(width: 8),
-                          const Text('ИДЕТ ЗАПИСЬ', style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold)),
+                          const Text(
+                            'ИДЕТ ЗАПИСЬ',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 12),
-                      const Text('Скажите "Стоп" для остановки записи', style: TextStyle(color: Colors.white, fontSize: 16), textAlign: TextAlign.center),
+                      const Text(
+                        'Скажите "Стоп" для остановки записи',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
@@ -237,7 +290,10 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 16,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -247,7 +303,13 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                           children: [
                             Icon(Icons.stop, size: 24),
                             SizedBox(width: 8),
-                            Text('Остановить запись', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            Text(
+                              'Остановить запись',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -262,13 +324,28 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
                 right: 16,
                 child: Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.8), borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white))),
+                      SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
+                      ),
                       SizedBox(width: 12),
-                      Text('Остановка записи...', style: TextStyle(color: Colors.white, fontSize: 16)),
+                      Text(
+                        'Остановка записи...',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
                     ],
                   ),
                 ),

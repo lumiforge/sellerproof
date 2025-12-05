@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'scan_controller.dart';
-import 'pages/packing_camera_page.dart';
-import 'pages/settings_screen.dart';
+import '../packing_camera_screen/packing_camera_screen.dart';
+import '../settings_screen/settings_screen.dart';
 
 /// Screen that handles QR code scanning.
 class ScanScreen extends StatefulWidget {
@@ -112,17 +112,13 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
 
   void _navigateToSettings() {
     if (_isNavigating) return;
-    
+
     _isNavigating = true;
     // Останавливаем сканер перед переходом в настройки
     controller?.scannerController?.stop();
-    
+
     Navigator.of(context)
-        .push(
-          MaterialPageRoute(
-            builder: (context) => const SettingsScreen(),
-          ),
-        )
+        .push(MaterialPageRoute(builder: (context) => const SettingsScreen()))
         .then((_) {
           debugPrint('🔙 Returned from settings screen');
           _isNavigating = false;
