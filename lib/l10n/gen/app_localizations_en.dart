@@ -227,4 +227,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get voiceSettingsTitle => 'Voice & TTS Settings';
+
+  @override
+  String get voiceSettingsSubtitle =>
+      'Manage voice commands and speech synthesis';
+
+  @override
+  String get slow => 'Slow';
+
+  @override
+  String get fast => 'Fast';
 }

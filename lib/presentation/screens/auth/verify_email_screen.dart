@@ -5,6 +5,7 @@ import 'package:sellerproof/l10n/gen/app_localizations.dart';
 
 import 'package:sellerproof/presentation/providers/auth_provider.dart';
 import 'package:sellerproof/presentation/screens/auth/login_screen.dart';
+import 'package:sellerproof/presentation/widgets/app_input.dart';
 import 'package:sellerproof/presentation/widgets/auth_shared.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
       subtitle: l.verifyEmailSubtitle(widget.email),
       child: Column(
         children: [
-          AuthInput(
+          AppInput(
             label: l.verificationCodeLabel,
             placeholder: l.verificationCodePlaceholder,
             icon: LucideIcons.shieldCheck,

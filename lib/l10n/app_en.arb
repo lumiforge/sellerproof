@@ -106,5 +106,8 @@
   "aimCameraHelper": "Point the camera at a QR or barcode",
   "logout": "Log out",
   "inviteUser": "Invite User",
-  "voiceSettingsTitle": "Voice & TTS Settings"
+  "voiceSettingsTitle": "Voice & TTS Settings",
+  "voiceSettingsSubtitle": "Manage voice commands and speech synthesis",
+  "slow": "Slow",
+  "fast": "Fast"
 }

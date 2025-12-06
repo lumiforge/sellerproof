@@ -106,5 +106,8 @@
   "aimCameraHelper": "Наведите камеру на QR или штрих‑код",
   "logout": "Выйти",
   "inviteUser": "Пригласить пользователя",
-  "voiceSettingsTitle": "Настройки голоса и TTS"
+  "voiceSettingsTitle": "Настройки голоса и TTS",
+  "voiceSettingsSubtitle": "Управление голосовыми командами и синтезом речи",
+  "slow": "Медленно",
+  "fast": "Быстро"
 }

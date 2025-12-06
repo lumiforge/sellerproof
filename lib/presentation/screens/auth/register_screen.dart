@@ -8,6 +8,7 @@ import 'package:sellerproof/data/models/api_models.dart';
 import 'package:sellerproof/presentation/providers/auth_provider.dart';
 import 'package:sellerproof/presentation/screens/auth/verify_email_screen.dart';
 import 'package:sellerproof/presentation/theme/app_colors.dart';
+import 'package:sellerproof/presentation/widgets/app_input.dart';
 import 'package:sellerproof/presentation/widgets/auth_shared.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         key: _formKey,
         child: Column(
           children: [
-            AuthInput(
+            AppInput(
               label: AppLocalizations.of(context)!.fullNameLabel,
               placeholder: AppLocalizations.of(context)!.fullNamePlaceholder,
               icon: LucideIcons.user,
@@ -59,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const SizedBox(height: 16),
             if (_isJoinOrganization)
-              AuthInput(
+              AppInput(
                 label: AppLocalizations.of(context)!.inviteCodeLabel,
                 placeholder: AppLocalizations.of(
                   context,
@@ -71,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     : null,
               )
             else
-              AuthInput(
+              AppInput(
                 label: AppLocalizations.of(context)!.orgNameLabel,
                 placeholder: AppLocalizations.of(context)!.orgNamePlaceholder,
                 icon: LucideIcons.building,
@@ -81,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     : null,
               ),
             const SizedBox(height: 16),
-            AuthInput(
+            AppInput(
               label: AppLocalizations.of(context)!.emailLabel,
               placeholder: AppLocalizations.of(context)!.emailPlaceholder,
               icon: LucideIcons.mail,
@@ -92,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   : null,
             ),
             const SizedBox(height: 16),
-            AuthInput(
+            AppInput(
               label: AppLocalizations.of(context)!.passwordLabel,
               placeholder: AppLocalizations.of(context)!.passwordPlaceholder,
               icon: LucideIcons.lock,

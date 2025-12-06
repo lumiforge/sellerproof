@@ -7,6 +7,7 @@ import 'package:sellerproof/presentation/providers/auth_provider.dart';
 import 'package:sellerproof/presentation/screens/auth/register_screen.dart';
 import 'package:sellerproof/presentation/screens/scan_screen/scan_screen.dart';
 import 'package:sellerproof/presentation/theme/app_colors.dart';
+import 'package:sellerproof/presentation/widgets/app_input.dart';
 import 'package:sellerproof/presentation/widgets/auth_shared.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         key: _formKey,
         child: Column(
           children: [
-            AuthInput(
+            AppInput(
               label: AppLocalizations.of(context)!.emailLabel,
               placeholder: AppLocalizations.of(context)!.emailPlaceholder,
               icon: LucideIcons.mail,
@@ -43,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   : null,
             ),
             const SizedBox(height: 16),
-            AuthInput(
+            AppInput(
               label: AppLocalizations.of(context)!.passwordLabel,
               placeholder: AppLocalizations.of(context)!.passwordPlaceholder,
               icon: LucideIcons.lock,

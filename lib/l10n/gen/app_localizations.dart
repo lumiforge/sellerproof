@@ -517,6 +517,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Voice & TTS Settings'**
   String get voiceSettingsTitle;
+
+  /// No description provided for @voiceSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage voice commands and speech synthesis'**
+  String get voiceSettingsSubtitle;
+
+  /// No description provided for @slow.
+  ///
+  /// In en, this message translates to:
+  /// **'Slow'**
+  String get slow;
+
+  /// No description provided for @fast.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast'**
+  String get fast;
 }
 
 class _AppLocalizationsDelegate

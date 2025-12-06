@@ -229,4 +229,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get voiceSettingsTitle => 'Настройки голоса и TTS';
+
+  @override
+  String get voiceSettingsSubtitle =>
+      'Управление голосовыми командами и синтезом речи';
+
+  @override
+  String get slow => 'Медленно';
+
+  @override
+  String get fast => 'Быстро';
 }
