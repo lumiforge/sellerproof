@@ -71,7 +71,7 @@
   "noAccountText": "Нет аккаунта?",
   "signUpLink": "Зарегистрироваться",
   "registerTitle": "Создание аккаунта",
-  "registerSubtitle": "Присоединяйтесь к SellerProof для безопасных транзакций",
+  "registerSubtitle": "Присоединяйтесь к SellerProof",
   "fullNameLabel": "Полное имя",
   "fullNamePlaceholder": "Иван Иванов",
   "fullNameValidator": "Введите имя",
