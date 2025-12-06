@@ -1,0 +1,107 @@
+{
+  "@@locale": "en",
+  "appTitle": "SellerProof",
+  "settingsTitle": "Settings",
+  "languageSection": "Language",
+  "languagePickerLabel": "App language",
+  "languageEnglish": "English",
+  "languageRussian": "Russian",
+  "communicationMethod": "Communication method",
+  "voiceControlTitle": "Voice control",
+  "voiceControlSubtitle": "Use voice commands",
+  "bluetoothButtonTitle": "Bluetooth button",
+  "bluetoothButtonSubtitle": "Use a Bluetooth button to control",
+  "voiceCommandsSection": "Voice commands",
+  "stopCommandLabel": "Stop recording word",
+  "enterWordHint": "Enter a word",
+  "ttsSettingsSection": "Text‑to‑speech (TTS) settings",
+  "voiceChoiceLabel": "Voice selection",
+  "voicesNotFound": "No voices found",
+  "selectVoiceHint": "Select a voice",
+  "volumeLabel": "Volume: {percent}%",
+  "@volumeLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "description": "Volume percent, e.g. 50"
+      }
+    }
+  },
+  "speechRateLabel": "Speech rate: {rate}",
+  "@speechRateLabel": {
+    "placeholders": {
+      "rate": {
+        "type": "double",
+        "description": "Speech rate, e.g. 1.00"
+      }
+    }
+  },
+  "testVoiceButton": "Test voice",
+  "testVoiceText": "Hello, this is a voice test",
+  "videoStorageSection": "Video recordings storage",
+  "folderLabel": "Save folder",
+  "folderNotSelected": "Folder not selected",
+  "chooseFolderButton": "Choose folder",
+  "folderSelectedSnackbar": "Folder selected: {path}",
+  "@folderSelectedSnackbar": {
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
+  "folderSelectError": "Folder selection error: {error}",
+  "@folderSelectError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "loginTitle": "Welcome back",
+  "loginSubtitle": "Sign in to access your dashboard",
+  "emailLabel": "Email address",
+  "emailPlaceholder": "you@example.com",
+  "emailValidator": "Enter email",
+  "passwordLabel": "Password",
+  "passwordPlaceholder": "••••••••",
+  "passwordValidator": "Enter password",
+  "forgotPassword": "Forgot your password?",
+  "signInButton": "Sign in",
+  "noAccountText": "Don't have an account?",
+  "signUpLink": "Sign up",
+  "registerTitle": "Create an account",
+  "registerSubtitle": "Join SellerProof for secure transactions",
+  "fullNameLabel": "Full Name",
+  "fullNamePlaceholder": "John Doe",
+  "fullNameValidator": "Enter full name",
+  "joinOrganization": "Join Organization",
+  "createOrganization": "Create Organization",
+  "inviteCodeLabel": "Invite Code",
+  "inviteCodePlaceholder": "Enter code",
+  "inviteCodeValidator": "Enter invite code",
+  "orgNameLabel": "Organization Name",
+  "orgNamePlaceholder": "Acme Corp",
+  "orgNameValidator": "Enter organization name",
+  "createAccountButton": "Create account",
+  "alreadyHaveAccountText": "Already have an account?",
+  "loginLink": "Log in",
+  "verifyEmailTitle": "Verify Email",
+  "verifyEmailSubtitle": "Code sent to {email}",
+  "@verifyEmailSubtitle": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "verificationCodeLabel": "Verification Code",
+  "verificationCodePlaceholder": "123456",
+  "verifyButton": "Verify",
+  "emailVerifiedSnackbar": "Email verified. Please sign in.",
+  "scannerInitializing": "Initializing scanner...",
+  "preparingCamera": "Preparing camera...",
+  "codeFoundTitle": "Code found:",
+  "startingRecording": "Starting recording...",
+  "aimCameraHelper": "Point the camera at a QR or barcode"
+}

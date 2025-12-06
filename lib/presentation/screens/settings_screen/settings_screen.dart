@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:sellerproof/l10n/gen/app_localizations.dart';
 import 'package:sellerproof/domain/entities/app_settings.dart';
 import 'package:sellerproof/providers/settings_provider.dart';
 
@@ -95,15 +96,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
             selectedDirectory,
           );
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Папка выбрана: $selectedDirectory')),
+            SnackBar(
+              content: Text(
+                AppLocalizations.of(
+                  context,
+                )!.folderSelectedSnackbar(selectedDirectory),
+              ),
+            ),
           );
         }
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Ошибка выбора папки: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.folderSelectError('$e'),
+            ),
+          ),
+        );
       }
     }
   }
@@ -111,20 +122,64 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Настройки'), elevation: 2),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.settingsTitle),
+        elevation: 2,
+      ),
       body: Consumer<SettingsProvider>(
         builder: (context, settingsProvider, child) {
           final settings = settingsProvider.settings;
+          final l = AppLocalizations.of(context)!;
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              _buildSectionHeader('Способ коммуникации'),
+              _buildSectionHeader(l.languageSection),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l.languagePickerLabel,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      DropdownButtonFormField<String>(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        value: settings.languageCode,
+                        items: [
+                          DropdownMenuItem(
+                            value: 'en',
+                            child: Text(l.languageEnglish),
+                          ),
+                          DropdownMenuItem(
+                            value: 'ru',
+                            child: Text(l.languageRussian),
+                          ),
+                        ],
+                        onChanged: (code) {
+                          if (code != null) {
+                            context.read<SettingsProvider>().setLanguageCode(
+                              code,
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              _buildSectionHeader(l.communicationMethod),
               Card(
                 child: Column(
                   children: [
                     RadioListTile<CommunicationMethod>(
-                      title: const Text('Голосовое управление'),
-                      subtitle: const Text('Использовать голосовые команды'),
+                      title: Text(l.voiceControlTitle),
+                      subtitle: Text(l.voiceControlSubtitle),
                       value: CommunicationMethod.voice,
                       groupValue: settings.communicationMethod,
                       onChanged: (value) {
@@ -135,10 +190,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     const Divider(height: 1),
                     RadioListTile<CommunicationMethod>(
-                      title: const Text('Bluetooth кнопка'),
-                      subtitle: const Text(
-                        'Использовать Bluetooth кнопку для управления',
-                      ),
+                      title: Text(l.bluetoothButtonTitle),
+                      subtitle: Text(l.bluetoothButtonSubtitle),
                       value: CommunicationMethod.bluetoothButton,
                       groupValue: settings.communicationMethod,
                       onChanged: (value) {
@@ -153,23 +206,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
               if (settings.communicationMethod ==
                   CommunicationMethod.voice) ...[
-                _buildSectionHeader('Голосовые команды'),
+                _buildSectionHeader(l.voiceCommandsSection),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Команда для остановки записи',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text(
+                          l.stopCommandLabel,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
                         TextFormField(
                           initialValue: settings.stopCommand ?? 'стоп',
-                          decoration: const InputDecoration(
-                            hintText: 'Введите слово',
-                            border: OutlineInputBorder(),
+                          decoration: InputDecoration(
+                            hintText: l.enterWordHint,
+                            border: const OutlineInputBorder(),
                           ),
                           onChanged: (value) {
                             settingsProvider.setStopCommand(value);
@@ -180,22 +233,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                _buildSectionHeader('Настройки голосового синтеза (TTS)'),
+                _buildSectionHeader(l.ttsSettingsSection),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Выбор голоса',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text(
+                          l.voiceChoiceLabel,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
                         if (_isLoadingVoices)
                           const Center(child: CircularProgressIndicator())
                         else if (_filteredVoices.isEmpty)
-                          const Text('Голоса не найдены')
+                          Text(l.voicesNotFound)
                         else
                           Container(
                             width: double.infinity,
@@ -205,7 +258,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 border: OutlineInputBorder(),
                               ),
                               initialValue: settings.selectedVoice,
-                              hint: const Text('Выберите голос'),
+                              hint: Text(l.selectVoiceHint),
                               items: _filteredVoices.map((voice) {
                                 final name = voice['name'].toString();
                                 final locale = voice['locale'].toString();
@@ -224,7 +277,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         const SizedBox(height: 24),
                         Text(
-                          'Громкость: ${(settings.ttsVolume * 100).toInt()}%',
+                          l.volumeLabel((settings.ttsVolume * 100).toInt()),
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Slider(
@@ -239,7 +292,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Скорость речи: ${settings.ttsSpeechRate.toStringAsFixed(2)}',
+                          l.speechRateLabel(settings.ttsSpeechRate),
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Slider(
@@ -276,12 +329,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   );
                                 }
                               }
-                              await _flutterTts.speak(
-                                'Привет, это тест голоса',
-                              );
+                              await _flutterTts.speak(l.testVoiceText);
                             },
                             icon: const Icon(Icons.volume_up),
-                            label: const Text('Проверить голос'),
+                            label: Text(l.testVoiceButton),
                           ),
                         ),
                       ],
@@ -290,16 +341,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 const SizedBox(height: 24),
               ],
-              _buildSectionHeader('Хранение видеозаписей'),
+              _buildSectionHeader(l.videoStorageSection),
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Папка для сохранения',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Text(
+                        l.folderLabel,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
                       if (settings.videoStoragePath != null)
@@ -323,14 +374,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         )
                       else
-                        const Text('Папка не выбрана'),
+                        Text(l.folderNotSelected),
                       const SizedBox(height: 12),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           onPressed: () => _pickVideoStorageFolder(context),
                           icon: const Icon(Icons.folder_open),
-                          label: const Text('Выбрать папку'),
+                          label: Text(l.chooseFolderButton),
                         ),
                       ),
                     ],

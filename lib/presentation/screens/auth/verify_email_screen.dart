@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:sellerproof/l10n/gen/app_localizations.dart';
 
 import 'package:sellerproof/presentation/providers/auth_provider.dart';
 import 'package:sellerproof/presentation/screens/auth/login_screen.dart';
+import 'package:sellerproof/presentation/widgets/auth_shared.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   final String email;
@@ -19,37 +22,35 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Подтверждение почты')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Код отправлен на ${widget.email}'),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _codeController,
-              decoration: const InputDecoration(labelText: 'Код подтверждения'),
+    final l = AppLocalizations.of(context)!;
+    return AuthLayout(
+      title: l.verifyEmailTitle,
+      subtitle: l.verifyEmailSubtitle(widget.email),
+      child: Column(
+        children: [
+          AuthInput(
+            label: l.verificationCodeLabel,
+            placeholder: l.verificationCodePlaceholder,
+            icon: LucideIcons.shieldCheck,
+            controller: _codeController,
+            keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 24),
+          AuthButton(
+            text: l.verifyButton,
+            onPressed: _verify,
+            isLoading: authProvider.isLoading,
+          ),
+          if (authProvider.error != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text(
+                authProvider.error!,
+                style: const TextStyle(color: Colors.red),
+                textAlign: TextAlign.center,
+              ),
             ),
-            const SizedBox(height: 24),
-            if (authProvider.isLoading)
-              const CircularProgressIndicator()
-            else
-              ElevatedButton(
-                onPressed: _verify,
-                child: const Text('Подтвердить'),
-              ),
-            if (authProvider.error != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text(
-                  authProvider.error!,
-                  style: const TextStyle(color: Colors.red),
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -63,9 +64,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
       code,
     );
     if (success && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Почта подтверждена. Войдите в аккаунт.')),
-      );
+      final l = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l.emailVerifiedSnackbar)));
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (_) => const LoginScreen()),

@@ -1,0 +1,107 @@
+{
+  "@@locale": "ru",
+  "appTitle": "SellerProof",
+  "settingsTitle": "Настройки",
+  "languageSection": "Язык",
+  "languagePickerLabel": "Язык приложения",
+  "languageEnglish": "Английский",
+  "languageRussian": "Русский",
+  "communicationMethod": "Способ коммуникации",
+  "voiceControlTitle": "Голосовое управление",
+  "voiceControlSubtitle": "Использовать голосовые команды",
+  "bluetoothButtonTitle": "Bluetooth кнопка",
+  "bluetoothButtonSubtitle": "Использовать Bluetooth кнопку для управления",
+  "voiceCommandsSection": "Голосовые команды",
+  "stopCommandLabel": "Команда для остановки записи",
+  "enterWordHint": "Введите слово",
+  "ttsSettingsSection": "Настройки голосового синтеза (TTS)",
+  "voiceChoiceLabel": "Выбор голоса",
+  "voicesNotFound": "Голоса не найдены",
+  "selectVoiceHint": "Выберите голос",
+  "volumeLabel": "Громкость: {percent}%",
+  "@volumeLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "description": "Процент громкости, например 50"
+      }
+    }
+  },
+  "speechRateLabel": "Скорость речи: {rate}",
+  "@speechRateLabel": {
+    "placeholders": {
+      "rate": {
+        "type": "double",
+        "description": "Скорость речи, например 1.00"
+      }
+    }
+  },
+  "testVoiceButton": "Проверить голос",
+  "testVoiceText": "Привет, это тест голоса",
+  "videoStorageSection": "Хранение видеозаписей",
+  "folderLabel": "Папка для сохранения",
+  "folderNotSelected": "Папка не выбрана",
+  "chooseFolderButton": "Выбрать папку",
+  "folderSelectedSnackbar": "Папка выбрана: {path}",
+  "@folderSelectedSnackbar": {
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
+  "folderSelectError": "Ошибка выбора папки: {error}",
+  "@folderSelectError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "loginTitle": "С возвращением",
+  "loginSubtitle": "Войдите, чтобы получить доступ к панели",
+  "emailLabel": "Адрес электронной почты",
+  "emailPlaceholder": "you@example.com",
+  "emailValidator": "Введите email",
+  "passwordLabel": "Пароль",
+  "passwordPlaceholder": "••••••••",
+  "passwordValidator": "Введите пароль",
+  "forgotPassword": "Забыли пароль?",
+  "signInButton": "Войти",
+  "noAccountText": "Нет аккаунта?",
+  "signUpLink": "Зарегистрироваться",
+  "registerTitle": "Создание аккаунта",
+  "registerSubtitle": "Присоединяйтесь к SellerProof для безопасных транзакций",
+  "fullNameLabel": "Полное имя",
+  "fullNamePlaceholder": "Иван Иванов",
+  "fullNameValidator": "Введите имя",
+  "joinOrganization": "Присоединиться к организации",
+  "createOrganization": "Создать организацию",
+  "inviteCodeLabel": "Код приглашения",
+  "inviteCodePlaceholder": "Введите код",
+  "inviteCodeValidator": "Введите код приглашения",
+  "orgNameLabel": "Название организации",
+  "orgNamePlaceholder": "Acme Corp",
+  "orgNameValidator": "Введите название организации",
+  "createAccountButton": "Создать аккаунт",
+  "alreadyHaveAccountText": "Уже есть аккаунт?",
+  "loginLink": "Войти",
+  "verifyEmailTitle": "Подтверждение почты",
+  "verifyEmailSubtitle": "Код отправлен на {email}",
+  "@verifyEmailSubtitle": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "verificationCodeLabel": "Код подтверждения",
+  "verificationCodePlaceholder": "123456",
+  "verifyButton": "Подтвердить",
+  "emailVerifiedSnackbar": "Почта подтверждена. Войдите в аккаунт.",
+  "scannerInitializing": "Инициализация сканера...",
+  "preparingCamera": "Подготовка камеры...",
+  "codeFoundTitle": "Код найден:",
+  "startingRecording": "Запуск видеозаписи...",
+  "aimCameraHelper": "Наведите камеру на QR или штрих‑код"
+}

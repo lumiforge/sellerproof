@@ -7,6 +7,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
   cupertino_icons: ^1.0.8
   path_provider: ^2.1.5
   vosk_flutter: ^0.3.48
@@ -24,6 +27,10 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   json_annotation: ^4.9.0
   retrofit_generator: ^6.0.0
+  google_fonts: ^6.2.1
+  lucide_icons_flutter: ^3.1.7
+  flutter_svg: ^2.0.10+1
+
 dependency_overrides:
   vosk_flutter:
     git:
@@ -38,5 +45,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
   assets:
     - assets/models/vosk-model-small-ru-0.22.zip
+    - assets/images/

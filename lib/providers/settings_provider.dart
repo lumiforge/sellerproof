@@ -81,4 +81,10 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
     await _saveSettings();
   }
+
+  Future<void> setLanguageCode(String code) async {
+    _settings = _settings.copyWith(languageCode: code);
+    notifyListeners();
+    await _saveSettings();
+  }
 }

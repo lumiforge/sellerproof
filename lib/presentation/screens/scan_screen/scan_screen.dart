@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:sellerproof/l10n/gen/app_localizations.dart';
 import 'scan_controller.dart';
 import '../packing_camera_screen/packing_camera_screen.dart';
 import '../settings_screen/settings_screen.dart';
@@ -139,12 +140,13 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<ScanController>(context);
+    final l = AppLocalizations.of(context)!;
 
     if (!controller.scannerReady) {
       debugPrint('⏳ Scanner not ready');
       return Scaffold(
         appBar: AppBar(
-          title: const Text('SellerProof'),
+          title: Text(AppLocalizations.of(context)!.appTitle),
           backgroundColor: Colors.black,
           actions: [
             IconButton(
@@ -153,13 +155,13 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
             ),
           ],
         ),
-        body: const Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircularProgressIndicator(),
               SizedBox(height: 16),
-              Text('Инициализация сканера...'),
+              Text(l.scannerInitializing),
             ],
           ),
         ),
@@ -187,7 +189,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('SellerProof'),
+        title: Text(AppLocalizations.of(context)!.appTitle),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -215,14 +217,14 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
           if (!controller.isScanning && controller.lastScannedCode == null)
             Container(
               color: Colors.black,
-              child: const Center(
+              child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(color: Colors.white),
                     SizedBox(height: 16),
                     Text(
-                      'Подготовка камеры...',
+                      l.preparingCamera,
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ],
@@ -247,8 +249,8 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      'Код найден:',
+                    Text(
+                      l.codeFoundTitle,
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     const SizedBox(height: 8),
@@ -258,7 +260,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
-                    const Row(
+                    Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
@@ -273,7 +275,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
                         ),
                         SizedBox(width: 8),
                         Text(
-                          'Запуск видеозаписи...',
+                          l.startingRecording,
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
@@ -300,6 +302,7 @@ class ScannerOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     return Stack(
       children: [
         Center(
@@ -319,10 +322,10 @@ class ScannerOverlay extends StatelessWidget {
           child: Center(
             child: Card(
               color: Colors.black.withAlpha(179),
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  'Наведите камеру на QR или штрих-код',
+                  l.aimCameraHelper,
                   style: TextStyle(color: Colors.white, fontSize: 18),
                   textAlign: TextAlign.center,
                 ),

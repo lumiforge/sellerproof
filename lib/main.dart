@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sellerproof/l10n/gen/app_localizations.dart';
 
 import 'package:provider/provider.dart';
 import 'package:sellerproof/injection_container.dart' as di;
@@ -40,10 +43,22 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.home});
   @override
   Widget build(BuildContext context) {
+    final settings = context.watch<SettingsProvider>().settings;
     return MaterialApp(
-      title: 'sellerproof',
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.interTextTheme(),
+      ),
+      locale: Locale(settings.languageCode),
+      supportedLocales: const [Locale('en'), Locale('ru')],
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       home: home,
     );
   }
