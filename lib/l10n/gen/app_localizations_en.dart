@@ -218,4 +218,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aimCameraHelper => 'Point the camera at a QR or barcode';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get inviteUser => 'Invite User';
+
+  @override
+  String get voiceSettingsTitle => 'Voice & TTS Settings';
 }

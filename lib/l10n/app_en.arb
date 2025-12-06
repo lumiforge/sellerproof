@@ -103,5 +103,8 @@
   "preparingCamera": "Preparing camera...",
   "codeFoundTitle": "Code found:",
   "startingRecording": "Starting recording...",
-  "aimCameraHelper": "Point the camera at a QR or barcode"
+  "aimCameraHelper": "Point the camera at a QR or barcode",
+  "logout": "Log out",
+  "inviteUser": "Invite User",
+  "voiceSettingsTitle": "Voice & TTS Settings"
 }

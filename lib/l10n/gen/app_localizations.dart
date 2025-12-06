@@ -499,6 +499,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Point the camera at a QR or barcode'**
   String get aimCameraHelper;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logout;
+
+  /// No description provided for @inviteUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite User'**
+  String get inviteUser;
+
+  /// No description provided for @voiceSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice & TTS Settings'**
+  String get voiceSettingsTitle;
 }
 
 class _AppLocalizationsDelegate

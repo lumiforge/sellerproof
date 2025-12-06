@@ -7,6 +7,7 @@ import 'package:sellerproof/data/models/api_models.dart';
 
 import 'package:sellerproof/presentation/providers/auth_provider.dart';
 import 'package:sellerproof/presentation/screens/auth/verify_email_screen.dart';
+import 'package:sellerproof/presentation/theme/app_colors.dart';
 import 'package:sellerproof/presentation/widgets/auth_shared.dart';
 
 class RegisterScreen extends StatefulWidget {

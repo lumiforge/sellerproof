@@ -3,23 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-
-class AppColors {
-  static const slate50 = Color(0xFFF8FAFC);
-  static const slate100 = Color(0xFFF1F5F9);
-  static const slate200 = Color(0xFFE2E8F0);
-  static const slate400 = Color(0xFF94A3B8);
-  static const slate500 = Color(0xFF64748B);
-  static const slate600 = Color(0xFF475569);
-  static const slate900 = Color(0xFF0F172A);
-  static const sky50 = Color(0xFFF0F9FF);
-  static const sky100 = Color(0xFFE0F2FE);
-  static const sky200 = Color(0xFFBAE6FD);
-  static const sky500 = Color(0xFF0EA5E9);
-  static const sky600 = Color(0xFF0284C7);
-  static const sky700 = Color(0xFF0369A1);
-  static const red500 = Color(0xFFEF4444);
-}
+import 'package:sellerproof/presentation/theme/app_colors.dart';
 
 class AuthLayout extends StatelessWidget {
   final Widget child;

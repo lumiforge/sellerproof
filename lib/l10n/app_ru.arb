@@ -103,5 +103,8 @@
   "preparingCamera": "Подготовка камеры...",
   "codeFoundTitle": "Код найден:",
   "startingRecording": "Запуск видеозаписи...",
-  "aimCameraHelper": "Наведите камеру на QR или штрих‑код"
+  "aimCameraHelper": "Наведите камеру на QR или штрих‑код",
+  "logout": "Выйти",
+  "inviteUser": "Пригласить пользователя",
+  "voiceSettingsTitle": "Настройки голоса и TTS"
 }

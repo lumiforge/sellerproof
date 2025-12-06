@@ -4,7 +4,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sellerproof/l10n/gen/app_localizations.dart';
 import 'scan_controller.dart';
 import '../packing_camera_screen/packing_camera_screen.dart';
-import '../settings_screen/settings_screen.dart';
+import '../../widgets/app_drawer.dart';
 
 /// Screen that handles QR code scanning.
 class ScanScreen extends StatefulWidget {
@@ -111,31 +111,6 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
         });
   }
 
-  void _navigateToSettings() {
-    if (_isNavigating) return;
-
-    _isNavigating = true;
-    // Останавливаем сканер перед переходом в настройки
-    controller?.scannerController?.stop();
-
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const SettingsScreen()))
-        .then((_) {
-          debugPrint('🔙 Returned from settings screen');
-          _isNavigating = false;
-
-          // Возобновляем сканирование после возврата
-          if (mounted && controller != null) {
-            Future.delayed(const Duration(milliseconds: 300), () {
-              if (mounted && !_isNavigating) {
-                controller?.resumeScanning();
-                setState(() {});
-                debugPrint('✅ Scanner resumed after settings');
-              }
-            });
-          }
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,12 +123,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.appTitle),
           backgroundColor: Colors.black,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: _navigateToSettings,
-            ),
-          ],
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: Center(
           child: Column(
@@ -192,14 +162,9 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
         title: Text(AppLocalizations.of(context)!.appTitle),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: _navigateToSettings,
-            color: Colors.white,
-          ),
-        ],
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      drawer: const AppDrawer(),
       body: Stack(
         fit: StackFit.expand,
         children: [

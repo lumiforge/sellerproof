@@ -220,4 +220,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get aimCameraHelper => 'Наведите камеру на QR или штрих‑код';
+
+  @override
+  String get logout => 'Выйти';
+
+  @override
+  String get inviteUser => 'Пригласить пользователя';
+
+  @override
+  String get voiceSettingsTitle => 'Настройки голоса и TTS';
 }

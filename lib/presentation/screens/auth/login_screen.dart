@@ -6,6 +6,7 @@ import 'package:sellerproof/l10n/gen/app_localizations.dart';
 import 'package:sellerproof/presentation/providers/auth_provider.dart';
 import 'package:sellerproof/presentation/screens/auth/register_screen.dart';
 import 'package:sellerproof/presentation/screens/scan_screen/scan_screen.dart';
+import 'package:sellerproof/presentation/theme/app_colors.dart';
 import 'package:sellerproof/presentation/widgets/auth_shared.dart';
 
 class LoginScreen extends StatefulWidget {
