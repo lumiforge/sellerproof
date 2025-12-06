@@ -32,16 +32,7 @@ class VoskRecognitionService {
   static const _stopCommandDebounce = Duration(milliseconds: 1000);
   bool _stopCommandProcessed = false;
 
-  final List<String> stopCommands = [
-    'стоп',
-    'stop',
-    'остановить',
-    'остановись',
-    'хватит',
-    'закончить',
-    'стопай',
-    'остановка',
-  ];
+  final List<String> stopCommands = [];
 
   Function()? _onStopCommand;
 
@@ -61,6 +52,19 @@ class VoskRecognitionService {
     _instance!._onStopCommand = onStopCommand;
 
     return _instance!;
+  }
+
+  void setCustomStopCommand(String? command) {
+    stopCommands.clear();
+    if (command != null && command.trim().isNotEmpty) {
+      final lowerCmd = command.trim().toLowerCase();
+      stopCommands.add(lowerCmd);
+      debugPrint('✅ Vosk: Set stop command to: "$lowerCmd"');
+    } else {
+      debugPrint(
+        'ℹ️ Vosk: No stop command configured; none will be recognized',
+      );
+    }
   }
 
   // Метод для сброса singleton (использовать осторожно)

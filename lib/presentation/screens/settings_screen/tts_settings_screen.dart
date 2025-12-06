@@ -1,10 +1,12 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:sellerproof/l10n/gen/app_localizations.dart';
+import 'package:sellerproof/presentation/providers/auth_provider.dart';
 import 'package:sellerproof/presentation/theme/app_colors.dart';
 import 'package:sellerproof/presentation/widgets/app_input.dart';
 import 'package:sellerproof/providers/settings_provider.dart';
@@ -21,6 +23,10 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
   List<Map<String, dynamic>> _filteredVoices = [];
   bool _isLoadingVoices = true;
   late TextEditingController _stopCommandController;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String? _selectedVoice;
+  double _volume = 1.0;
+  double _speechRate = 0.5;
 
   @override
   void initState() {
@@ -29,6 +35,9 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
     _stopCommandController = TextEditingController(
       text: settings.stopCommand ?? 'стоп',
     );
+    _selectedVoice = settings.selectedVoice;
+    _volume = settings.ttsVolume;
+    _speechRate = settings.ttsSpeechRate;
     WidgetsBinding.instance.addPostFrameCallback((_) => _loadAvailableVoices());
   }
 
@@ -90,8 +99,10 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
         await _flutterTts.setVoice(
           selectedVoice.map((k, v) => MapEntry(k.toString(), v.toString())),
         );
-        context.read<SettingsProvider>().setSelectedVoice(voiceId);
       }
+      setState(() {
+        _selectedVoice = voiceId;
+      });
     }
   }
 
@@ -100,22 +111,86 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
     final l = AppLocalizations.of(context)!;
     final settingsProvider = context.watch<SettingsProvider>();
     final settings = settingsProvider.settings;
+    final user = context.watch<AuthProvider>().user;
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: AppColors.slate50,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        toolbarHeight: 64,
         backgroundColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 0,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.8),
+                border: const Border(
+                  bottom: BorderSide(color: AppColors.slate200),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 2,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-        iconTheme: const IconThemeData(color: AppColors.slate900),
+        leading: IconButton(
+          icon: const Icon(LucideIcons.arrowLeft, color: AppColors.slate600),
+          onPressed: () => Navigator.of(context).maybePop(),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).maybePop(),
+            child: Text(
+              'Отмена',
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: AppColors.slate600,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              final sp = context.read<SettingsProvider>();
+              final text = _stopCommandController.text.trim();
+              final current = sp.settings;
+              await sp.updateSettings(
+                current.copyWith(
+                  stopCommand: text.isNotEmpty ? text : null,
+                  selectedVoice: _selectedVoice,
+                  ttsVolume: _volume,
+                  ttsSpeechRate: _speechRate,
+                ),
+              );
+              if (mounted) Navigator.of(context).maybePop();
+            },
+            child: Text(
+              'Сохранить',
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: AppColors.sky600,
+              ),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.only(
+          top: 64 + MediaQuery.of(context).padding.top + 24,
+          left: 24,
+          right: 24,
+          bottom: 24,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -179,7 +254,7 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
                     icon: LucideIcons.mic,
                     controller: _stopCommandController,
                     onChanged: (value) {
-                      if (value != null) settingsProvider.setStopCommand(value);
+                      // Local-only change; persisted on Save
                     },
                   ),
                 ],
@@ -268,7 +343,7 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
                         color: AppColors.slate500,
                         size: 16,
                       ),
-                      value: settings.selectedVoice,
+                      value: _selectedVoice,
                       hint: Text(l.selectVoiceHint),
                       items: _filteredVoices.map((voice) {
                         final name = voice['name'].toString();
@@ -291,7 +366,7 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
 
                   // Volume
                   Text(
-                    l.volumeLabel((settings.ttsVolume * 100).toInt()),
+                    l.volumeLabel((_volume * 100).toInt()),
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -306,12 +381,14 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
                       overlayColor: AppColors.sky600.withOpacity(0.2),
                     ),
                     child: Slider(
-                      value: settings.ttsVolume,
+                      value: _volume,
                       min: 0.0,
                       max: 1.0,
                       divisions: 20,
                       onChanged: (value) {
-                        settingsProvider.setTtsVolume(value);
+                        setState(() {
+                          _volume = value;
+                        });
                       },
                     ),
                   ),
@@ -319,7 +396,7 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
 
                   // Speech Rate
                   Text(
-                    l.speechRateLabel(settings.ttsSpeechRate),
+                    l.speechRateLabel(_speechRate),
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -334,12 +411,14 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
                       overlayColor: AppColors.sky600.withOpacity(0.2),
                     ),
                     child: Slider(
-                      value: settings.ttsSpeechRate,
+                      value: _speechRate,
                       min: 0.1,
                       max: 3.0,
                       divisions: 29,
                       onChanged: (value) {
-                        settingsProvider.setTtsSpeechRate(value);
+                        setState(() {
+                          _speechRate = value;
+                        });
                       },
                     ),
                   ),
@@ -372,11 +451,11 @@ class _TtsSettingsScreenState extends State<TtsSettingsScreen> {
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () async {
-                        await _flutterTts.setVolume(settings.ttsVolume);
-                        await _flutterTts.setSpeechRate(settings.ttsSpeechRate);
-                        if (settings.selectedVoice != null) {
+                        await _flutterTts.setVolume(_volume);
+                        await _flutterTts.setSpeechRate(_speechRate);
+                        if (_selectedVoice != null) {
                           final selectedVoice = _filteredVoices.firstWhere(
-                            (v) => v['name'] == settings.selectedVoice,
+                            (v) => v['name'] == _selectedVoice,
                             orElse: () => {},
                           );
                           if (selectedVoice.isNotEmpty) {

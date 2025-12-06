@@ -40,7 +40,13 @@ class _PackingCameraPageState extends State<PackingCameraPage> {
         }
       },
     );
-
+    if (mounted) {
+      final settings = Provider.of<SettingsProvider>(
+        context,
+        listen: false,
+      ).settings;
+      _voskService.setCustomStopCommand(settings.stopCommand);
+    }
     try {
       await _voskService.initialize();
       if (mounted) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sellerproof/l10n/gen/app_localizations.dart';
+
 import 'scan_controller.dart';
 import '../packing_camera_screen/packing_camera_screen.dart';
 import '../../widgets/app_drawer.dart';
@@ -111,7 +112,6 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
         });
   }
 
-
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<ScanController>(context);
@@ -121,7 +121,12 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
       debugPrint('⏳ Scanner not ready');
       return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.appTitle),
+          // title: SvgPicture.asset(
+          //   'assets/images/elephant.svg',
+          //   width: 28,
+          //   height: 28,
+          //   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          // ),
           backgroundColor: Colors.black,
           iconTheme: const IconThemeData(color: Colors.white),
         ),
@@ -159,7 +164,12 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
+        // title: SvgPicture.asset(
+        //   'assets/images/elephant.svg',
+        //   width: 28,
+        //   height: 28,
+        //   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        // ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
